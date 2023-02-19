@@ -31,12 +31,15 @@ export default function Header() {
           alt='Ribix'
         />
       </Link>
-      <ul className='hidden items-center justify-center space-x-4 lg:flex'>
+      <ul className='hidden items-center justify-center gap-10 lg:flex'>
         {links.map(({ href, label, isArrow }) => (
-          <li key={`${href}${label}`} className='px-5'>
-            <Link href={href} className='hover:text-yellow-300'>
-              {label}
-              {isArrow && <KeyboardArrowDownOutlinedIcon />}
+          <li key={`${href}${label}`}>
+            <Link
+              href={href}
+              className='flex break-normal hover:text-yellow-300'
+            >
+              <span className='w-full'>{label}</span>
+              <span>{isArrow && <KeyboardArrowDownOutlinedIcon />}</span>
             </Link>
           </li>
         ))}

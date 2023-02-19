@@ -54,6 +54,10 @@ module.exports = {
         xl: '240px',
         sm: '48px',
       },
+      boxShadow: {
+        login: '13px 13px 40px #d9d9d9, -13px -13px 40px #ffffff',
+      },
+      transitionProperty: { buttonLogin: 'all .35s ease' },
     },
   },
   plugins: [require('@tailwindcss/forms')],

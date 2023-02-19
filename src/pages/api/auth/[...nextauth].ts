@@ -7,7 +7,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { BASE_URL_API, ERROR_TOKEN, ROUTES } from '@/constant';
 import { IResLogin, IToken } from '@/shared/types';
 
-const handleRefreshToken = async (token: JWT) => {
+const _ = async (token: JWT) => {
   try {
     const tokenData: IToken = await axios
       .post(`${BASE_URL_API}/auth/refresh-token`, {
@@ -15,7 +15,6 @@ const handleRefreshToken = async (token: JWT) => {
       })
       .then((value) => value.data.data);
 
-    console.log('refresh token here:', tokenData);
     const { access_token: accessToken, refresh_token: refreshToken } =
       tokenData;
     const accessTokenExpirationTime =
@@ -75,6 +74,7 @@ export default NextAuth({
             //return new object user contain token
           }
           return null; //if the data is null, return null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (e: any) {
           throw new Error(e.response.data.message); //if the server response is an error, throw an error with the message from the server
         }

@@ -4,6 +4,17 @@ export type WithLayout = {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
+export interface ReqLogin {
+  email: string;
+  password: string;
+}
+
+export interface ReqRegister {
+  username: string;
+  email: string;
+  password: string;
+}
+
 export interface IToken {
   access_token: string;
   refresh_token: string;
