@@ -26,16 +26,17 @@ const Register: NextPage & WithLayout = () => {
     initialValues: initialValues,
 
     onSubmit: async (values) => {
+      console.log(values);
       try {
         const _ = await axios.post(`${BASE_URL_API}/account/register`, {
-          username: values.username,
-          email: values.email,
-          password: values.password,
+          Name: values.username,
+          Email: values.email,
+          Password: values.password,
         });
 
         router.push(ROUTES.LOGIN);
       } catch (e: any) {
-        setError(e.response.data.message);
+        setError(e.response.data.error);
       }
     },
 
@@ -86,10 +87,10 @@ const Register: NextPage & WithLayout = () => {
         <div className='text-sm text-red-600'>{formik.errors.password}</div>
       ) : null}
       <div className='flex w-full items-center justify-between'></div>
-      {error && <span className='text-light-error pt-2 text-sm'>{error}</span>}
+      {error && <span className='pt-2 text-sm text-red-600'>{error}</span>}
       <Button
         type='submit'
-        large
+        large={true}
         className='my-4 rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
         title='CREATE AN ACCOUNT'
       />

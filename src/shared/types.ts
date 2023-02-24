@@ -15,14 +15,9 @@ export interface ReqRegister {
   password: string;
 }
 
-export interface IToken {
-  access_token: string;
-  refresh_token: string;
-}
-
 export interface IResLogin {
+  token: string;
   user: IUser;
-  token: IToken;
 }
 
 export interface IUser {

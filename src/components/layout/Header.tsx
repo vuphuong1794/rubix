@@ -8,6 +8,9 @@ import * as React from 'react';
 
 import NextImage from '@/components/NextImage';
 
+import { useAppDispatch } from '@/app/hooks';
+import { login, register } from '@/features/auth/authSlice';
+
 const links = [
   { href: '/', label: 'Home' },
   { href: '/shop', label: 'Shop', isArrow: true },
@@ -17,6 +20,7 @@ const links = [
 ];
 
 export default function Header() {
+  const dispatch = useAppDispatch();
   return (
     <header className='flex h-24 w-full items-center justify-around bg-white  px-sm py-5 font-normal lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
@@ -31,13 +35,10 @@ export default function Header() {
           alt='Ribix'
         />
       </Link>
-      <ul className='hidden items-center justify-center gap-10 lg:flex'>
+      <ul className='ml-20 hidden items-center lg:flex'>
         {links.map(({ href, label, isArrow }) => (
           <li key={`${href}${label}`}>
-            <Link
-              href={href}
-              className='flex break-normal hover:text-yellow-300'
-            >
+            <Link href={href} className=' flex px-4 hover:text-yellow-300'>
               <span className='w-full'>{label}</span>
               <span>{isArrow && <KeyboardArrowDownOutlinedIcon />}</span>
             </Link>
@@ -47,16 +48,20 @@ export default function Header() {
       <div className='relative flex items-center justify-end'>
         <ul className='flex items-center justify-center '>
           <li className='pr-2 hover:text-yellow-300'>
-            <Link href='/account'>
+            <Link href='/login'>
               <PersonOutlinedIcon />
             </Link>
           </li>
           <li className='hidden pr-1 hover:text-yellow-300 xl:block'>
-            <Link href='/login'>Login</Link>
+            <Link onClick={() => dispatch(login())} href='/login'>
+              Login
+            </Link>
           </li>
           <li className='hidden xl:block'>/</li>
           <li className='hidden pl-1 pr-6 hover:text-yellow-300 xl:block'>
-            <Link href='/signup'>Sign up</Link>
+            <Link onClick={() => dispatch(register())} href='/signup'>
+              Sign up
+            </Link>
           </li>
           <li>|</li>
         </ul>

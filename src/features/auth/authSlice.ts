@@ -3,25 +3,28 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 interface InitialState {
-  activeLabel: string;
+  isChoose: boolean;
 }
 
 const initialState: InitialState = {
-  activeLabel: '',
+  isChoose: true,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
-    toggle: (state, action) => {
-      state.activeLabel = action.payload;
+    login: (state) => {
+      state.isChoose = true;
+    },
+    register: (state) => {
+      state.isChoose = false;
     },
   },
 });
 
-export const { toggle } = authSlice.actions;
+export const { login, register } = authSlice.actions;
 
-export const selectIndexActive = (state: RootState) => state.auth.activeLabel;
+export const selectIsChoose = (state: RootState) => state.auth.isChoose;
 
 export default authSlice.reducer;

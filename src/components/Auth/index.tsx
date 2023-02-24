@@ -9,7 +9,8 @@ const Auth: React.FC<{
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (session?.error === ERROR_TOKEN) {
+    console.log(session);
+    if (session?.user?.email === ERROR_TOKEN) {
       signOut();
     }
   });

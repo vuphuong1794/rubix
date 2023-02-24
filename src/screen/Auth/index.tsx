@@ -1,9 +1,10 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import Layout from '@/components/layout/Layout';
 
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { login, register, selectIsChoose } from '@/features/auth/authSlice';
 import { WithLayout } from '@/shared/types';
 
 interface LoginProps {
@@ -11,35 +12,28 @@ interface LoginProps {
 }
 
 const Auth: NextPage<LoginProps> & WithLayout = ({ children }) => {
-  const [isChooseRegister, setIsChooseRegister] = useState<boolean>(true);
-
-  const handleClickLogin = () => {
-    setIsChooseRegister(false);
-  };
-
-  const handleClickRegister = () => {
-    setIsChooseRegister(true);
-  };
+  const dispatch = useAppDispatch();
+  const isChoose = useAppSelector(selectIsChoose);
 
   return (
     <div className='flex items-center justify-center'>
       <div className='mt-16 mb-20 min-w-[36%] rounded-[8px] bg-[#ffffff]  pb-10 shadow-login'>
-        <div className='grid h-[80px] w-full grid-cols-2'>
+        <div className='grid h-[70px] w-full grid-cols-2'>
           <Link
             href='/login'
             className={`${
-              isChooseRegister ? 'bg-[#ebebeb]' : 'bg-[bg-white]'
+              isChoose ? 'bg-white' : 'bg-[#ebebeb]'
             } flex items-center justify-center text-xl font-semibold`}
-            onClick={handleClickLogin}
+            onClick={() => dispatch(login())}
           >
             Login
           </Link>
           <Link
             href='/signup'
             className={`${
-              !isChooseRegister ? 'bg-[#ebebeb]' : '#ebebeb]'
+              !isChoose ? 'bg-white' : 'bg-[#ebebeb]'
             } flex items-center justify-center text-xl font-semibold`}
-            onClick={handleClickRegister}
+            onClick={() => dispatch(register())}
           >
             Create Account
           </Link>

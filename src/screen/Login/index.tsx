@@ -33,8 +33,10 @@ const Login: NextPage & WithLayout = () => {
         email: values.email,
         password: values.password,
       };
+
+      console.log(reqLogin);
       // setIsLoading(true);
-      const res: any = await signIn('credentials', {
+      const res = await signIn('credentials', {
         ...reqLogin,
         redirect: false,
       });
@@ -100,9 +102,7 @@ const Login: NextPage & WithLayout = () => {
             </Link>
           </span>
 
-          {error && (
-            <span className='text-light-error pt-2 text-sm'>{error}</span>
-          )}
+          {error && <span className='pt-2 text-sm text-red-600'>{error}</span>}
           <Button
             type='submit'
             large

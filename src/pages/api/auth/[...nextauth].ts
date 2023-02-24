@@ -5,18 +5,17 @@ import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { BASE_URL_API, ERROR_TOKEN, ROUTES } from '@/constant';
-import { IResLogin, IToken } from '@/shared/types';
 
-const _ = async (token: JWT) => {
+const handleRefreshToken = async (token: JWT) => {
   try {
-    const tokenData: IToken = await axios
-      .post(`${BASE_URL_API}/auth/refresh-token`, {
-        refresh_token: token.refreshToken,
+    const tokenData = await axios
+      .post(`${BASE_URL_API}/account/refresh-token`, {
+        refreshToken: token.refreshToken,
       })
       .then((value) => value.data.data);
 
-    const { access_token: accessToken, refresh_token: refreshToken } =
-      tokenData;
+    console.log('refresh token here:', tokenData);
+    const { accessToken: accessToken, refreshToken: refreshToken } = tokenData;
     const accessTokenExpirationTime =
       (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
     return {
@@ -49,24 +48,21 @@ export default NextAuth({
       authorize: async (credentials) => {
         try {
           //login
-          const data: IResLogin = await axios
-            .post(`${BASE_URL_API}/auth/login`, {
-              email: credentials?.email,
-              password: credentials?.password,
-              role: 'admin',
-            })
-            .then((value) => value.data.data);
+          const data = await axios.post(`${BASE_URL_API}/account/login`, {
+            email: credentials?.email,
+            password: credentials?.password,
+          });
 
           if (data) {
-            const { access_token: accessToken, refresh_token: refreshToken } =
-              data.token; //We get the access token and the refresh token from the data object.
+            const { accessToken: accessToken, refreshToken: refreshToken } =
+              data.data.user; //We get the access token and the refresh token from the data object.
 
             const accessTokenExpirationTime =
               (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
             //minus 10 seconds before expiration time to prevent token expiration error in the browser side unit ms
 
             return {
-              ...data.user,
+              ...data.data.user,
               accessToken,
               accessTokenExpires: accessTokenExpirationTime,
               refreshToken,
@@ -74,8 +70,9 @@ export default NextAuth({
             //return new object user contain token
           }
           return null; //if the data is null, return null
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (e: any) {
+          console.log('error:', e);
+
           throw new Error(e.response.data.message); //if the server response is an error, throw an error with the message from the server
         }
       },
@@ -108,4 +105,3 @@ export default NextAuth({
     signIn: ROUTES.LOGIN,
   },
 });
-1;
