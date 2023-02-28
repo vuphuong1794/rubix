@@ -58,6 +58,10 @@ module.exports = {
         login: '13px 13px 40px #d9d9d9, -13px -13px 40px #ffffff',
       },
       transitionProperty: { buttonLogin: 'all .35s ease' },
+
+      backgroundImage: {
+        'background-home': "url('/images/background.png')",
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

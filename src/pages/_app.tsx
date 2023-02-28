@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
-        {' '}
         {getLayout(<Component {...pageProps} />)}
       </Provider>
     </SessionProvider>
