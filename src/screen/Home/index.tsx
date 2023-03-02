@@ -1,5 +1,10 @@
+import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
+import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
+import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import axios from 'axios';
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { Title } from '@/components/common';
@@ -8,16 +13,41 @@ import NextImage from '@/components/NextImage';
 
 import { WithLayout } from '@/shared/types';
 
-interface IcaptionContent {
-  image: string;
-  lable: string;
+interface IService {
+  icon: React.ReactElement;
+  title: string;
   content: string;
-  children?: React.ReactElement;
 }
 
-const captionContent: IcaptionContent[] = [
-  { image: 'a', lable: 'a', content: 'a' },
-  { image: 'b', lable: 'b', content: 'b' },
+const services: IService[] = [
+  {
+    icon: (
+      <AirplanemodeActiveOutlinedIcon style={{ width: '2em', height: '2em' }} />
+    ),
+    title: 'Free Worldwide Shipping',
+    content: 'On all orders over $75.00',
+  },
+  {
+    icon: <PaymentOutlinedIcon style={{ width: '2em', height: '2em' }} />,
+    title: '100% Payment Secure',
+    content: 'We ensure secure payment with PEV',
+  },
+  {
+    icon: (
+      <KeyboardReturnOutlinedIcon style={{ width: '2em', height: '2em' }} />
+    ),
+    title: '30 Days Return',
+    content: 'Return it within 20 day for an exchange',
+  },
+];
+
+const partner: string[] = [
+  '/images/brand/brand1.png',
+  '/images/brand/brand2.png',
+  '/images/brand/brand3.png',
+  '/images/brand/brand4.png',
+  '/images/brand/brand5.png',
+  '/images/brand/brand6.png',
 ];
 
 const Home: NextPage & WithLayout = () => {
@@ -112,6 +142,42 @@ const Home: NextPage & WithLayout = () => {
           </span>
         </div>
       </section>
+      <div className='bg-white'>
+        <section className='bg-[#f8f8f8] px-10'>
+          <div className='flex w-full items-center justify-around py-20 '>
+            {services.map((service) => (
+              <div
+                key={service.title}
+                className='flex w-full flex-col items-center justify-center gap-2 border-r last:border-0'
+              >
+                <span>{service.icon}</span>
+                <h4 className='font-semibold'>{service.title}</h4>
+                <p>{service.content}</p>
+                <Link href='/' className='mt-2'>
+                  <span className='font-bold'>Learn More</span>
+                  <span>
+                    <KeyboardArrowRightOutlinedIcon />
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className='px-10'>
+          <div className='my-10 flex items-center justify-around border-t border-b p-5'>
+            {partner.map((item) => (
+              <NextImage
+                key={item}
+                src={item}
+                alt=''
+                width='78'
+                height='72'
+                className='transition-all hover:opacity-50'
+              />
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

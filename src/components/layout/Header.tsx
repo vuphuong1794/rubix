@@ -1,4 +1,3 @@
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
@@ -22,7 +21,7 @@ const links = [
 export default function Header() {
   const dispatch = useAppDispatch();
   return (
-    <header className='flex h-24 w-full items-center justify-around bg-white  px-sm py-5 font-normal lg:justify-between xl:px-xl'>
+    <header className='sticky top-0 flex h-24 w-full items-center  justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
         <MenuIcon />
         <SearchOutlinedIcon />
@@ -35,12 +34,12 @@ export default function Header() {
           alt='Ribix'
         />
       </Link>
-      <ul className='ml-20 hidden items-center lg:flex'>
+      <ul className='ml-20 hidden items-center gap-10 lg:flex'>
         {links.map(({ href, label, isArrow }) => (
           <li key={`${href}${label}`}>
             <Link href={href} className=' flex px-4 hover:text-yellow-300'>
               <span className='w-full'>{label}</span>
-              <span>{isArrow && <KeyboardArrowDownOutlinedIcon />}</span>
+              {/* <span>{isArrow && <KeyboardArrowDownOutlinedIcon />}</span> */}
             </Link>
           </li>
         ))}
