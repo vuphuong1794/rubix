@@ -9,7 +9,7 @@ const nextConfig = {
 
   // Uncoment to add domain whitelist
   images: {
-    domains: ['via.placeholder.com'],
+    domains: ['cdn.shopify.com'],
   },
 
   // SVGR

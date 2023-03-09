@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -90,7 +90,7 @@ const Register: NextPage & WithLayout = () => {
       {error && <span className='pt-2 text-sm text-red-600'>{error}</span>}
       <Button
         type='submit'
-        large={true}
+        large
         className='my-4 rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
         title='CREATE AN ACCOUNT'
       />
@@ -98,7 +98,7 @@ const Register: NextPage & WithLayout = () => {
   );
 };
 
-Register.getLayout = (page) => (
+Register.getLayout = (page: any) => (
   <Layout>
     <Auth>{page}</Auth>
   </Layout>

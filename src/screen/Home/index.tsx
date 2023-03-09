@@ -1,16 +1,19 @@
 import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
-import axios from 'axios';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+import { ourBlog, partner, photoSamples, product } from '@/data/home';
 
 import { Title } from '@/components/common';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
 
+import ProductItem from '@/screen/Home/ProductItem';
 import { WithLayout } from '@/shared/types';
 
 interface IService {
@@ -41,25 +44,20 @@ const services: IService[] = [
   },
 ];
 
-const partner: string[] = [
-  '/images/brand/brand1.png',
-  '/images/brand/brand2.png',
-  '/images/brand/brand3.png',
-  '/images/brand/brand4.png',
-  '/images/brand/brand5.png',
-  '/images/brand/brand6.png',
-];
-
 const Home: NextPage & WithLayout = () => {
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/albums/1/photos')
-      .then((res) => {
-        setCategories(res.data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     axios.get('http://192.168.1.12:3000/domestic').then((res) => {
+  //       console.log(res.data);
+
+  //       setCategories(res.data);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   return (
     <div className='bg-background-home bg-cover bg-fixed bg-center bg-no-repeat'>
@@ -95,27 +93,48 @@ const Home: NextPage & WithLayout = () => {
             className=' col-span-2 h-full w-full'
           />
         </div>
-        <section className=''>
+        <section className='pb-10'>
           <Title title='Trending Products' content='Top view in this week' />
-          {/* {categories.map((category: any) => {
-          console.log(category.url);
-          return (
-            <div key={category.id}>
-              <div className='grid-cols-2'>
-                <div>
-                  <NextImage
-                    width={1000}
-                    height={1000}
-                    className='h-full w-full'
-                    src={category.url}
-                    alt=''
-                  />
-                </div>
-                <div></div>
-              </div>
+          <div className='grid grid-flow-col gap-6'>
+            <div>
+              <NextImage
+                className='h-full w-full cursor-pointer'
+                width={1000}
+                height={1000}
+                src='https://cdn.shopify.com/s/files/1/0376/9440/6700/files/banner-product_1080x.jpg?v=1629543119'
+                alt=''
+              />
             </div>
-          );
-        })} */}
+            <div className='grid grid-cols-3 gap-6'>
+              {product.slice(0, 6).map((item) => (
+                <ProductItem key={item.product_image} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className='mt-10 pb-6'>
+          <div className='flex gap-6'>
+            <NextImage
+              width={1000}
+              height={1000}
+              src='https://cdn.shopify.com/s/files/1/0376/9440/6700/files/banner14_900x.jpg?v=1629543119'
+              alt=''
+            />
+            <NextImage
+              width={1000}
+              height={1000}
+              src='https://cdn.shopify.com/s/files/1/0376/9440/6700/files/banner15_900x.jpg?v=1629543119'
+              alt=''
+            />
+          </div>
+        </section>
+        <section className='pb-16'>
+          <Title title='Best Seller Products' content='Top view in this week' />
+          <div className='grid grid-cols-6 gap-6'>
+            {product.slice(0, 12).map((item) => (
+              <ProductItem key={item.product_image} item={item} />
+            ))}
+          </div>
         </section>
       </div>
       <section className='flex w-full items-center justify-center bg-transparent py-[80px]'>
@@ -142,7 +161,7 @@ const Home: NextPage & WithLayout = () => {
           </span>
         </div>
       </section>
-      <div className='bg-white'>
+      <div className=' bg-white'>
         <section className='bg-[#f8f8f8] px-10'>
           <div className='flex w-full items-center justify-around py-20 '>
             {services.map((service) => (
@@ -163,8 +182,46 @@ const Home: NextPage & WithLayout = () => {
             ))}
           </div>
         </section>
+        <section className='px-10 pt-10'>
+          <Title
+            title='From Our Blog'
+            content='Commodo sociosqu venenatis cras dolor sagittis integer luctus sem primis eget'
+          />
+          <div className='flex gap-6 pt-2'>
+            {ourBlog.map((item) => (
+              <div className='flex w-full flex-col gap-4' key={item.author}>
+                <NextImage
+                  className='w-full cursor-pointer'
+                  width={600}
+                  height={600}
+                  src={item.blog_image}
+                  alt=''
+                />
+                <span className='w-20 cursor-pointer rounded-md bg-amber-400 py-1  text-center text-xs font-bold text-white'>
+                  LIFESTYLE
+                </span>
+                <div>
+                  <div className='flex'>
+                    <h6 className='mr-2 font-bold'>{item.author}</h6>
+                    <span className='text-gray-700'>{item.date}</span>
+                  </div>
+                  <h4 className='pb-6 pt-2 text-xl'>{item.title}</h4>
+                  <p className='text-gray-700'>{item.description}</p>
+                </div>
+                <button className='mt-6 flex h-full w-full items-end'>
+                  <div className='flex h-14 w-36 items-center justify-center gap-1 rounded-md border-2 font-semibold transition-all hover:border-amber-400 hover:text-amber-400'>
+                    <span>Read More</span>
+                    <span>
+                      <KeyboardArrowRightIcon />
+                    </span>
+                  </div>
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
         <section className='px-10'>
-          <div className='my-10 flex items-center justify-around border-t border-b p-5'>
+          <div className='mt-10 flex items-center justify-around border-t border-b p-5'>
             {partner.map((item) => (
               <NextImage
                 key={item}
@@ -177,6 +234,21 @@ const Home: NextPage & WithLayout = () => {
             ))}
           </div>
         </section>
+        <section className='px-10 pt-10 pb-20'>
+          <Title title='Follow us on Instagram' content='@ Rubix Instagram' />
+          <div className='flex gap-6'>
+            {photoSamples.map((item) => (
+              <NextImage
+                className='cursor-pointer'
+                key={item}
+                src={item}
+                alt=''
+                width='500'
+                height='500'
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -184,6 +256,6 @@ const Home: NextPage & WithLayout = () => {
 
 export default Home;
 
-Home.getLayout = (page) => {
+Home.getLayout = (page: any) => {
   return <Layout>{page}</Layout>;
 };

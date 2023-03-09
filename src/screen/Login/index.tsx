@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -154,7 +154,7 @@ const Login: NextPage & WithLayout = () => {
   );
 };
 
-Login.getLayout = (page) => (
+Login.getLayout = (page: any) => (
   <Layout>
     <Auth>{page}</Auth>
   </Layout>

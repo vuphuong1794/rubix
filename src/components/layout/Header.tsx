@@ -21,7 +21,7 @@ const links = [
 export default function Header() {
   const dispatch = useAppDispatch();
   return (
-    <header className='sticky top-0 flex h-24 w-full items-center  justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
+    <header className='sticky top-0 z-40 flex h-24 w-full items-center  justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
         <MenuIcon />
         <SearchOutlinedIcon />

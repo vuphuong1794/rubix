@@ -7,7 +7,7 @@ interface ITitle {
 
 const Title: FC<ITitle> = ({ title, content }) => {
   return (
-    <div className='flex flex-col items-center justify-center pb-5'>
+    <div className='mt-10 mb-2 flex flex-col items-center justify-center pb-5'>
       <h2 className='pb-2 text-3xl font-semibold'>{title}</h2>
       <p>{content}</p>
     </div>
