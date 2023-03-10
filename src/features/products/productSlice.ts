@@ -3,34 +3,42 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/app/store';
 
 interface InitialState {
-  isHover: boolean;
-  keyRef?: string;
+  subItemChoose: string;
+  subColorChoose: string;
+  valueImage: string;
 }
 
 const initialState: InitialState = {
-  isHover: true,
-  keyRef: '',
+  subItemChoose: '',
+  subColorChoose: '',
+  valueImage: '',
 };
 
 const productSlice = createSlice({
   name: 'product',
   initialState: initialState,
   reducers: {
-    inHover: (state) => {
-      state.isHover = true;
+    setSubItemChoose: (state, action) => {
+      state.subItemChoose = action.payload;
     },
-    outHover: (state) => {
-      state.isHover = false;
+
+    setSubColorChoose: (state, action) => {
+      state.subColorChoose = action.payload;
     },
-    getKeyRef: (state, action) => {
-      state.keyRef = action.payload;
+
+    getValueImage: (state, action) => {
+      state.valueImage = action.payload;
     },
   },
 });
 
-export const { inHover, outHover, getKeyRef } = productSlice.actions;
+export const { setSubItemChoose, getValueImage, setSubColorChoose } =
+  productSlice.actions;
 
-export const selectIsHover = (state: RootState) => state.product.isHover;
-export const selectKeyRef = (state: RootState) => state.product.keyRef;
+export const selectSubItemChoose = (state: RootState) =>
+  state.product.subItemChoose;
+export const selectSubColorChoose = (state: RootState) =>
+  state.product.subColorChoose;
+export const selectValueImage = (state: RootState) => state.product.valueImage;
 
 export default productSlice.reducer;

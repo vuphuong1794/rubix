@@ -1,34 +1,30 @@
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { IProduct } from '@/data/home';
+import { IProduct } from '@/data';
 
 import NextImage from '@/components/NextImage';
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
-  getKeyRef,
-  inHover,
-  outHover,
-  selectIsHover,
-  selectKeyRef,
+  getValueImage,
+  selectValueImage,
 } from '@/features/products/productSlice';
 
 const ProductItem = ({ item }: { item: IProduct }) => {
-  const isHover = useAppSelector(selectIsHover);
-  const keyRefHover = useAppSelector(selectKeyRef);
+  const [isHover, setIsHover] = useState(false);
   const dispatch = useAppDispatch();
+  const selectImageVariety = useAppSelector(selectValueImage);
+
   return (
     <div
       className='relative cursor-pointer'
       onMouseEnter={() => {
-        dispatch(getKeyRef(item.product_image));
-        dispatch(inHover());
+        setIsHover(true);
       }}
       onMouseLeave={() => {
-        dispatch(getKeyRef(item.product_image));
-        dispatch(outHover());
+        setIsHover(false);
       }}
     >
       <div>
@@ -36,14 +32,10 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           className='relative h-full w-full'
           width={500}
           height={500}
-          src={
-            isHover && keyRefHover === item.product_image
-              ? item.product_image
-              : item.product_image_placehoder
-          }
+          src={isHover ? item.product_image : item.product_image_placehoder}
           alt=''
         />
-        {isHover && keyRefHover === item.product_image && (
+        {isHover && (
           <div className='absolute right-4 top-4 flex flex-col gap-2'>
             <span className='flex h-8 w-8 items-center justify-center rounded-md bg-white transition-all hover:bg-amber-400 hover:text-white xl:h-12 xl:w-12'>
               <SearchOutlinedIcon />
@@ -85,12 +77,12 @@ const ProductItem = ({ item }: { item: IProduct }) => {
               <span
                 key={image}
                 onMouseEnter={() => {
-                  dispatch(getKeyRef(image));
-                  dispatch(inHover());
+                  setIsHover(true);
+                  dispatch(getValueImage(image));
                 }}
                 onMouseLeave={() => {
-                  dispatch(getKeyRef(image));
-                  dispatch(outHover());
+                  setIsHover(false);
+                  dispatch(getValueImage(image));
                 }}
                 className='h-4 w-4 rounded-full'
               >

@@ -1,3 +1,29 @@
+export interface ISwiper {
+  image: string;
+  content: string;
+  br: string;
+}
+
+const dataSwiper: ISwiper[] = [
+  {
+    image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/slide31.jpg?v=1629543119',
+    content: 'Fliegenbein Table Lamp',
+    br: 'Mordern furniture special offer.',
+  },
+  {
+    image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/slide32.jpg?v=1629543119',
+    content: 'Wood Minimal Office Chair ',
+    br: 'Extra 40% off now.',
+  },
+  {
+    image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/slide33.jpg?v=1629543119',
+    content: 'Nordic Kitchen Termokande ',
+    br: 'One big markdown sale 70% off.',
+  },
+];
 export interface IProduct {
   product_image: string;
   product_image_placehoder: string;
@@ -163,12 +189,12 @@ const ourBlog: IBlog[] = [
 ];
 
 const partner: string[] = [
-  '/images/brand/brand1.png',
-  '/images/brand/brand2.png',
-  '/images/brand/brand3.png',
-  '/images/brand/brand4.png',
-  '/images/brand/brand5.png',
-  '/images/brand/brand6.png',
+  'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/brand1.jpg?v=1613723877',
+  'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/brand2.jpg?v=1613723877',
+  'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/brand3.jpg?v=1613723883',
+  'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/brand4.jpg?v=1613723884',
+  'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/brand5.jpg?v=1613723884',
+  'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/brand6.jpg?v=1613723884',
 ];
 
 const photoSamples: string[] = [
@@ -180,4 +206,4 @@ const photoSamples: string[] = [
   'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/2_360x.jpg?v=1629543350',
 ];
 
-export { ourBlog, partner, photoSamples, product };
+export { dataSwiper, ourBlog, partner, photoSamples, product };

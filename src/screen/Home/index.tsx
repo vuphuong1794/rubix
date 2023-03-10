@@ -1,19 +1,25 @@
 import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Autoplay, EffectFade } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
-import { ourBlog, partner, photoSamples, product } from '@/data/home';
+import { dataSwiper, ourBlog, partner, photoSamples, product } from '@/data';
 
 import { Title } from '@/components/common';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
+import ProductItem from '@/components/Products/ProductItem';
 
-import ProductItem from '@/screen/Home/ProductItem';
+import ItemSwiper from '@/screen/Home/Swiper';
 import { WithLayout } from '@/shared/types';
 
 interface IService {
@@ -45,31 +51,56 @@ const services: IService[] = [
 ];
 
 const Home: NextPage & WithLayout = () => {
-  const [categories, setCategories] = useState([]);
+  const [swiper, setSwiper] = useState<any>();
 
-  // useEffect(() => {
-  //   try {
-  //     axios.get('http://192.168.1.12:3000/domestic').then((res) => {
-  //       console.log(res.data);
+  useEffect(() => {
+    const s = document.querySelector('.list-product-swiper') as any;
+    setSwiper(s.swiper);
+  }, []);
 
-  //       setCategories(res.data);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
+  const handlerPrev = () => {
+    swiper.slidePrev();
+  };
+
+  const handlerNext = () => {
+    swiper.slideNext();
+  };
 
   return (
     <div className='bg-background-home bg-cover bg-fixed bg-center bg-no-repeat'>
-      {/* <div className=''>
-        <NextImage
-          src='/images/background.png'
-          width={1000}
-          height={1000}
-          alt=''
-        />
-      </div> */}
       <div className='bg-white px-10'>
+        <div className='relative mb-10 w-full overflow-hidden'>
+          <span
+            className='absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
+            onClick={handlerPrev}
+          >
+            <ArrowBackIosNewIcon style={{ fontSize: '16px' }} />
+          </span>
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            effect='fade'
+            loop={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            speed={800}
+            className='list-product-swiper'
+          >
+            {dataSwiper.map((item) => (
+              <SwiperSlide key={item.content}>
+                <ItemSwiper {...item} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <span
+            className='absolute top-1/2 right-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
+            onClick={handlerNext}
+          >
+            <ArrowForwardIosIcon style={{ fontSize: '16px' }} />
+          </span>
+        </div>
+
         <div className='grid w-full grid-cols-4 gap-6 bg-white pb-7'>
           <NextImage
             src='/images/banner1.png'

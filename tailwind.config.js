@@ -60,7 +60,8 @@ module.exports = {
       transitionProperty: { buttonLogin: 'all .35s ease' },
 
       backgroundImage: {
-        'background-home': "url('/images/background.png')",
+        'background-home':
+          "url('https://cdn.shopify.com/s/files/1/0376/9440/6700/files/newsletter-bg.jpg?v=1629543119&fbclid=IwAR2e9wGtb3uV_AbVs768Jf2vHNPqPpnSIHqtEpGcng8hsFhguzqeUM3LCCk')",
       },
     },
   },
