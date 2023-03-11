@@ -13,7 +13,7 @@ import {
 } from '@/features/products/productSlice';
 
 const ProductItem = ({ item }: { item: IProduct }) => {
-  const [isHover, setIsHover] = useState(false);
+  const [isHover, setIsHover] = useState(true);
   const dispatch = useAppDispatch();
   const selectImageVariety = useAppSelector(selectValueImage);
 

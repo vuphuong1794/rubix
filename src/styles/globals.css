@@ -119,11 +119,18 @@
 
 @layer components {
   .swiper-slide-active {
+    animation: opacity 2s;
   }
 
   .swiper-slide-active .slider-label {
+    animation: arrow-left 1s;
   }
 
   .swiper-slide-active .slider-detail {
+    animation: arrow-right 1s;
+  }
+
+  .swiper-slide-active .slider-button {
+    animation: arrow-top 1.5s;
   }
 }

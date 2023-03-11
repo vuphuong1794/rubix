@@ -16,7 +16,7 @@ const ItemSwiper: FC<ISwiper> = (item) => {
         src={item.image}
         alt=''
       />
-      <div className='absolute top-1/2 hidden -translate-y-1/2 md:left-[20%] md:block lg:left-[40%] xl:left-[45%] 2xl:left-[45%]'>
+      <div className='absolute top-1/2 hidden -translate-y-1/2 md:left-[20%] md:block lg:left-[40%] xl:left-[45%] 2xl:left-[1/2]'>
         <div className='mb-10 flex'>
           <h3 className='pr-2'>Quick parcel delivery,</h3>
           <h3 className='text-amber-400'>from $25</h3>
@@ -29,7 +29,7 @@ const ItemSwiper: FC<ISwiper> = (item) => {
         </h1>
         <Link
           href='/shop'
-          className='rounded-md bg-black py-[14px] px-8 text-white transition-all hover:bg-amber-400'
+          className='slider-button absolute animate-arrow-top rounded-md bg-black py-[14px] px-8 text-white transition-all hover:bg-amber-400'
         >
           <span className='font-semibold'>Start Shopping</span>
           <KeyboardArrowRightIcon />

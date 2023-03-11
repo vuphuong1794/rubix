@@ -5,7 +5,7 @@ import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlin
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Autoplay, EffectFade } from 'swiper';
+import { Autoplay, EffectFade, Pagination } from 'swiper';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
 
@@ -56,22 +56,24 @@ const Home: NextPage & WithLayout = () => {
         <div className='relative mb-10 w-full overflow-hidden'>
           <Swiper
             className='swiper'
-            modules={[Autoplay, EffectFade]}
+            modules={[Autoplay, EffectFade, Pagination]}
             slidesPerView={1}
             // effect='fade'
             // fadeEffect={{ crossFade: true }}
             loop={true}
+            scrollbar={{ draggable: true }}
             autoplay={{
               delay: 3500,
               disableOnInteraction: false,
             }}
             speed={800}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
           >
             {/* <span
               className='absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
-              onClick={() => swiper.slidePrev()}
+              onClick={() => {
+                console.log(swiper);
+                swiper.slidePrev();
+              }}
             >
               <ArrowBackIosNewIcon style={{ fontSize: '16px' }} />
             </span> */}

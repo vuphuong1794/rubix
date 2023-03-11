@@ -69,6 +69,14 @@ module.exports = {
             transform: 'translateX(0%)',
           },
         },
+        'arrow-top': {
+          '0%': {
+            transform: 'translateY(100%)',
+          },
+          '100%': {
+            transform: 'translateY(0%)',
+          },
+        },
       },
       animation: {
         flicker: 'flicker 3s linear infinite',
@@ -76,6 +84,7 @@ module.exports = {
         opacity: 'opacity 0.3s',
         'arrow-left': 'arrow-left 0.3s',
         'arrow-right': 'arrow-right 0.3s',
+        'arrow-top': 'arrow-top 0.3s',
       },
       padding: {
         xl: '240px',
