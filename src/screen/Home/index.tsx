@@ -1,15 +1,12 @@
 import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { Autoplay, EffectFade } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
 
 import { dataSwiper, ourBlog, partner, photoSamples, product } from '@/data';
@@ -51,54 +48,47 @@ const services: IService[] = [
 ];
 
 const Home: NextPage & WithLayout = () => {
-  const [swiper, setSwiper] = useState<any>();
-
-  useEffect(() => {
-    const s = document.querySelector('.list-product-swiper') as any;
-    setSwiper(s.swiper);
-  }, []);
-
-  const handlerPrev = () => {
-    swiper.slidePrev();
-  };
-
-  const handlerNext = () => {
-    swiper.slideNext();
-  };
+  const swiper = useSwiper();
 
   return (
     <div className='bg-background-home bg-cover bg-fixed bg-center bg-no-repeat'>
       <div className='bg-white px-10'>
         <div className='relative mb-10 w-full overflow-hidden'>
-          <span
-            className='absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
-            onClick={handlerPrev}
-          >
-            <ArrowBackIosNewIcon style={{ fontSize: '16px' }} />
-          </span>
           <Swiper
+            className='swiper'
             modules={[Autoplay, EffectFade]}
-            effect='fade'
+            slidesPerView={1}
+            // effect='fade'
+            // fadeEffect={{ crossFade: true }}
             loop={true}
             autoplay={{
-              delay: 5000,
+              delay: 3500,
               disableOnInteraction: false,
             }}
             speed={800}
-            className='list-product-swiper'
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
           >
-            {dataSwiper.map((item) => (
-              <SwiperSlide key={item.content}>
-                <ItemSwiper {...item} />
-              </SwiperSlide>
-            ))}
+            {/* <span
+              className='absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
+              onClick={() => swiper.slidePrev()}
+            >
+              <ArrowBackIosNewIcon style={{ fontSize: '16px' }} />
+            </span> */}
+            <div>
+              {dataSwiper.map((item) => (
+                <SwiperSlide key={item.image}>
+                  <ItemSwiper {...item} />
+                </SwiperSlide>
+              ))}
+            </div>
+            {/* <span
+              className='absolute top-1/2 right-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
+              onClick={() => swiper.slideNext()}
+            >
+              <ArrowForwardIosIcon style={{ fontSize: '16px' }} />
+            </span> */}
           </Swiper>
-          <span
-            className='absolute top-1/2 right-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
-            onClick={handlerNext}
-          >
-            <ArrowForwardIosIcon style={{ fontSize: '16px' }} />
-          </span>
         </div>
 
         <div className='grid w-full grid-cols-4 gap-6 bg-white pb-7'>

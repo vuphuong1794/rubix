@@ -45,10 +45,37 @@ module.exports = {
             backgroundPosition: '700px 0',
           },
         },
+        opacity: {
+          '0%': {
+            opacity: 0.2,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+        'arrow-left': {
+          '0%': {
+            transform: 'translateX(30%)',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
+          },
+        },
+        'arrow-right': {
+          '0%': {
+            transform: 'translateX(-30%)',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
+          },
+        },
       },
       animation: {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
+        opacity: 'opacity 0.3s',
+        'arrow-left': 'arrow-left 0.3s',
+        'arrow-right': 'arrow-right 0.3s',
       },
       padding: {
         xl: '240px',

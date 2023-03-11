@@ -116,3 +116,14 @@
     background-size: 0 2px, 100% 2px;
   }
 }
+
+@layer components {
+  .swiper-slide-active {
+  }
+
+  .swiper-slide-active .slider-label {
+  }
+
+  .swiper-slide-active .slider-detail {
+  }
+}
