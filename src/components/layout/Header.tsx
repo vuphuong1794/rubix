@@ -21,7 +21,7 @@ const links = [
 export default function Header() {
   const dispatch = useAppDispatch();
   return (
-    <header className='sticky top-0 z-40 flex h-24 w-full items-center  justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
+    <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
         <MenuIcon />
         <SearchOutlinedIcon />
@@ -34,10 +34,10 @@ export default function Header() {
           alt='Ribix'
         />
       </Link>
-      <ul className='ml-20 hidden items-center gap-10 lg:flex'>
+      <ul className=' hidden min-w-[600px] items-center justify-evenly gap-10 lg:flex'>
         {links.map(({ href, label, isArrow }) => (
           <li key={`${href}${label}`}>
-            <Link href={href} className=' flex px-4 hover:text-yellow-300'>
+            <Link href={href} className=' flex hover:text-yellow-300'>
               <span className='w-full'>{label}</span>
               {/* <span>{isArrow && <KeyboardArrowDownOutlinedIcon />}</span> */}
             </Link>
@@ -45,7 +45,7 @@ export default function Header() {
         ))}
       </ul>
       <div className='relative flex items-center justify-end'>
-        <ul className='flex items-center justify-center '>
+        <ul className='flex min-w-[170px] items-center justify-center'>
           <li className='pr-2 hover:text-yellow-300'>
             <Link href='/login'>
               <PersonOutlinedIcon />

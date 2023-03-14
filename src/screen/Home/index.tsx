@@ -1,5 +1,4 @@
 import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
@@ -11,6 +10,7 @@ import 'swiper/css';
 
 import { dataSwiper, ourBlog, partner, photoSamples, product } from '@/data';
 
+import Blog from '@/components/Blogs';
 import { Title } from '@/components/common';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
@@ -211,35 +211,8 @@ const Home: NextPage & WithLayout = () => {
             content='Commodo sociosqu venenatis cras dolor sagittis integer luctus sem primis eget'
           />
           <div className='flex gap-6 pt-2'>
-            {ourBlog.map((item) => (
-              <div className='flex w-full flex-col gap-4' key={item.author}>
-                <NextImage
-                  className='w-full cursor-pointer'
-                  width={600}
-                  height={600}
-                  src={item.blog_image}
-                  alt=''
-                />
-                <span className='w-20 cursor-pointer rounded-md bg-amber-400 py-1  text-center text-xs font-bold text-white'>
-                  LIFESTYLE
-                </span>
-                <div>
-                  <div className='flex'>
-                    <h6 className='mr-2 font-bold'>{item.author}</h6>
-                    <span className='text-gray-700'>{item.date}</span>
-                  </div>
-                  <h4 className='pb-6 pt-2 text-xl'>{item.title}</h4>
-                  <p className='text-gray-700'>{item.description}</p>
-                </div>
-                <button className='mt-6 flex h-full w-full items-end'>
-                  <div className='flex h-14 w-36 items-center justify-center gap-1 rounded-md border-2 font-semibold transition-all hover:border-amber-400 hover:text-amber-400'>
-                    <span>Read More</span>
-                    <span>
-                      <KeyboardArrowRightIcon />
-                    </span>
-                  </div>
-                </button>
-              </div>
+            {ourBlog.slice(0, 3).map((item) => (
+              <Blog key={item.author} item={item} />
             ))}
           </div>
         </section>

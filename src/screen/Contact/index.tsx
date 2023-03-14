@@ -59,11 +59,7 @@ const Contact: WithLayout = () => {
             </div>
           </div>
           <form className='flex w-1/2 flex-col gap-2'>
-            <Input
-              type='text'
-              placeholder='Name'
-              className='h-12 rounded border-[#e8e8e8] hover:border-amber-400'
-            />
+            <Input type='text' placeholder='Name' />
             <Input type='text' placeholder='Email' className='rounded' />
             <textarea
               placeholder='Message'

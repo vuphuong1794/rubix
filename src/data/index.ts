@@ -186,6 +186,69 @@ const ourBlog: IBlog[] = [
     description:
       'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
   },
+  {
+    blog_image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/7_540x.jpg?v=1585986856',
+    author: 'Mrs. Shi. ',
+    date: 'Feb 18, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    blog_image:
+      '	https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/6_540x.jpg?v=1585986836',
+    author: 'Mrs. Sasimi. ',
+    date: 'Aug 23, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    blog_image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/5_540x.jpg?v=1585986814',
+    author: 'Mr. Dawm. ',
+    date: 'July 19, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    blog_image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/4_540x.jpg?v=1585986796',
+    author: 'Mr. Bob. ',
+    date: 'April 4, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    blog_image:
+      '	https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/3_540x.jpg?v=1585986762',
+    author: 'Mrs. Hanakoisi. ',
+    date: 'Feb 18, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    blog_image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/2_540x.jpg?v=1585986704',
+    author: 'Mrs. Lee. ',
+    date: 'Jan 28, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    blog_image:
+      'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/1_540x.jpg?v=1585986627',
+    author: 'Mr. ToLi. ',
+    date: 'Jan 18, 2020',
+    title: 'Diga: three kitchen utensils designed for Ommo',
+    description:
+      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
 ];
 
 const partner: string[] = [
@@ -206,4 +269,34 @@ const photoSamples: string[] = [
   'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/2_360x.jpg?v=1629543350',
 ];
 
-export { dataSwiper, ourBlog, partner, photoSamples, product };
+//BLOG
+
+const categories: string[] = [
+  'Music',
+  'Education',
+  'Construction',
+  'Travel',
+  'Apps',
+  'Text',
+  'Tech',
+  'Social',
+  'Uncategorized',
+];
+
+const tags: string[] = [
+  'Apps',
+  'Conference',
+  'Developers',
+  'Enterprise',
+  'Startups',
+];
+
+export {
+  categories,
+  dataSwiper,
+  ourBlog,
+  partner,
+  photoSamples,
+  product,
+  tags,
+};
