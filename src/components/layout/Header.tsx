@@ -3,6 +3,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
 import NextImage from '@/components/NextImage';
@@ -20,6 +21,8 @@ const links = [
 
 export default function Header() {
   const dispatch = useAppDispatch();
+  const { data: session } = useSession();
+  console.log('session', session);
   return (
     <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
@@ -35,7 +38,7 @@ export default function Header() {
         />
       </Link>
       <ul className=' hidden min-w-[600px] items-center justify-evenly gap-10 lg:flex'>
-        {links.map(({ href, label, isArrow }) => (
+        {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
             <Link href={href} className=' flex hover:text-yellow-300'>
               <span className='w-full'>{label}</span>
@@ -45,25 +48,29 @@ export default function Header() {
         ))}
       </ul>
       <div className='relative flex items-center justify-end'>
-        <ul className='flex min-w-[170px] items-center justify-center'>
-          <li className='pr-2 hover:text-yellow-300'>
-            <Link href='/login'>
-              <PersonOutlinedIcon />
-            </Link>
-          </li>
-          <li className='hidden pr-1 hover:text-yellow-300 xl:block'>
-            <Link onClick={() => dispatch(login())} href='/login'>
-              Login
-            </Link>
-          </li>
-          <li className='hidden xl:block'>/</li>
-          <li className='hidden pl-1 pr-6 hover:text-yellow-300 xl:block'>
-            <Link onClick={() => dispatch(register())} href='/signup'>
-              Sign up
-            </Link>
-          </li>
-          <li>|</li>
-        </ul>
+        <div className='pr-2 hover:text-yellow-300'>
+          <Link href='/login'>
+            <PersonOutlinedIcon />
+          </Link>
+        </div>
+        {!session ? (
+          <ul className='hidden min-w-[170px] items-center justify-center xl:flex'>
+            <li className='hidden pr-1 hover:text-yellow-300 xl:block'>
+              <Link onClick={() => dispatch(login())} href='/login'>
+                Login
+              </Link>
+            </li>
+            <li className='hidden xl:block'>/</li>
+            <li className='hidden pl-1 pr-6 hover:text-yellow-300 xl:block'>
+              <Link onClick={() => dispatch(register())} href='/signup'>
+                Sign up
+              </Link>
+            </li>
+            <li>|</li>
+          </ul>
+        ) : (
+          <div>{session.user.username}</div>
+        )}
         <div className='hidden cursor-pointer px-2 hover:text-yellow-300 lg:block'>
           <SearchOutlinedIcon />
         </div>

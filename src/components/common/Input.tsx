@@ -34,12 +34,12 @@ const Input: FC<IInput> = (props) => {
       {eyeEnable ? (
         !isHidden ? (
           <VisibilityOutlinedIcon
-            className='absolute right-2 text-gray-400 '
+            className='absolute right-2 cursor-pointer text-gray-400'
             onClick={HiddenPassword}
           />
         ) : (
           <VisibilityOffOutlinedIcon
-            className='absolute right-2 text-gray-400'
+            className='absolute right-2 cursor-pointer text-gray-400'
             onClick={HiddenPassword}
           />
         )

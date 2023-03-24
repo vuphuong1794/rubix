@@ -10,7 +10,9 @@ import { Button, Input } from '@/components/common';
 import Layout from '@/components/layout/Layout';
 
 import { Auth } from '@/screen';
-import { ReqLogin, WithLayout } from '@/shared/types';
+import { Platform } from '@/shared/enum/platform';
+import { WithLayout } from '@/shared/types';
+import { ReqLogin } from '@/shared/types/authType';
 
 const Login: NextPage & WithLayout = () => {
   const [isShowForgotPassword, setIsShowForgotPassword] = useState(true);
@@ -24,6 +26,7 @@ const Login: NextPage & WithLayout = () => {
   const initialValues: ReqLogin = {
     email: '',
     password: '',
+    requestFrom: Platform.CMS,
   };
   const formik = useFormik({
     initialValues: initialValues,
@@ -32,10 +35,8 @@ const Login: NextPage & WithLayout = () => {
       const reqLogin = {
         email: values.email,
         password: values.password,
+        requestFrom: values.requestFrom,
       };
-
-      console.log(reqLogin);
-      // setIsLoading(true);
       const res = await signIn('credentials', {
         ...reqLogin,
         redirect: false,

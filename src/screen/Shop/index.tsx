@@ -6,20 +6,21 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import React from 'react';
-
-import { product } from '@/data';
+import React, { useEffect, useState } from 'react';
 
 import BgBanner from '@/components/common/BgBanner';
 import Layout from '@/components/layout/Layout';
 import ProductItem from '@/components/Products/ProductItem';
 
+import { CmsApi } from '@/api/cms-api';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
   selectSubPriceChoose,
   setSubPriceChoose,
 } from '@/features/products/productSlice';
 import { WithLayout } from '@/shared/types';
+import { ReqSearch } from '@/shared/types/itemType';
+import { Product } from '@/shared/types/productType';
 
 import {
   BestSeller,
@@ -54,11 +55,26 @@ const price: string[] = [
 const Shop: WithLayout = () => {
   const [sort, setSort] = React.useState('');
   const getSubPriceChoose = useAppSelector(selectSubPriceChoose);
+  const [product, setProduct] = useState<Product[]>([]);
+
   const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
     setSort(event.target.value as string);
   };
+
+  useEffect(() => {
+    const handleSort = async ({ page, take }: ReqSearch) => {
+      try {
+        const res = await CmsApi.getProduct({ page, take });
+        console.log(res.data.data);
+        setProduct(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    handleSort({ page: 1, take: 10 });
+  }, [sort]);
 
   return (
     <div className='flex w-full flex-col items-center justify-center'>
@@ -102,8 +118,8 @@ const Shop: WithLayout = () => {
           <div>
             <h4 className='mt-12 mb-8'>Best sellers</h4>
             <div className='flex flex-col gap-6'>
-              {product.slice(6, 10).map((item) => (
-                <BestSeller key={item.product_name} item={item} />
+              {product.slice(0, 4).map((item) => (
+                <BestSeller key={item.id} item={item} />
               ))}
             </div>
           </div>
@@ -150,7 +166,7 @@ const Shop: WithLayout = () => {
           </div>
           <div className='grid grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-4'>
             {product.map((item) => (
-              <ProductItem key={item.product_name} item={item} />
+              <ProductItem key={item.id} item={item} />
             ))}
           </div>
           <div className='flex items-center justify-between pt-16 text-gray-700'>

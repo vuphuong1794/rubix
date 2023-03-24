@@ -3,8 +3,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { FC, useEffect, useState } from 'react';
 
-import { IProduct } from '@/data';
-
 import NextImage from '@/components/NextImage';
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -16,6 +14,7 @@ import {
   setSubItemChoose,
   setSubPriceChoose,
 } from '@/features/products/productSlice';
+import { Product } from '@/shared/types/productType';
 
 export const SubItem = ({ item }: { item: string }) => {
   const [isHover, setIsHover] = useState(false);
@@ -141,15 +140,15 @@ export const SubPriceItem = ({ item }: { item: string }) => {
   );
 };
 
-export const BestSeller = ({ item }: { item: IProduct }) => {
+export const BestSeller = ({ item }: { item: Product }) => {
   return (
     <div className='flex gap-4'>
-      <NextImage width={60} height={120} src={item.product_image} alt='' />
+      <NextImage width={60} height={120} src={item.images[0]} alt='' />
       <div className='flex flex-col justify-center'>
         <span className='cursor-pointer text-sm font-bold transition-none hover:text-amber-400'>
-          {item.product_name}
+          {item.name}
         </span>
-        <span className='text-sm text-gray-700'>${item.product_price}.00</span>
+        <span className='text-sm text-gray-700'>${item.price}.00</span>
       </div>
     </div>
   );

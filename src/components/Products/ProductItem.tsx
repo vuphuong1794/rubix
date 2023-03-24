@@ -2,8 +2,6 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import React, { useState } from 'react';
 
-import { IProduct } from '@/data';
-
 import NextImage from '@/components/NextImage';
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -11,8 +9,9 @@ import {
   getValueImage,
   selectValueImage,
 } from '@/features/products/productSlice';
+import { Product } from '@/shared/types/productType';
 
-const ProductItem = ({ item }: { item: IProduct }) => {
+const ProductItem = ({ item }: { item: Product }) => {
   const [isHover, setIsHover] = useState(false);
   const dispatch = useAppDispatch();
   const selectImageVariety = useAppSelector(selectValueImage);
@@ -32,7 +31,7 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           className='relative h-full w-full'
           width={500}
           height={500}
-          src={isHover ? item.product_image : item.product_image_placehoder}
+          src={isHover ? item.images[0] : item.images[1]}
           alt=''
         />
         {isHover && (
@@ -45,7 +44,7 @@ const ProductItem = ({ item }: { item: IProduct }) => {
             </span>
           </div>
         )}
-        {item.product_sale_price && (
+        {item.price && (
           <span className='absolute top-4 left-4 z-10 flex h-8 w-14 items-center justify-center rounded-sm bg-amber-400 px-3 py-4 text-sm font-bold text-white'>
             Sale
           </span>
@@ -54,26 +53,26 @@ const ProductItem = ({ item }: { item: IProduct }) => {
 
       <div className='mt-2'>
         <h4 className='font-medium transition-all hover:text-amber-400'>
-          {item.product_name}
+          {item.name}
         </h4>
         <div className='flex items-center justify-between'>
           <div className='flex gap-2'>
             <span
               className={`${
-                item.product_sale_price ? 'line-through' : null
+                item.price ? 'line-through' : null
               } text-base font-light text-gray-700`}
             >
-              ${item.product_price}.00
+              ${item.cost}.00
             </span>
-            {item.product_sale_price && (
+            {item.price && (
               <span className='text-base font-light text-amber-400'>
-                ${item.product_sale_price}.00
+                ${item.price}.00
               </span>
             )}
           </div>
 
           <div className='flex h-full w-full justify-end gap-1'>
-            {item.variety_product?.map((image) => (
+            {item.images?.map((image) => (
               <span
                 key={image}
                 onMouseEnter={() => {

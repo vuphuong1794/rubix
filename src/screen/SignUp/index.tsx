@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useFormik } from 'formik';
 import { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
@@ -10,9 +9,11 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Layout from '@/components/layout/Layout';
 
-import { BASE_URL_API, ROUTES } from '@/constant';
+import { CmsApi } from '@/api/cms-api';
+import { ROUTES } from '@/constant';
 import Auth from '@/screen/Auth';
-import { ReqRegister, WithLayout } from '@/shared/types';
+import { WithLayout } from '@/shared/types';
+import { ReqRegister } from '@/shared/types/authType';
 
 const Register: NextPage & WithLayout = () => {
   const [error, setError] = useState<string>('');
@@ -26,12 +27,11 @@ const Register: NextPage & WithLayout = () => {
     initialValues: initialValues,
 
     onSubmit: async (values) => {
-      console.log(values);
       try {
-        const _ = await axios.post(`${BASE_URL_API}/account/register`, {
-          Name: values.username,
-          Email: values.email,
-          Password: values.password,
+        const _ = await CmsApi.register({
+          username: values.username,
+          email: values.email,
+          password: values.password,
         });
 
         router.push(ROUTES.LOGIN);
