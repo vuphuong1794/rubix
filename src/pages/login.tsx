@@ -2,7 +2,7 @@ import { Login } from '@/screen';
 
 export default Login;
 
-export const getServerSideProps = () => {
+export const getServerSideProps = async () => {
   return {
     props: {},
   };

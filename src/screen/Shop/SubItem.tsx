@@ -1,6 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
 
 import NextImage from '@/components/NextImage';
@@ -14,28 +15,37 @@ import {
   setSubItemChoose,
   setSubPriceChoose,
 } from '@/features/products/productSlice';
+import { Category } from '@/shared/types/categories';
+import { ReqSearchProduct } from '@/shared/types/itemType';
 import { Product } from '@/shared/types/productType';
 
-export const SubItem = ({ item }: { item: string }) => {
+interface PropsSubItem {
+  item: Category;
+  handleSort: ({ page, take, cates_slug }: ReqSearchProduct) => void;
+}
+
+export const SubItem: FC<PropsSubItem> = (props) => {
   const [isHover, setIsHover] = useState(false);
   const [itemChoose, setItemChoose] = useState(false);
   const getSubItemChoose = useAppSelector(selectSubItemChoose);
   const dispatch = useAppDispatch();
+
   const handleHover = () => {
     setIsHover(!isHover);
   };
 
   useEffect(() => {
-    if (getSubItemChoose === item) {
-      setItemChoose(true);
-    } else {
-      setItemChoose(false);
-    }
+    setItemChoose(getSubItemChoose === props.item.name);
   }, [getSubItemChoose]);
 
   return (
-    <li
-      onClick={() => dispatch(setSubItemChoose(item))}
+    <Link
+      href={`/collections/${props.item.slug}`}
+      passHref
+      onClick={() => {
+        props.handleSort({ page: 1, take: 12, cates_slug: props.item.slug });
+        dispatch(setSubItemChoose(props.item.name));
+      }}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       className='flex w-full cursor-pointer items-center  gap-4'
@@ -51,8 +61,8 @@ export const SubItem = ({ item }: { item: string }) => {
           </span>
         ) : null}
       </span>
-      <span>{item}</span>
-    </li>
+      <span>{props.item.name}</span>
+    </Link>
   );
 };
 
@@ -153,13 +163,21 @@ export const BestSeller = ({ item }: { item: Product }) => {
     </div>
   );
 };
-interface IButtonPage {
+interface IButtonPage
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   title?: string;
   children?: React.ReactElement;
 }
-export const ButtonPage: FC<IButtonPage> = ({ children, title }) => {
+export const ButtonPage: FC<IButtonPage> = (props) => {
+  const { children, title, className, ...parentAttributes } = props;
   return (
-    <button className='flex h-10 w-10 cursor-pointer items-center justify-center border transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'>
+    <button
+      {...parentAttributes}
+      className={`${className} flex h-10 w-10 cursor-pointer items-center justify-center border transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white`}
+    >
       {children}
       {title}
     </button>

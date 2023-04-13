@@ -1,36 +1,38 @@
 import NextAuth from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { CmsApi } from '@/api/cms-api';
+import { ERROR_TOKEN } from '@/constant';
 
-// const handleRefreshToken = async (token: JWT) => {
-//   try {
-//     const tokenData = await CmsApi.refreshToken({
-//       refresh_token: token.refreshToken,
-//     });
+const handleRefreshToken = async (token: JWT) => {
+  try {
+    const tokenData = await CmsApi.refreshToken({
+      refresh_token: token.refreshToken,
+    });
 
-//     const {
-//       access_token: accessToken,
-//       refresh_token: refreshToken,
-//       expiresIn: accessTokenExpires,
-//     } = tokenData.data;
-//     // const accessTokenExpirationTime =
-//     //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
-//     return {
-//       ...token,
-//       accessToken,
-//       accessTokenExpires,
-//       refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
-//     };
-//   } catch (error) {
-//     console.log('error', error);
+    const {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      expiresIn: accessTokenExpires,
+    } = tokenData.data;
+    // const accessTokenExpirationTime =
+    //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
+    return {
+      ...token,
+      accessToken,
+      accessTokenExpires,
+      refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
+    };
+  } catch (error) {
+    console.log('error', error);
 
-//     return {
-//       ...token,
-//       error: ERROR_TOKEN,
-//     };
-//   }
-// };
+    return {
+      ...token,
+      error: ERROR_TOKEN,
+    };
+  }
+};
 
 export const nextAuthOptions = {
   // Configure one or more authentication providers
@@ -55,8 +57,6 @@ export const nextAuthOptions = {
             password: credentials.password,
             requestFrom: 'CMS',
           });
-
-          console.log('res', res);
 
           if (res) {
             const {
@@ -89,6 +89,7 @@ export const nextAuthOptions = {
     //The jwt() callback is called when a new token is created.
     async jwt({ user, token }) {
       if (user) {
+        token.accessToken = user.accessToken;
         token.userId = user.id;
         token.email = user.email;
         token.username = user.username;
@@ -110,6 +111,7 @@ export const nextAuthOptions = {
     //The session() callback is called when a user logs in or log out
     async session({ session, token }) {
       if (token) {
+        session.user.accessToken = token.accessToken;
         session.user.userId = token.userId;
         session.user.email = token.email;
         session.user.username = token.username;

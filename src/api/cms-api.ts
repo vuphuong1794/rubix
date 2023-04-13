@@ -1,6 +1,9 @@
 import { AxiosResponse } from 'axios';
 
 import axiosClient from '@/api/axiosClient';
+import { ResCart } from '@/shared/types/cartType';
+import { ResCategories } from '@/shared/types/categories';
+import { ReqSearchProduct } from '@/shared/types/itemType';
 import { ResProducts } from '@/shared/types/productType';
 
 import {
@@ -11,7 +14,6 @@ import {
   ResRefreshToken,
   ResRegister,
 } from '../shared/types/authType';
-import { ReqSearch } from '../shared/types/itemType';
 
 export const CmsApi = {
   login: async (req: ReqLogin) => {
@@ -33,9 +35,21 @@ export const CmsApi = {
     ).data;
   },
 
-  getProduct: ({ sort, page, take }: ReqSearch) => {
+  getProducts: ({ sort, page, take, cates_slug }: ReqSearchProduct) => {
     return axiosClient.get<ResProducts>('/api/item/search', {
-      params: { sort, page, take },
+      params: { sort, page, take, cates_slug },
     });
+  },
+
+  getCategories: () => {
+    return axiosClient.get<ResCategories>('/api/cat');
+  },
+
+  getProductsByCategoryId: ({ id }: { id: string }) => {
+    return axiosClient.get<ResProducts>(`/api/item/${id}`);
+  },
+
+  getCart: () => {
+    return axiosClient.get<ResCart>(`/api/cart`);
   },
 };

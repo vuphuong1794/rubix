@@ -14,7 +14,7 @@ const BgBanner: FC<PropsBgBanner> = (props) => {
         width={2000}
         height={1000}
         className='h-full w-full scale-100'
-        src='https://cdn.shopify.com/s/files/1/0376/9440/6700/files/bg-breacumb.jpg?v=1613729001'
+        src='/images/inner.png'
         alt=''
       />
       <div className='absolute top-1/2 left-[5%] -translate-y-1/2 2xl:left-[10%]'>

@@ -4,20 +4,24 @@ import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlin
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
 
-import { dataSwiper, ourBlog, partner, photoSamples, product } from '@/data';
+import { dataSwiper, ourBlog, partner, photoSamples } from '@/data';
 
 import Blog from '@/components/Blogs';
-import { Title } from '@/components/common';
+import { Input, Title } from '@/components/common';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
 import ProductItem from '@/components/Products/ProductItem';
 
+import { CmsApi } from '@/api/cms-api';
 import ItemSwiper from '@/screen/Home/Swiper';
 import { WithLayout } from '@/shared/types';
+import { ReqSearchProduct } from '@/shared/types/itemType';
+import { Product } from '@/shared/types/productType';
 
 interface IService {
   icon: React.ReactElement;
@@ -49,6 +53,19 @@ const services: IService[] = [
 
 const Home: NextPage & WithLayout = () => {
   const swiper = useSwiper();
+  const [product, setProduct] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const handleSort = async ({ page, take }: ReqSearchProduct) => {
+      try {
+        const res = await CmsApi.getProducts({ page, take });
+        setProduct(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    handleSort({ page: 1, take: 12 });
+  }, []);
 
   return (
     <div className='bg-background-home bg-cover bg-fixed bg-center bg-no-repeat'>
@@ -130,7 +147,7 @@ const Home: NextPage & WithLayout = () => {
             </div>
             <div className='grid grid-cols-3 gap-6'>
               {product.slice(0, 6).map((item) => (
-                <ProductItem key={item.product_image} item={item} />
+                <ProductItem key={item.id} item={item} />
               ))}
             </div>
           </div>
@@ -154,8 +171,8 @@ const Home: NextPage & WithLayout = () => {
         <section className='pb-16'>
           <Title title='Best Seller Products' content='Top view in this week' />
           <div className='grid grid-cols-6 gap-6'>
-            {product.slice(0, 12).map((item) => (
-              <ProductItem key={item.product_image} item={item} />
+            {product.map((item) => (
+              <ProductItem key={item.id} item={item} />
             ))}
           </div>
         </section>
@@ -167,7 +184,7 @@ const Home: NextPage & WithLayout = () => {
             Sign up for the weekly newsletter and build better ecommerce stores.
           </span>
           <form className='my-8 flex w-full justify-between gap-4'>
-            <input
+            <Input
               type='text'
               placeholder='Your email address...'
               className='w-full rounded-md border-gray-300 px-4 focus:border-gray-300'
@@ -252,6 +269,6 @@ const Home: NextPage & WithLayout = () => {
 
 export default Home;
 
-Home.getLayout = (page: any) => {
+Home.getLayout = (page) => {
   return <Layout>{page}</Layout>;
 };

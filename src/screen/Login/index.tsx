@@ -67,7 +67,10 @@ const Login: NextPage & WithLayout = () => {
   return (
     <div>
       {isShowForgotPassword ? (
-        <form onSubmit={formik.handleSubmit} className='w-full pt-4'>
+        <form
+          onSubmit={formik.handleSubmit}
+          className='flex w-full flex-col gap-4 pt-4'
+        >
           <Input
             id='email'
             name='email'
@@ -95,7 +98,7 @@ const Login: NextPage & WithLayout = () => {
           ) : null}
 
           <span
-            className='flex w-full items-center justify-between pt-4'
+            className='flex w-full items-center justify-between '
             onClick={toggleAuthLogin}
           >
             <Link href='/login' className='text-xs hover:text-amber-400'>
@@ -103,11 +106,11 @@ const Login: NextPage & WithLayout = () => {
             </Link>
           </span>
 
-          {error && <span className='pt-2 text-sm text-red-600'>{error}</span>}
+          {error && <span className='text-sm text-red-600'>{error}</span>}
           <Button
             type='submit'
             large
-            className='my-4 rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
+            className='rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
             title='LOGIN'
           />
         </form>

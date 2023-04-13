@@ -5,6 +5,7 @@ declare module 'next-auth' {
     user: {
       userId: string;
       username: string;
+      accessToken: string;
     } & DefaultSession['user'];
   }
 

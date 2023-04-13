@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getSession } from 'next-auth/react';
 
 import { BASE_URL_API } from '@/constant';
 const axiosClient = axios.create({
@@ -9,13 +10,31 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(
-  function (config) {
+  async (request) => {
+    const session = await getSession();
+
+    if (session && request.headers) {
+      request.headers.Authorization = `Bearer ${session?.user.accessToken}`;
+      // } else if (axios.defaults.headers.common.Authorization && request.headers) {
+      //   request.headers.Authorization =
+      //     axios.defaults.headers.common.Authorization;
+    }
+    return request;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
+axiosClient.interceptors.request.use(
+  (config) => {
     if (config.headers) {
       config.headers['Accept-Language'] = 'en'; // vn - en
     }
     return config;
   },
-  function (error) {
+
+  (error) => {
     return Promise.reject(error);
   }
 );

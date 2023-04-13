@@ -49,7 +49,10 @@ const Register: NextPage & WithLayout = () => {
     }),
   });
   return (
-    <form onSubmit={formik.handleSubmit} className='w-full pt-4'>
+    <form
+      onSubmit={formik.handleSubmit}
+      className='flex w-full flex-col gap-4 pt-4'
+    >
       <Input
         id='username'
         name='username'
@@ -91,7 +94,7 @@ const Register: NextPage & WithLayout = () => {
       <Button
         type='submit'
         large
-        className='my-4 rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
+        className=' rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
         title='CREATE AN ACCOUNT'
       />
     </form>

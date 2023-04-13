@@ -1,5 +1,7 @@
 export { default as Auth } from './Auth';
 export { default as Blogs } from './Blogs';
+export { default as Cart } from './Cart/Cart';
+export { default as Collections } from './Collections';
 export { default as Contact } from './Contact';
 export { default as Home } from './Home';
 export { default as Login } from './Login';

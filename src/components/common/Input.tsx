@@ -25,7 +25,7 @@ const Input: FC<IInput> = (props) => {
   };
 
   return (
-    <div className='relative mb-4 flex h-[56px] w-full items-center justify-between rounded border border-gray-300'>
+    <div className='relative flex h-[56px] w-full items-center justify-between rounded border border-gray-300'>
       <input
         {...parentAttributes}
         className=' border-color-transparent h-full w-full rounded px-3 outline-none'

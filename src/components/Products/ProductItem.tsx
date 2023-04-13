@@ -31,7 +31,7 @@ const ProductItem = ({ item }: { item: Product }) => {
           className='relative h-full w-full'
           width={500}
           height={500}
-          src={isHover ? item.images[0] : item.images[1]}
+          src={isHover ? item.images[0] : item.images[1] || item.images[0]}
           alt=''
         />
         {isHover && (

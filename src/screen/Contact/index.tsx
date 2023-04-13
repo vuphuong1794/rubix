@@ -58,7 +58,7 @@ const Contact: WithLayout = () => {
               ))}
             </div>
           </div>
-          <form className='flex w-1/2 flex-col gap-2'>
+          <form className='flex w-1/2 flex-col gap-4'>
             <Input type='text' placeholder='Name' />
             <Input type='text' placeholder='Email' className='rounded' />
             <textarea
@@ -74,5 +74,5 @@ const Contact: WithLayout = () => {
     </div>
   );
 };
-Contact.getLayout = (page: any) => <Layout>{page}</Layout>;
+Contact.getLayout = (page) => <Layout>{page}</Layout>;
 export default Contact;

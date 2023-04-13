@@ -4,22 +4,36 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import * as React from 'react';
+import React, { useState } from 'react';
 
 import NextImage from '@/components/NextImage';
+import Potal from '@/components/overlay/Potal';
 
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { login, register } from '@/features/auth/authSlice';
+import { openShoppingCart, selectShowCart } from '@/features/cart/cartSlice';
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Shop', isArrow: true },
+  { href: '/collections/all', label: 'Shop', isArrow: true },
   { href: '/collections', label: 'Collections', isArrow: true },
   { href: '/blogs', label: 'Blogs', isArrow: true },
   { href: '/us', label: 'Contact Us' },
 ];
 
 export default function Header() {
+  const [showList, setShowList] = useState(false);
+  const showCart = useAppSelector(selectShowCart);
+
+  const handleShowList = () => {
+    setShowList(!showList);
+  };
+
+  const handleShowShoppingCart = (e: React.MouseEvent<Element, MouseEvent>) => {
+    dispatch(openShoppingCart());
+    e.preventDefault();
+  };
+
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
   console.log('session', session);
@@ -80,6 +94,10 @@ export default function Header() {
           <span className='absolute -top-3'>0</span>
         </div>
       </div>
+      {showCart ? <Potal /> : null}
+      {/* <ShoppingCart
+        className={showCart ? 'right-side-cart show' : 'right-side-cart'}
+      /> */}
     </header>
   );
 }

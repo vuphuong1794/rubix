@@ -22,9 +22,10 @@ export interface ResItem {
   quantity: number;
 }
 
-export interface ReqSearch {
+export interface ReqSearchProduct {
   page?: number;
   search?: string;
   sort?: string;
   take?: number;
+  cates_slug?: string;
 }

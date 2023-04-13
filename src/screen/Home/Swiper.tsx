@@ -28,7 +28,7 @@ const ItemSwiper: FC<ISwiper> = (item) => {
           {item.br}
         </h1>
         <Link
-          href='/shop'
+          href='/collections/all'
           className='slider-button absolute animate-arrow-top rounded-md bg-black py-[14px] px-8 text-white transition-all hover:bg-amber-400'
         >
           <span className='font-semibold'>Start Shopping</span>
