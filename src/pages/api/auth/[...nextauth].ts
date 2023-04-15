@@ -6,6 +6,7 @@ import { CmsApi } from '@/api/cms-api';
 import { ERROR_TOKEN } from '@/constant';
 
 const handleRefreshToken = async (token: JWT) => {
+  console.log('có chạy token', token);
   try {
     const tokenData = await CmsApi.refreshToken({
       refresh_token: token.refreshToken,
@@ -25,8 +26,6 @@ const handleRefreshToken = async (token: JWT) => {
       refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {
-    console.log('error', error);
-
     return {
       ...token,
       error: ERROR_TOKEN,
@@ -86,35 +85,32 @@ export const nextAuthOptions = {
     }),
   ],
   callbacks: {
-    //The jwt() callback is called when a new token is created.
-    async jwt({ user, token }) {
-      if (user) {
+    async jwt({ user, token, account }) {
+      if (user && account) {
         token.accessToken = user.accessToken;
         token.userId = user.id;
         token.email = user.email;
         token.username = user.username;
+        token.expiresIn = user.expiresIn;
+        return token;
       }
+      const expiresInToken = token?.expiresIn;
+      const expirationTime = expiresInToken.exp * 1000;
+      const currentTime = Date.now();
 
+      if (expirationTime && expirationTime - currentTime > 30 * 60 * 1000) {
+        return await handleRefreshToken(token);
+      }
       return token;
-      // const expiresInToken = token?.expiresIn;
-      // const expirationTime = expiresInToken.exp * 1000;
-      // const currentTime = Date.now();
-
-      // if (expirationTime && expirationTime - currentTime > 30 * 60 * 1000) {
-      // Token is still valid, just return it
-      //   return token;
-      // }
-
-      // Token has expired or will expire in the next 30 minutes, refresh it
-      // const refreshedToken = await handleRefreshToken(token);
     },
-    //The session() callback is called when a user logs in or log out
+
     async session({ session, token }) {
       if (token) {
         session.user.accessToken = token.accessToken;
         session.user.userId = token.userId;
         session.user.email = token.email;
         session.user.username = token.username;
+        session.user.error = token.error;
       }
 
       return session;

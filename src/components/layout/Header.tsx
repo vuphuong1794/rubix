@@ -36,7 +36,6 @@ export default function Header() {
 
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
-  console.log('session', session);
   return (
     <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
@@ -89,10 +88,12 @@ export default function Header() {
           <SearchOutlinedIcon />
         </div>
         <span className='hidden lg:block'>|</span>
-        <div className='relative cursor-pointer pl-2 hover:text-yellow-300'>
-          <LocalMallOutlinedIcon />
-          <span className='absolute -top-3'>0</span>
-        </div>
+        <Link href='/cart'>
+          <div className='relative cursor-pointer pl-2 hover:text-yellow-300'>
+            <LocalMallOutlinedIcon />
+            <span className='absolute -top-3'>0</span>
+          </div>
+        </Link>
       </div>
       {showCart ? <Potal /> : null}
       {/* <ShoppingCart

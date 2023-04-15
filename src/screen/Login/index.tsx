@@ -52,7 +52,7 @@ const Login: NextPage & WithLayout = () => {
 
       if (res?.ok) {
         // setIsLoading(false);
-        router.push('/');
+        router.push('/cart');
         // message.success('Login successfully');
       }
     },

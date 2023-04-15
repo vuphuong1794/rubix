@@ -1,11 +1,15 @@
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import { useEffect, useState } from 'react';
 
+import Auth from '@/components/Auth';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
 
 import { CmsApi } from '@/api/cms-api';
+import ButtonCart from '@/screen/Cart/ButtonCart';
 import { WithLayout } from '@/shared/types';
 import { CartItem } from '@/shared/types/cartType';
 
@@ -27,35 +31,48 @@ const Cart: WithLayout = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Shopping cart</h2>
-      <table>
+    <div className='mt-16 flex w-full flex-col items-center justify-center'>
+      <h3 className='mb-6 flex w-full max-w-[70%] justify-start'>
+        Shopping cart
+      </h3>
+      <table className='flex w-full max-w-[70%] flex-col gap-6'>
         <thead>
-          <tr>
-            <th>IMAGE</th>
-            <th>PRODUCT</th>
+          <tr className='flex w-full bg-[#f7f7f7] p-3 shadow-md'>
+            <th className='w-[250px] text-center'>IMAGE</th>
+            <th className='w-full text-center'>PRODUCT</th>
             <th>TOTAL</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='mb-10 flex flex-col gap-6'>
           {data.map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id} className='flex w-full gap-6'>
               <td>
                 <NextImage
                   width={200}
                   height={200}
                   src={item.item.images[0]}
                   alt=''
-                  className='h-full w-full bg-[#000]'
+                  className='h-full bg-[#000]'
                 />
               </td>
-              <td>
-                <h4>Product name</h4>
-                <p>Product description</p>
-                <p>Product price</p>
+              <td className='flex w-full flex-col gap-2'>
+                <h4>{item.item.name}</h4>
+                <p>${item.item.price}.00</p>
+                <p>{item.item.description}</p>
+                <div>
+                  <span>
+                    <ButtonCart>
+                      <RemoveIcon />
+                    </ButtonCart>
+                    <ButtonCart title={String(item.item.quantity)} />
+                    <ButtonCart>
+                      <AddIcon />
+                    </ButtonCart>
+                  </span>
+                </div>
               </td>
               <td>
-                <h3>Price</h3>
+                <h4>${item.item.price}.00</h4>
               </td>
             </tr>
           ))}
@@ -65,6 +82,10 @@ const Cart: WithLayout = () => {
   );
 };
 
-Cart.getLayout = (page) => <Layout>{page}</Layout>;
+Cart.getLayout = (page) => (
+  <Layout>
+    <Auth>{page}</Auth>
+  </Layout>
+);
 
 export default Cart;

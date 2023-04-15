@@ -1,25 +1,11 @@
-import { getSession } from 'next-auth/react';
+import { requireAuth } from '@/components/requireAuth/Auth';
 
-import { ROUTES } from '@/constant';
 import { Cart } from '@/screen';
 
 export default Cart;
 
-export const getServerSideProps = async () => {
-  const session = await getSession();
-  console.log('session', session);
-
-  if (session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: ROUTES.CART,
-      },
-    };
-  }
+export const getServerSideProps = requireAuth(async () => {
   return {
-    props: {
-      session: null,
-    },
+    props: {},
   };
-};
+});
