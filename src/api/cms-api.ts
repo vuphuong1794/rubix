@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import axiosClient from '@/api/axiosClient';
-import { ResCart } from '@/shared/types/cartType';
+import { ReqCartItem, ResCart } from '@/shared/types/cartType';
 import { ResCategories } from '@/shared/types/categories';
 import { ReqSearchProduct } from '@/shared/types/itemType';
 import { ResProducts } from '@/shared/types/productType';
@@ -51,5 +51,15 @@ export const CmsApi = {
 
   getCart: () => {
     return axiosClient.get<ResCart>(`/api/cart`);
+  },
+
+  addToCart: (req: ReqCartItem[]) => {
+    const params = { items: req };
+    return axiosClient.post(`/api/cart/add`, params);
+  },
+
+  deleteCartItem: (id: string[]) => {
+    const params = { itemsId: id };
+    return axiosClient.delete(`api/cart/delete-cart-item`, { data: params });
   },
 };

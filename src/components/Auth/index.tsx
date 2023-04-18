@@ -10,10 +10,7 @@ const Auth = ({ children }: Props) => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (!session) {
-      return;
-    }
-
+    if (!session) return;
     if (session?.user.error === ERROR_TOKEN) {
       signOut();
     }

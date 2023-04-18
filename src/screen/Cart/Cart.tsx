@@ -5,6 +5,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 import Auth from '@/components/Auth';
+import { Button } from '@/components/common';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
 
@@ -18,17 +19,29 @@ const Cart: WithLayout = () => {
   const session = useSession();
   console.log(session);
 
+  const getCart = async () => {
+    try {
+      const res = await CmsApi.getCart();
+      setData(res.data.data.cart_items);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const getCart = async () => {
-      try {
-        const res = await CmsApi.getCart();
-        setData(res.data.data.cart_items);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getCart();
   }, []);
+
+  const handleDeleteItem = async (id: string) => {
+    const item = [];
+    item.push(id);
+    try {
+      const _ = await CmsApi.deleteCartItem(item);
+    } catch (error) {
+      console.log(error);
+    }
+
+    getCart();
+  };
 
   return (
     <div className='mt-16 flex w-full flex-col items-center justify-center'>
@@ -45,7 +58,10 @@ const Cart: WithLayout = () => {
         </thead>
         <tbody className='mb-10 flex flex-col gap-6'>
           {data.map((item) => (
-            <tr key={item.id} className='flex w-full gap-6'>
+            <tr
+              key={item.id}
+              className='flex w-full gap-6 border-b pb-6 last:border-none'
+            >
               <td>
                 <NextImage
                   width={200}
@@ -55,20 +71,27 @@ const Cart: WithLayout = () => {
                   className='h-full bg-[#000]'
                 />
               </td>
-              <td className='flex w-full flex-col gap-2'>
-                <h4>{item.item.name}</h4>
-                <p>${item.item.price}.00</p>
-                <p>{item.item.description}</p>
-                <div>
+              <td className='flex w-full flex-col justify-between'>
+                <div className='flex w-full flex-col gap-2'>
+                  <h4>{item.item.name}</h4>
+                  <p>${item.item.price}.00</p>
+                  <p>{item.item.description}</p>
+                </div>
+                <div className='flex justify-between'>
                   <span>
                     <ButtonCart>
                       <RemoveIcon />
                     </ButtonCart>
-                    <ButtonCart title={String(item.item.quantity)} />
+                    <ButtonCart title={String(item.quantity)} />
                     <ButtonCart>
                       <AddIcon />
                     </ButtonCart>
                   </span>
+                  <Button
+                    title='Remove'
+                    onClick={() => handleDeleteItem(item.id)}
+                    className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
+                  />
                 </div>
               </td>
               <td>

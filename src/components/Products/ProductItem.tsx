@@ -4,17 +4,30 @@ import React, { useState } from 'react';
 
 import NextImage from '@/components/NextImage';
 
+import { CmsApi } from '@/api/cms-api';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
   getValueImage,
   selectValueImage,
 } from '@/features/products/productSlice';
+import { ReqCartItem } from '@/shared/types/cartType';
 import { Product } from '@/shared/types/productType';
 
 const ProductItem = ({ item }: { item: Product }) => {
   const [isHover, setIsHover] = useState(false);
   const dispatch = useAppDispatch();
   const selectImageVariety = useAppSelector(selectValueImage);
+
+  const handleAddToCart = async ({ itemId, quantity }: ReqCartItem) => {
+    const items: ReqCartItem[] = [];
+    items.push({ itemId, quantity });
+
+    try {
+      const _ = await CmsApi.addToCart(items);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -39,7 +52,10 @@ const ProductItem = ({ item }: { item: Product }) => {
             <span className='flex h-8 w-8 items-center justify-center rounded-md bg-white transition-all hover:bg-amber-400 hover:text-white xl:h-12 xl:w-12'>
               <SearchOutlinedIcon />
             </span>
-            <span className='flex h-8 w-8 items-center justify-center rounded-md bg-white transition-all hover:bg-amber-400 hover:text-white xl:h-12 xl:w-12'>
+            <span
+              onClick={() => handleAddToCart({ itemId: item.id, quantity: 1 })}
+              className='flex h-8 w-8 items-center justify-center rounded-md bg-white transition-all hover:bg-amber-400 hover:text-white xl:h-12 xl:w-12'
+            >
               <LocalMallOutlinedIcon />
             </span>
           </div>

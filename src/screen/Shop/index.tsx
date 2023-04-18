@@ -7,6 +7,7 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import BgBanner from '@/components/common/BgBanner';
@@ -153,13 +154,14 @@ const Collections: WithLayout = () => {
                     </span>
                   ) : null}
                 </span>
-                <span
+                <Link
+                  href='/collections/all'
                   onClick={() => {
                     handleSort({ page: 1, take: 12 });
                   }}
                 >
                   All Categories
-                </span>
+                </Link>
               </li>
               {categories.map((item) => (
                 <SubItem key={item.id} item={item} handleSort={handleSort} />

@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
 import NextImage from '@/components/NextImage';
@@ -29,13 +30,16 @@ export const SubItem: FC<PropsSubItem> = (props) => {
   const [itemChoose, setItemChoose] = useState(false);
   const getSubItemChoose = useAppSelector(selectSubItemChoose);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const { id } = router.query;
 
   const handleHover = () => {
     setIsHover(!isHover);
   };
 
   useEffect(() => {
-    setItemChoose(getSubItemChoose === props.item.name);
+    setItemChoose(getSubItemChoose === props.item.slug);
   }, [getSubItemChoose]);
 
   return (
@@ -44,7 +48,7 @@ export const SubItem: FC<PropsSubItem> = (props) => {
       passHref
       onClick={() => {
         props.handleSort({ page: 1, take: 12, cates_slug: props.item.slug });
-        dispatch(setSubItemChoose(props.item.name));
+        dispatch(setSubItemChoose(props.item.slug));
       }}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}

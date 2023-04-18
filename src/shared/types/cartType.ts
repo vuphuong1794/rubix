@@ -36,3 +36,12 @@ export interface Item {
   details: string;
   sku: string;
 }
+
+export interface ReqAddCart {
+  items: ReqCartItem[];
+}
+
+export interface ReqCartItem {
+  itemId: string;
+  quantity: number;
+}

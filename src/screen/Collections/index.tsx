@@ -51,7 +51,7 @@ const Collections: WithLayout = () => {
                 17 products
               </span>
               <Link
-                href='/'
+                href={`/collections/${category.slug}`}
                 className='bg-black px-4 py-2 font-semibold text-white transition-all hover:bg-amber-400'
               >
                 SHOP THE COLLECTION
