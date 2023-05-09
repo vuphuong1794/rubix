@@ -38,6 +38,7 @@ export const nextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
+
       credentials: {
         email: {
           label: 'Email',
@@ -84,6 +85,7 @@ export const nextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.SECRET,
   callbacks: {
     async jwt({ user, token, account }) {
       if (user && account) {
