@@ -3,7 +3,7 @@ import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { CmsApi } from '@/api/cms-api';
-import { ERROR_TOKEN } from '@/constant';
+import { ERROR_TOKEN, ROUTES } from '@/constant';
 
 const handleRefreshToken = async (token: JWT) => {
   console.log('có chạy token', token);
@@ -79,13 +79,11 @@ export const nextAuthOptions = {
           return null; //if the data is null, return null
         } catch (e: any) {
           console.log('error', e);
-
-          throw new Error(e.response.data.message); //if the server response is an error, throw an error with the message from the server
+          //if the server response is an error, throw an error with the message from the server
         }
       },
     }),
   ],
-  secret: process.env.SECRET,
   callbacks: {
     async jwt({ user, token, account }) {
       if (user && account) {
@@ -118,6 +116,12 @@ export const nextAuthOptions = {
       return session;
     },
   },
+
+  pages: {
+    signIn: ROUTES.LOGIN,
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(nextAuthOptions);
