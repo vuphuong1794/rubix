@@ -37,7 +37,7 @@ export default function Header() {
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
   return (
-    <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white px-sm py-5 font-normal lg:justify-between xl:px-xl'>
+    <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white  py-5 font-normal sm:px-sm lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
         <MenuIcon />
         <SearchOutlinedIcon />

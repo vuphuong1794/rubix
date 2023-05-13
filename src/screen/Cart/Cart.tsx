@@ -75,7 +75,7 @@ const Cart: WithLayout = () => {
                 <div className='flex w-full flex-col gap-2'>
                   <h4>{item.item.name}</h4>
                   <p>${item.item.price}.00</p>
-                  <p>{item.item.description}</p>
+                  <p className='hidden lg:block'>{item.item.description}</p>
                 </div>
                 <div className='flex justify-between'>
                   <span>

@@ -110,7 +110,7 @@ const Home: NextPage & WithLayout = () => {
           </Swiper>
         </div>
 
-        <div className='grid w-full grid-cols-4 gap-6 bg-white pb-7'>
+        <div className='grid w-full grid-cols-2 gap-6 bg-white pb-7 md:grid-cols-4'>
           <NextImage
             src='/images/banner1.png'
             alt=''
@@ -130,7 +130,7 @@ const Home: NextPage & WithLayout = () => {
             alt=''
             width={1000}
             height={1000}
-            className=' col-span-2 h-full w-full'
+            className=' col-span-2 hidden h-full w-full md:block'
           />
         </div>
         <section className='pb-10'>
@@ -138,14 +138,14 @@ const Home: NextPage & WithLayout = () => {
           <div className='grid grid-flow-col gap-6'>
             <div>
               <NextImage
-                className='h-full w-full cursor-pointer'
+                className='hidden h-full w-full cursor-pointer md:block'
                 width={1000}
                 height={1000}
                 src='https://cdn.shopify.com/s/files/1/0376/9440/6700/files/banner-product_1080x.jpg?v=1629543119'
                 alt=''
               />
             </div>
-            <div className='grid grid-cols-3 gap-6'>
+            <div className='grid grid-cols-2 gap-6 md:grid-cols-3'>
               {product.slice(0, 6).map((item) => (
                 <ProductItem key={item.id} item={item} />
               ))}
@@ -168,9 +168,9 @@ const Home: NextPage & WithLayout = () => {
             />
           </div>
         </section>
-        <section className='pb-16'>
+        <section className='hidden pb-16 md:block'>
           <Title title='Best Seller Products' content='Top view in this week' />
-          <div className='grid grid-cols-6 gap-6'>
+          <div className='grid gap-6  md:grid-cols-4 xl:grid-cols-6'>
             {product.map((item) => (
               <ProductItem key={item.id} item={item} />
             ))}
@@ -203,7 +203,7 @@ const Home: NextPage & WithLayout = () => {
       </section>
       <div className=' bg-white'>
         <section className='bg-[#f8f8f8] px-10'>
-          <div className='flex w-full items-center justify-around py-20 '>
+          <div className='hidden w-full items-center justify-around py-20 md:flex '>
             {services.map((service) => (
               <div
                 key={service.title}
@@ -227,7 +227,7 @@ const Home: NextPage & WithLayout = () => {
             title='From Our Blog'
             content='Commodo sociosqu venenatis cras dolor sagittis integer luctus sem primis eget'
           />
-          <div className='flex gap-6 pt-2'>
+          <div className='grid grid-cols-2 gap-6 pt-2 md:grid-cols-3'>
             {ourBlog.slice(0, 3).map((item) => (
               <Blog key={item.author} item={item} />
             ))}
@@ -249,10 +249,10 @@ const Home: NextPage & WithLayout = () => {
         </section>
         <section className='px-10 pt-10 pb-20'>
           <Title title='Follow us on Instagram' content='@ Rubix Instagram' />
-          <div className='flex gap-6'>
+          <div className='grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6'>
             {photoSamples.map((item) => (
               <NextImage
-                className='cursor-pointer'
+                className='h-full w-full cursor-pointer'
                 key={item}
                 src={item}
                 alt=''

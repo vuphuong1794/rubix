@@ -121,7 +121,7 @@ export const nextAuthOptions = {
     signIn: ROUTES.LOGIN,
   },
 
-  secret: 'cc',
+  secret: 'hi',
 };
 
 export default NextAuth(nextAuthOptions);

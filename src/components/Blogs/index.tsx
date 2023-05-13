@@ -24,7 +24,7 @@ const Blog = ({ item }: { item: IBlog }) => {
           <span className='text-gray-700'>{item.date}</span>
         </div>
         <h4 className='pb-6 pt-2 text-xl'>{item.title}</h4>
-        <p className='text-gray-700'>{item.description}</p>
+        <p className='hidden text-gray-700 md:block'>{item.description}</p>
       </div>
       <button className='mt-6 flex h-full w-full items-end'>
         <div className='flex h-14 w-36 items-center justify-center gap-1 rounded-md border-2 font-semibold transition-all hover:border-amber-400 hover:text-amber-400'>
