@@ -1,39 +1,42 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { CmsApi } from '@/api/cms-api';
 import { RootState } from '@/app/store';
-import { Product } from '@/shared/types/productType';
+import { CartItem } from '@/shared/types/cartType';
 
 export interface CartState {
-  cart: Product[];
-  showShoppingCart: boolean;
-  checkoutCart: boolean;
+  cart: CartItem[];
+  total: number;
 }
+
+export const fetchTotal = createAsyncThunk('cart/fetchTotal', async () => {
+  try {
+    const response = await CmsApi.getCart(); // Gọi API để lấy tổng
+    return response.data.data.cart_items;
+  } catch (error) {
+    // Xử lý lỗi nếu cần thiết
+    throw Error('Failed to fetch total');
+  }
+});
 
 const initialStateCart: CartState = {
   cart: [],
-  showShoppingCart: false,
-  checkoutCart: false,
+  total: 0,
 };
 
 export const CartSlice = createSlice({
   name: 'cart',
   initialState: initialStateCart,
 
-  reducers: {
-    openShoppingCart: (state) => {
-      state.showShoppingCart = true;
-    },
-
-    closeShoppingCart: (state) => {
-      state.showShoppingCart = false;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchTotal.fulfilled, (state, action) => {
+      state.cart = action.payload;
+      state.total = action.payload.length;
+    });
   },
 });
 
-export const selectCart = (state: RootState) => state.cart.cart;
-export const selectShowCart = (state: RootState) => state.cart.showShoppingCart;
-export const selectCheckCart = (state: RootState) => state.cart.checkoutCart;
-
-export const { openShoppingCart, closeShoppingCart } = CartSlice.actions;
+export const selectCartTotal = (state: RootState) => state.cart.total;
 
 export default CartSlice.reducer;

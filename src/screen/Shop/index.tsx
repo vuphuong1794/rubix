@@ -122,7 +122,7 @@ const Collections: WithLayout = () => {
 
   useEffect(() => {
     handleSort({ page: page, take: 12 });
-  }, []);
+  }, [page]);
 
   return (
     <div className='flex w-full flex-col items-center justify-center'>

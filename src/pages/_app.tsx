@@ -3,9 +3,11 @@ import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import '@/styles/globals.css';
 import '@/styles/colors.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { store } from '@/app/store';
 
@@ -22,6 +24,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
+        <ToastContainer />
         {getLayout(<Component {...pageProps} />)}
       </Provider>
     </SessionProvider>

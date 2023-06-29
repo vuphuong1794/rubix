@@ -1,22 +1,20 @@
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import NextImage from '@/components/NextImage';
 
 import { CmsApi } from '@/api/cms-api';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import {
-  getValueImage,
-  selectValueImage,
-} from '@/features/products/productSlice';
+import { useAppDispatch } from '@/app/hooks';
+import { fetchTotal } from '@/features/cart/cartSlice';
+import { getValueImage } from '@/features/products/productSlice';
 import { ReqCartItem } from '@/shared/types/cartType';
 import { Product } from '@/shared/types/productType';
 
 const ProductItem = ({ item }: { item: Product }) => {
   const [isHover, setIsHover] = useState(false);
   const dispatch = useAppDispatch();
-  const selectImageVariety = useAppSelector(selectValueImage);
 
   const handleAddToCart = async ({ itemId, quantity }: ReqCartItem) => {
     const items: ReqCartItem[] = [];
@@ -24,6 +22,8 @@ const ProductItem = ({ item }: { item: Product }) => {
 
     try {
       const _ = await CmsApi.addToCart(items);
+      dispatch(fetchTotal());
+      toast.success('Thêm vào giỏ hàng thành công');
     } catch (error) {
       console.log(error);
     }
@@ -78,11 +78,11 @@ const ProductItem = ({ item }: { item: Product }) => {
                 item.price ? 'line-through' : null
               } text-base font-light text-gray-700`}
             >
-              ${item.cost}.00
+              ₫{item.cost}.00
             </span>
             {item.price && (
               <span className='text-base font-light text-amber-400'>
-                ${item.price}.00
+                ₫{item.price}.00
               </span>
             )}
           </div>

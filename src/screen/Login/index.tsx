@@ -15,6 +15,7 @@ import { WithLayout } from '@/shared/types';
 import { ReqLogin } from '@/shared/types/authType';
 
 const Login: NextPage & WithLayout = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isShowForgotPassword, setIsShowForgotPassword] = useState(true);
   const [error, setError] = useState<string>('');
   const router = useRouter();
@@ -37,23 +38,22 @@ const Login: NextPage & WithLayout = () => {
         password: values.password,
         requestFrom: values.requestFrom,
       };
+      setIsLoading(true);
       const res = await signIn('credentials', {
         ...reqLogin,
         redirect: false,
       });
 
       if (res?.error) {
-        // setIsLoading(false);
-        // message.error(res.error);
+        setIsLoading(false);
 
         setError(res.error);
         return;
       }
 
       if (res?.ok) {
-        // setIsLoading(false);
+        setIsLoading(false);
         router.push('/cart');
-        // message.success('Login successfully');
       }
     },
 
@@ -111,7 +111,7 @@ const Login: NextPage & WithLayout = () => {
             type='submit'
             large
             className='rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
-            title='LOGIN'
+            title={`${isLoading ? 'Loading...' : 'LOGIN'}`}
           />
         </form>
       ) : (
@@ -158,7 +158,7 @@ const Login: NextPage & WithLayout = () => {
   );
 };
 
-Login.getLayout = (page: any) => (
+Login.getLayout = (page: JSX.Element) => (
   <Layout>
     <Auth>{page}</Auth>
   </Layout>

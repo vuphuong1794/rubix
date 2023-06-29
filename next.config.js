@@ -10,6 +10,7 @@ const nextConfig = {
   // Uncoment to add domain whitelist
   images: {
     domains: [
+      'cdn.shopify.com',
       'res.cloudinary.com',
       'images.unsplash.com',
       'down-vn.img.susercontent.com',
