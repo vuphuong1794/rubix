@@ -5,8 +5,9 @@ import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Autoplay, EffectFade, Pagination } from 'swiper';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 import { dataSwiper, ourBlog, partner, photoSamples } from '@/data';
@@ -52,7 +53,6 @@ const services: IService[] = [
 ];
 
 const Home: NextPage & WithLayout = () => {
-  const swiper = useSwiper();
   const [product, setProduct] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Home: NextPage & WithLayout = () => {
         const res = await CmsApi.getProducts({ page, take });
         setProduct(res.data.data);
       } catch (error) {
-        console.log(error);
+        toast.error('Lỗi load sản phẩm');
       }
     };
     handleSort({ page: 1, take: 12 });

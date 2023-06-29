@@ -1,5 +1,4 @@
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -25,7 +24,7 @@ const ProductItem = ({ item }: { item: Product }) => {
       dispatch(fetchTotal());
       toast.success('Thêm vào giỏ hàng thành công');
     } catch (error) {
-      console.log(error);
+      toast.error('Thêm vào giỏ hàng thất bại');
     }
   };
 
@@ -49,9 +48,6 @@ const ProductItem = ({ item }: { item: Product }) => {
         />
         {isHover && (
           <div className='absolute right-4 top-4 flex flex-col gap-2'>
-            <span className='flex h-8 w-8 items-center justify-center rounded-md bg-white transition-all hover:bg-amber-400 hover:text-white xl:h-12 xl:w-12'>
-              <SearchOutlinedIcon />
-            </span>
             <span
               onClick={() => handleAddToCart({ itemId: item.id, quantity: 1 })}
               className='flex h-8 w-8 items-center justify-center rounded-md bg-white transition-all hover:bg-amber-400 hover:text-white xl:h-12 xl:w-12'
@@ -78,11 +74,11 @@ const ProductItem = ({ item }: { item: Product }) => {
                 item.price ? 'line-through' : null
               } text-base font-light text-gray-700`}
             >
-              ₫{item.cost}.00
+              ₫{item.cost}
             </span>
             {item.price && (
               <span className='text-base font-light text-amber-400'>
-                ₫{item.price}.00
+                ₫{item.price}
               </span>
             )}
           </div>

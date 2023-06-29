@@ -35,9 +35,17 @@ export const CmsApi = {
     ).data;
   },
 
-  getProducts: ({ sort, page, take, cates_slug }: ReqSearchProduct) => {
+  getProducts: ({
+    sort,
+    page,
+    take,
+    cates_slug,
+    search,
+    start_price,
+    end_price,
+  }: ReqSearchProduct) => {
     return axiosClient.get<ResProducts>('/api/item/search', {
-      params: { sort, page, take, cates_slug },
+      params: { sort, page, take, cates_slug, search, start_price, end_price },
     });
   },
 

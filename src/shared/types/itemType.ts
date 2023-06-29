@@ -28,4 +28,6 @@ export interface ReqSearchProduct {
   sort?: string;
   take?: number;
   cates_slug?: string;
+  start_price?: number;
+  end_price?: number;
 }

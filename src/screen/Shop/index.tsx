@@ -54,10 +54,10 @@ const Collections: WithLayout = () => {
   const [itemCount, setItemCount] = useState<number | null>(null);
   const [take, setTake] = useState<number>(12);
   const [isHover, setIsHover] = useState(false);
-  const [minPrice, setMinPrice] = React.useState('');
-  const [maxPrice, setMaxPrice] = React.useState('');
+  const [minPrice, setMinPrice] = React.useState(0);
+  const [maxPrice, setMaxPrice] = React.useState(0);
   const router = useRouter();
-  const { id } = router.query;
+  const { id, search } = router.query;
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setSubItemChoose(id));
@@ -105,6 +105,40 @@ const Collections: WithLayout = () => {
         page,
         take,
         cates_slug: lastSegment,
+        search: search as string,
+      });
+      setProduct(res.data.data);
+      setPageCount(res.data.meta.pageCount);
+      setPrevPage(res.data.meta.hasPreviousPage);
+      setNextPage(res.data.meta.hasNextPage);
+      setItemCount(res.data.meta.itemCount);
+      setTake(res.data.meta.take);
+      setPage(res.data.meta.page);
+      setIsLoading(true);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const handleFilter = async ({ page, take }: ReqSearchProduct) => {
+    setIsLoading(false);
+    try {
+      const dataCat = await CmsApi.getCategories();
+      setCategories(dataCat.data.data);
+
+      const currentPath = window.location.pathname;
+      const pathSegments = currentPath.split('/');
+      let lastSegment = pathSegments[pathSegments.length - 1];
+      if (lastSegment === 'all') {
+        lastSegment = undefined;
+      }
+
+      const res = await CmsApi.getProducts({
+        page,
+        take,
+        cates_slug: lastSegment,
+        start_price: minPrice,
+        end_price: maxPrice,
       });
       setProduct(res.data.data);
       setPageCount(res.data.meta.pageCount);
@@ -121,7 +155,7 @@ const Collections: WithLayout = () => {
 
   useEffect(() => {
     handleSort({ page: page, take: 12 });
-  }, [page]);
+  }, [search, page]);
 
   const handleMinPriceChange = (event) => {
     setMinPrice(event.target.value);
@@ -129,10 +163,6 @@ const Collections: WithLayout = () => {
 
   const handleMaxPriceChange = (event) => {
     setMaxPrice(event.target.value);
-  };
-
-  const handleFilter = () => {
-    // Perform filtering logic with minPrice and maxPrice values
   };
 
   return (
@@ -220,7 +250,15 @@ const Collections: WithLayout = () => {
                 <Button
                   variant='outlined'
                   className='w-full'
-                  onClick={handleFilter}
+                  onClick={() =>
+                    handleFilter({
+                      page: 1,
+                      take: 12,
+                      cates_slug: 'all',
+                      start_price: minPrice,
+                      end_price: maxPrice,
+                    } as ReqSearchProduct)
+                  }
                 >
                   Lọc
                 </Button>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import BgBanner from '@/components/common/BgBanner';
 import Layout from '@/components/layout/Layout';
@@ -20,7 +21,7 @@ const Collections: WithLayout = () => {
         setCategories(res.data.data);
         setIsLoading(true);
       } catch (error) {
-        console.log(error);
+        toast.error(error);
       }
     };
     getCollection();

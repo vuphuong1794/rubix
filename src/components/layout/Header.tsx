@@ -1,7 +1,6 @@
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {
   Badge,
   Button,
@@ -17,6 +16,7 @@ import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import { RiCloseCircleFill } from 'react-icons/ri';
 
+import SearchHeader from '@/components/layout/SearchHeader';
 import NextImage from '@/components/NextImage';
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -74,9 +74,7 @@ export default function Header() {
         <IconButton onClick={handleDrawerOpen}>
           <MenuIcon className='cursor-pointer' />
         </IconButton>
-        <IconButton>
-          <SearchOutlinedIcon />
-        </IconButton>
+        <SearchHeader />
       </div>
       <Link href='/'>
         <NextImage
@@ -166,15 +164,15 @@ export default function Header() {
                 Sign up
               </Link>
             </li>
-            <li>|</li>
           </ul>
         ) : (
-          <div>{session.user.username}</div>
+          <div className='flex justify-center'>
+            <span className='lg:mt-2'>{session.user.username}</span>
+            <div className='hidden cursor-pointer px-2 hover:text-yellow-300 lg:block'>
+              <SearchHeader />
+            </div>
+          </div>
         )}
-        <div className='hidden cursor-pointer px-2 hover:text-yellow-300 lg:block'>
-          <SearchOutlinedIcon />
-        </div>
-        <span className='hidden lg:block'>|</span>
         {session && (
           <Link href='/cart'>
             <Badge
