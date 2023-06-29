@@ -4,10 +4,11 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import { Button, MenuItem, TextField } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import BgBanner from '@/components/common/BgBanner';
@@ -18,7 +19,6 @@ import Skeleton from '@/components/Skeleton';
 import { CmsApi } from '@/api/cms-api';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
-  selectSubItemChoose,
   selectSubPriceChoose,
   setSubItemChoose,
   setSubPriceChoose,
@@ -28,13 +28,7 @@ import { Category } from '@/shared/types/categories';
 import { ReqSearchProduct } from '@/shared/types/itemType';
 import { Product } from '@/shared/types/productType';
 
-import {
-  BestSeller,
-  ButtonPage,
-  SubColorItem,
-  SubItem,
-  SubPriceItem,
-} from './SubItem';
+import { BestSeller, ButtonPage, SubColorItem, SubItem } from './SubItem';
 
 const colors: string[] = [
   'bg-[#000]',
@@ -42,12 +36,6 @@ const colors: string[] = [
   'bg-[#7e7d7d]',
   'bg-[#fff]',
   'bg-[#f9b61e]',
-];
-const price: string[] = [
-  '$0 - $50',
-  '$50 - $100',
-  '$150 - $200',
-  '$200 - $250',
 ];
 
 const COUNT_PAGES_SHOW = 5;
@@ -66,18 +54,18 @@ const Collections: WithLayout = () => {
   const [itemCount, setItemCount] = useState<number | null>(null);
   const [take, setTake] = useState<number>(12);
   const [isHover, setIsHover] = useState(false);
-  const [itemChoose, setItemChoose] = useState(false);
-
-  const getSubItemChoose = useAppSelector(selectSubItemChoose);
+  const [minPrice, setMinPrice] = React.useState('');
+  const [maxPrice, setMaxPrice] = React.useState('');
+  const router = useRouter();
+  const { id } = router.query;
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setSubItemChoose(id));
+  }, [dispatch, id]);
 
   const handleHover = () => {
     setIsHover(!isHover);
   };
-
-  useEffect(() => {
-    setItemChoose(getSubItemChoose === 'All Categories');
-  }, [getSubItemChoose]);
 
   const minPageShow =
     page - Math.floor(COUNT_PAGES_SHOW / 2) > 1
@@ -100,13 +88,24 @@ const Collections: WithLayout = () => {
     }
   };
 
-  const handleSort = async ({ page, take, cates_slug }: ReqSearchProduct) => {
+  const handleSort = async ({ page, take }: ReqSearchProduct) => {
     setIsLoading(false);
     try {
       const dataCat = await CmsApi.getCategories();
       setCategories(dataCat.data.data);
 
-      const res = await CmsApi.getProducts({ page, take, cates_slug });
+      const currentPath = window.location.pathname;
+      const pathSegments = currentPath.split('/');
+      let lastSegment = pathSegments[pathSegments.length - 1];
+      if (lastSegment === 'all') {
+        lastSegment = undefined;
+      }
+
+      const res = await CmsApi.getProducts({
+        page,
+        take,
+        cates_slug: lastSegment,
+      });
       setProduct(res.data.data);
       setPageCount(res.data.meta.pageCount);
       setPrevPage(res.data.meta.hasPreviousPage);
@@ -123,6 +122,18 @@ const Collections: WithLayout = () => {
   useEffect(() => {
     handleSort({ page: page, take: 12 });
   }, [page]);
+
+  const handleMinPriceChange = (event) => {
+    setMinPrice(event.target.value);
+  };
+
+  const handleMaxPriceChange = (event) => {
+    setMaxPrice(event.target.value);
+  };
+
+  const handleFilter = () => {
+    // Perform filtering logic with minPrice and maxPrice values
+  };
 
   return (
     <div className='flex w-full flex-col items-center justify-center'>
@@ -143,10 +154,12 @@ const Collections: WithLayout = () => {
               >
                 <span
                   className={`${
-                    isHover || itemChoose ? 'border-black bg-black' : 'bg-white'
+                    isHover || id === 'all'
+                      ? 'border-black bg-black'
+                      : 'bg-white'
                   } flex h-4 w-4 items-center justify-center rounded-full border transition-all hover:border-black hover:bg-black`}
                 >
-                  {isHover || itemChoose ? (
+                  {isHover || id === 'all' ? (
                     <span className='flex items-center justify-center text-white transition-all'>
                       <KeyboardArrowRightIcon
                         style={{ width: '16px', height: '16px' }}
@@ -189,9 +202,29 @@ const Collections: WithLayout = () => {
               )}
             </div>
             <ul className='flex w-full flex-col gap-4'>
-              {price.map((item) => (
-                <SubPriceItem key={item} item={item} />
-              ))}
+              <li className='flex w-full cursor-pointer items-center gap-4'>
+                <TextField
+                  label='₫ TỪ'
+                  type='number'
+                  value={minPrice}
+                  onChange={handleMinPriceChange}
+                />
+                <TextField
+                  label='₫ ĐẾN'
+                  type='number'
+                  value={maxPrice}
+                  onChange={handleMaxPriceChange}
+                />
+              </li>
+              <li className='w-full'>
+                <Button
+                  variant='outlined'
+                  className='w-full'
+                  onClick={handleFilter}
+                >
+                  Lọc
+                </Button>
+              </li>
             </ul>
           </div>
           <div>

@@ -2,7 +2,6 @@ import AddIcon from '@mui/icons-material/Add';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
 import NextImage from '@/components/NextImage';
@@ -30,9 +29,6 @@ export const SubItem: FC<PropsSubItem> = (props) => {
   const [itemChoose, setItemChoose] = useState(false);
   const getSubItemChoose = useAppSelector(selectSubItemChoose);
   const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  const { id } = router.query;
 
   const handleHover = () => {
     setIsHover(!isHover);
@@ -40,7 +36,7 @@ export const SubItem: FC<PropsSubItem> = (props) => {
 
   useEffect(() => {
     setItemChoose(getSubItemChoose === props.item.slug);
-  }, [getSubItemChoose]);
+  }, [getSubItemChoose, props.item.slug]);
 
   return (
     <Link
