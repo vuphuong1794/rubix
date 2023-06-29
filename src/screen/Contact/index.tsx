@@ -21,7 +21,7 @@ const data: PropsContact[] = [
   },
   {
     field: 'Email:',
-    value: 'hieuhoi912002@gmail.com',
+    value: 'thanhbkbk111@gmail.com',
   },
   {
     field: 'Open:',

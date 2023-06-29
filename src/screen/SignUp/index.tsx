@@ -16,6 +16,7 @@ import { WithLayout } from '@/shared/types';
 import { ReqRegister } from '@/shared/types/authType';
 
 const Register: NextPage & WithLayout = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const router = useRouter();
   const initialValues: ReqRegister = {
@@ -28,6 +29,7 @@ const Register: NextPage & WithLayout = () => {
 
     onSubmit: async (values) => {
       try {
+        setIsLoading(true);
         const _ = await CmsApi.register({
           username: values.username,
           email: values.email,
@@ -36,6 +38,7 @@ const Register: NextPage & WithLayout = () => {
 
         router.push(ROUTES.LOGIN);
       } catch (e: any) {
+        setIsLoading(false);
         setError(e.response.data.error);
       }
     },
@@ -95,13 +98,13 @@ const Register: NextPage & WithLayout = () => {
         type='submit'
         large
         className=' rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
-        title='CREATE AN ACCOUNT'
+        title={`${isLoading ? 'Loading...' : 'REGISTER'}`}
       />
     </form>
   );
 };
 
-Register.getLayout = (page: any) => (
+Register.getLayout = (page: JSX.Element) => (
   <Layout>
     <Auth>{page}</Auth>
   </Layout>

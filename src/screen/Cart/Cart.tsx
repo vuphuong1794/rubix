@@ -1,8 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useSession } from 'next-auth/react';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import Auth from '@/components/Auth';
 import { Button } from '@/components/common';
@@ -10,37 +9,28 @@ import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
 
 import { CmsApi } from '@/api/cms-api';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { fetchTotal } from '@/features/cart/cartSlice';
 import ButtonCart from '@/screen/Cart/ButtonCart';
 import { WithLayout } from '@/shared/types';
-import { CartItem } from '@/shared/types/cartType';
 
 const Cart: WithLayout = () => {
-  const [data, setData] = useState<CartItem[]>([]);
-  const session = useSession();
-  console.log(session);
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.cart.cart);
 
-  const getCart = async () => {
-    try {
-      const res = await CmsApi.getCart();
-      setData(res.data.data.cart_items);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
-    getCart();
-  }, []);
+    dispatch(fetchTotal());
+  }, [dispatch]);
 
   const handleDeleteItem = async (id: string) => {
-    const item = [];
-    item.push(id);
     try {
-      const _ = await CmsApi.deleteCartItem(item);
+      const item = [id];
+      await CmsApi.deleteCartItem(item);
+      dispatch(fetchTotal());
+      toast.success('Xóa sản phẩm thành công');
     } catch (error) {
-      console.log(error);
+      toast.error('Lỗi khi xóa sản phẩm');
     }
-
-    getCart();
   };
 
   return (
@@ -57,7 +47,7 @@ const Cart: WithLayout = () => {
           </tr>
         </thead>
         <tbody className='mb-10 flex flex-col gap-6'>
-          {data.map((item) => (
+          {cartItems.map((item) => (
             <tr
               key={item.id}
               className='flex w-full gap-6 border-b pb-6 last:border-none'
@@ -74,7 +64,7 @@ const Cart: WithLayout = () => {
               <td className='flex w-full flex-col justify-between'>
                 <div className='flex w-full flex-col gap-2'>
                   <h4>{item.item.name}</h4>
-                  <p>${item.item.price}.00</p>
+                  <p>₫{item.item.price}.00</p>
                   <p className='hidden lg:block'>{item.item.description}</p>
                 </div>
                 <div className='flex justify-between'>
@@ -88,14 +78,14 @@ const Cart: WithLayout = () => {
                     </ButtonCart>
                   </span>
                   <Button
-                    title='Remove'
+                    title='Xóa'
                     onClick={() => handleDeleteItem(item.id)}
                     className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
                   />
                 </div>
               </td>
               <td>
-                <h4>${item.item.price}.00</h4>
+                <h4>₫{item.item.price}.00</h4>
               </td>
             </tr>
           ))}

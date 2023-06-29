@@ -1,7 +1,6 @@
 export const ERROR_TOKEN = 'RefreshAccessTokenError';
 
-export const BASE_URL_API =
-  'https://materialize-production-df07.up.railway.app';
+export const BASE_URL_API = 'http://localhost:8080';
 
 export const ROUTES = {
   LOGIN: '/login',
