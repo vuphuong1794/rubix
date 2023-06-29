@@ -64,7 +64,7 @@ const Cart: WithLayout = () => {
               <td className='flex w-full flex-col justify-between'>
                 <div className='flex w-full flex-col gap-2'>
                   <h4>{item.item.name}</h4>
-                  <p>₫{item.item.price}.00</p>
+                  <p>₫{item.item.price}</p>
                   <p className='hidden lg:block'>{item.item.description}</p>
                 </div>
                 <div className='flex justify-between'>
@@ -85,7 +85,7 @@ const Cart: WithLayout = () => {
                 </div>
               </td>
               <td>
-                <h4>₫{item.item.price}.00</h4>
+                <h4>₫{item.item.price}</h4>
               </td>
             </tr>
           ))}
