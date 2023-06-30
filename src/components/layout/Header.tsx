@@ -24,11 +24,11 @@ import { login, register } from '@/features/auth/authSlice';
 import { fetchTotal } from '@/features/cart/cartSlice';
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/collections/all', label: 'Shop' },
-  { href: '/collections', label: 'Collections' },
-  { href: '/blogs', label: 'Blogs' },
-  { href: '/us', label: 'Contact Us' },
+  { href: '/', label: 'Trang chủ' },
+  { href: '/collections/all', label: 'Cửa hàng' },
+  { href: '/collections', label: 'Bộ sưu tập' },
+  { href: '/blogs', label: 'Bài viết' },
+  { href: '/us', label: 'Liên hệ' },
 ];
 
 export default function Header() {

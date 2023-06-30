@@ -167,11 +167,11 @@ const Collections: WithLayout = () => {
 
   return (
     <div className='flex w-full flex-col items-center justify-center'>
-      <BgBanner nav='Products' />
+      <BgBanner nav='Sản phẩm' />
       <div className='my-20 grid w-full max-w-[90%] grid-cols-5 gap-6 2xl:max-w-[80%]'>
         <div className='hidden w-full lg:block'>
           <div className='border-b pb-10'>
-            <h4 className='mb-10'>Product Categories</h4>
+            <h4 className='mb-10'>Danh mục sản phẩm</h4>
             <ul className='flex w-full flex-col gap-4 '>
               <li
                 onClick={() => {
@@ -203,7 +203,7 @@ const Collections: WithLayout = () => {
                     handleSort({ page: 1, take: 12 });
                   }}
                 >
-                  All Categories
+                  Tất cả sản phẩm
                 </Link>
               </li>
               {categories.map((item) => (
@@ -212,7 +212,7 @@ const Collections: WithLayout = () => {
             </ul>
           </div>
           <div className='border-b pb-10 pt-14'>
-            <h4 className='mb-6'>Color</h4>
+            <h4 className='mb-6'>Màu</h4>
             <ul className='flex'>
               {colors.map((item) => (
                 <SubColorItem key={item} item={item} />
@@ -221,7 +221,7 @@ const Collections: WithLayout = () => {
           </div>
           <div className='mt-12 w-full border-b pb-10'>
             <div className='flex h-full w-full justify-between'>
-              <h4 className='mb-6'>Price</h4>
+              <h4 className='mb-6'>Giá</h4>
               {getSubPriceChoose === '' ? null : (
                 <span
                   className='cursor-pointer text-amber-400'
@@ -266,7 +266,7 @@ const Collections: WithLayout = () => {
             </ul>
           </div>
           <div>
-            <h4 className='mt-12 mb-8'>Best sellers</h4>
+            <h4 className='mt-12 mb-8'>Bán chạy nhất</h4>
             <div className='flex flex-col gap-6'>
               {product.slice(0, 4).map((item) => (
                 <BestSeller key={item.id} item={item} />
@@ -366,9 +366,9 @@ const Collections: WithLayout = () => {
               </ButtonPage>
             </div>
             <span>
-              Showing {prevPage ? page * take - 11 : 1}-
-              {nextPage ? take * page : itemCount} of {itemCount}
-              Results
+              Hiển thị {prevPage ? page * take - 11 : 1}-
+              {nextPage ? take * page : itemCount} của {itemCount}
+              &nbsp;Kết quả
             </span>
           </div>
         </div>

@@ -36,7 +36,7 @@ const Cart: WithLayout = () => {
   return (
     <div className='mt-16 flex w-full flex-col items-center justify-center'>
       <h3 className='mb-6 flex w-full max-w-[70%] justify-start'>
-        Shopping cart
+        Giỏ hàng của bạn
       </h3>
       <table className='flex w-full max-w-[70%] flex-col gap-6'>
         <thead>

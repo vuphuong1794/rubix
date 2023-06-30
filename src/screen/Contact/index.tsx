@@ -12,11 +12,11 @@ interface PropsContact {
 
 const data: PropsContact[] = [
   {
-    field: 'Add:',
-    value: 'No 40 Baria Sreet 133/2, NewYork',
+    field: 'Địa chỉ:',
+    value: '113 Bà Huyện Thanh Quan, Phường 9, Quận 3, TP.HCM',
   },
   {
-    field: 'Phone:',
+    field: 'Số điện thoại:',
     value: '+1 800 1236879',
   },
   {
@@ -24,7 +24,7 @@ const data: PropsContact[] = [
     value: 'thanhbkbk111@gmail.com',
   },
   {
-    field: 'Open:',
+    field: 'Thời gian mở của:',
     value: 'Mon - Fri: 8:00 - 18:00',
   },
 ];
@@ -43,11 +43,9 @@ const Contact: WithLayout = () => {
       <div className='flex w-full items-start justify-center'>
         <div className='my-20 flex max-w-[80%] items-start justify-between gap-10'>
           <div className='flex w-1/2 flex-col gap-6'>
-            <h3 className='font-semibold'>CONTACT US</h3>
+            <h3 className='font-semibold'>Liên hệ chúng tôi</h3>
             <p className='text-gray-700'>
-              Nor again is there anyone who loves or pursues or desires to
-              obtain pain of itself, because it is pain.no annoying
-              consequences.
+              Hãy liên hệ với chúng tôi để không có hậu quả phiền toái.
             </p>
             <div className='flex flex-col gap-2 text-gray-700'>
               {data.map((item) => (
@@ -59,14 +57,14 @@ const Contact: WithLayout = () => {
             </div>
           </div>
           <form className='flex w-1/2 flex-col gap-4'>
-            <Input type='text' placeholder='Name' />
+            <Input type='text' placeholder='Tên' />
             <Input type='text' placeholder='Email' className='rounded' />
             <textarea
-              placeholder='Message'
+              placeholder='TIn nhắn'
               className='mb-4 h-32 w-full rounded border border-gray-300 pt-4 pl-2 outline-none'
             />
             <button className='h-14 w-full rounded border border-gray-300 transition-all hover:border-amber-400 hover:text-amber-400'>
-              <span>Send Message</span>
+              <span>Gửi tin nhắn</span>
             </button>
           </form>
         </div>

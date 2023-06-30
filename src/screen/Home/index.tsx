@@ -35,20 +35,20 @@ const services: IService[] = [
     icon: (
       <AirplanemodeActiveOutlinedIcon style={{ width: '2em', height: '2em' }} />
     ),
-    title: 'Free Worldwide Shipping',
-    content: 'On all orders over $75.00',
+    title: 'Miễn phí vận chuyển toàn cầu',
+    content: 'Cho tất cả đơn hàng trên $75.00',
   },
   {
     icon: <PaymentOutlinedIcon style={{ width: '2em', height: '2em' }} />,
-    title: '100% Payment Secure',
-    content: 'We ensure secure payment with PEV',
+    title: 'Thanh toán 100% an toàn',
+    content: 'Chúng tôi đảm bảo thanh toán an toàn với PEV',
   },
   {
     icon: (
       <KeyboardReturnOutlinedIcon style={{ width: '2em', height: '2em' }} />
     ),
-    title: '30 Days Return',
-    content: 'Return it within 20 day for an exchange',
+    title: '30 ngày đổi trả',
+    content: 'Đổi trả trong vòng 20 ngày',
   },
 ];
 
@@ -134,7 +134,10 @@ const Home: NextPage & WithLayout = () => {
           />
         </div>
         <section className='pb-10'>
-          <Title title='Trending Products' content='Top view in this week' />
+          <Title
+            title='Sản phẩm thịnh hành'
+            content='Xem nhiều nhất trong tuần'
+          />
           <div className='grid grid-flow-col gap-6'>
             <div>
               <NextImage
@@ -169,7 +172,10 @@ const Home: NextPage & WithLayout = () => {
           </div>
         </section>
         <section className='hidden pb-16 md:block'>
-          <Title title='Best Seller Products' content='Top view in this week' />
+          <Title
+            title='Sản phẩm bán chạy nhất'
+            content='Xem nhiều nhất trong tuần'
+          />
           <div className='grid gap-6  md:grid-cols-4 xl:grid-cols-6'>
             {product.map((item) => (
               <ProductItem key={item.id} item={item} />
@@ -179,25 +185,27 @@ const Home: NextPage & WithLayout = () => {
       </div>
       <section className='flex w-full items-center justify-center bg-transparent py-[80px]'>
         <div className=' inline-block w-full max-w-[690px] bg-white py-12 px-10 text-center'>
-          <h3 className='mb-3 pt-6 text-3xl'>Subcribe To Our Newsletter</h3>
+          <h3 className='mb-3 pt-6 text-3xl'>Theo dõi bản tin của chúng tôi</h3>
           <span className='text-gray-700'>
-            Sign up for the weekly newsletter and build better ecommerce stores.
+            Đăng ký nhận bản tin hàng tuần và xây dựng các cửa hàng thương mại
+            điện tử tốt hơn.
           </span>
           <form className='my-8 flex w-full justify-between gap-4'>
             <Input
               type='text'
-              placeholder='Your email address...'
+              placeholder='Địa chỉ email của bạn...'
               className='w-full rounded-md border-gray-300 px-4 focus:border-gray-300'
             />
             <button
               type='submit'
-              className='rounded-sm bg-black px-4 font-normal text-white transition-all hover:bg-amber-400'
+              className='w-32 rounded-sm bg-black px-4 font-normal text-white transition-all hover:bg-amber-400'
             >
-              Subscribe
+              Đăng ký
             </button>
           </form>
           <span className='text-gray-700'>
-            We respect your privacy, so we never share your info.
+            Chúng tôi tôn trọng quyền riêng tư của bạn, vì vậy chúng tôi không
+            bao giờ chia sẻ thông tin của bạn.
           </span>
         </div>
       </section>
@@ -213,7 +221,7 @@ const Home: NextPage & WithLayout = () => {
                 <h4 className='font-semibold'>{service.title}</h4>
                 <p>{service.content}</p>
                 <Link href='/' className='mt-2'>
-                  <span className='font-bold'>Learn More</span>
+                  <span className='font-bold'>Đọc thêm</span>
                   <span>
                     <KeyboardArrowRightOutlinedIcon />
                   </span>
@@ -248,7 +256,10 @@ const Home: NextPage & WithLayout = () => {
           </div>
         </section>
         <section className='px-10 pt-10 pb-20'>
-          <Title title='Follow us on Instagram' content='@ Rubix Instagram' />
+          <Title
+            title='Theo dõi chúng tôi trên Instagram'
+            content='@ Rubix Instagram'
+          />
           <div className='grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6'>
             {photoSamples.map((item) => (
               <NextImage

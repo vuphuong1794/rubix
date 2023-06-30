@@ -31,7 +31,7 @@ const ItemSwiper: FC<ISwiper> = (item) => {
           href='/collections/all'
           className='slider-button absolute animate-arrow-top rounded-md bg-black py-[14px] px-8 text-white transition-all hover:bg-amber-400'
         >
-          <span className='font-semibold'>Start Shopping</span>
+          <span className='font-semibold'>Bắt đầu mua hàng</span>
           <KeyboardArrowRightIcon />
         </Link>
       </div>

@@ -13,35 +13,51 @@ import React from 'react';
 import NextImage from '@/components/NextImage';
 
 const infoCompany: string[] = [
-  'My Account',
-  'Track Your Order',
-  'FAQs',
-  'Payment Methods',
-  'Shipping Guide',
-  'Products Support',
-  'Gift Card Balance',
+  'Tài khoản của tôi',
+  'Theo dõi đơn hàng của bạn',
+  'Các câu hỏi thường gặp',
+  'Phương thức thanh toán',
+  'Hướng dẫn vận chuyển',
+  'Hỗ trợ sản phẩm',
+  'Số dư thẻ quà tặng',
 ];
 
 const moreFromRubix: string[] = [
-  'About Rubix',
-  'Our Guarantees',
-  'Terms and Conditions',
-  'Privacy Policy',
-  'Return Policy',
-  'Delivery & Return',
-  'Sitemap',
+  'Về Rubix',
+  'Cam kết của chúng tôi',
+  'Điều khoản và điều kiện',
+  'Chính sách bảo mật',
+  'Chính sách đổi trả',
+  'Giao hàng & Đổi trả',
+  'Bản đồ trang web',
 ];
+
 interface Iicon {
   href: string;
   icon: React.ReactElement;
 }
 
 const icon: Iicon[] = [
-  { href: 'https://www.facebook.com/hieuhoi91', icon: <FacebookIcon /> },
-  { href: 'https://www.facebook.com/hieuhoi91', icon: <TwitterIcon /> },
-  { href: 'https://www.facebook.com/hieuhoi91', icon: <InstagramIcon /> },
-  { href: 'https://www.facebook.com/hieuhoi91', icon: <PinterestIcon /> },
-  { href: 'https://www.facebook.com/hieuhoi91', icon: <YouTubeIcon /> },
+  {
+    href: 'https://www.facebook.com/tranngocthanh.tran.10',
+    icon: <FacebookIcon />,
+  },
+  {
+    href: 'https://www.facebook.com/tranngocthanh.tran.10',
+    icon: <TwitterIcon />,
+  },
+  {
+    href: 'https://www.facebook.com/tranngocthanh.tran.10',
+    icon: <InstagramIcon />,
+  },
+  {
+    href: 'https://www.facebook.com/tranngocthanh.tran.10',
+    icon: <PinterestIcon />,
+  },
+  {
+    href: 'https://www.facebook.com/tranngocthanh.tran.10',
+    icon: <YouTubeIcon />,
+  },
 ];
 
 const Footer = () => {
@@ -85,7 +101,7 @@ const Footer = () => {
             onClick={handlerOpenIC}
           >
             <h4 className='mb-[10px] py-[10px] font-medium'>
-              Information Company
+              Thông tin công ty
             </h4>
             <span className='block sm:hidden'>
               {!openIC ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
@@ -107,7 +123,9 @@ const Footer = () => {
             className='flex w-full items-center justify-between sm:block'
             onClick={handlerOpenMFR}
           >
-            <h4 className='mb-[10px] py-[10px] font-medium'>More From Rubix</h4>
+            <h4 className='mb-[10px] py-[10px] font-medium'>
+              Nhiều hơn từ Rubix
+            </h4>
             <span className='block sm:hidden'>
               {!openMFR ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
             </span>
@@ -125,7 +143,7 @@ const Footer = () => {
         </div>
         <div>
           <div>
-            <h4 className='mb-[10px] py-[10px] font-medium'>Let’s Talk</h4>
+            <h4 className='mb-[10px] py-[10px] font-medium'>Hãy nói chuyện</h4>
             <div className='flex items-start gap-3 text-[#999]'>
               <div>
                 <HeadphonesIcon />
@@ -137,7 +155,7 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <h4 className='mb-[10px] py-[10px] font-medium'>Find Us</h4>
+            <h4 className='mb-[10px] py-[10px] font-medium'>Tìm chúng tôi</h4>
             <div className='flex items-start gap-3 text-[#999]'>
               <div>
                 <LocationOnIcon />
@@ -153,9 +171,9 @@ const Footer = () => {
       <div className='flex w-full items-center justify-between border-t border-[#999] py-8 px-sm text-[#999] xl:px-xl '>
         <div>
           <Link href='/'>
-            <b className='text-white'>© 2021 Rubix.</b>
+            <b className='text-white'>© 2023 Rubix.</b>
           </Link>{' '}
-          All Rights Reserved
+          Mọi quyền được bảo lưu
         </div>
         <div className='hidden md:block'>
           <NextImage

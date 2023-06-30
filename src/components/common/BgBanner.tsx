@@ -20,7 +20,7 @@ const BgBanner: FC<PropsBgBanner> = (props) => {
       <div className='absolute top-1/2 left-[5%] -translate-y-1/2 2xl:left-[10%]'>
         <h1 className='mb-6 text-5xl font-bold'>{props.nav}</h1>
         <div className='flex items-center gap-2 text-sm text-gray-700'>
-          <span>Home</span>
+          <span>Trang chủ</span>
           <KeyboardArrowRightIcon style={{ fontSize: '18px' }} />
           <span className='text-gray-400'>{props.nav}</span>
         </div>

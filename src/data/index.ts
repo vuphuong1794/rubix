@@ -8,20 +8,20 @@ const dataSwiper: ISwiper[] = [
   {
     image:
       'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/slide31.jpg?v=1629543119',
-    content: 'Fliegenbein Table Lamp',
-    br: 'Mordern furniture special offer.',
+    content: 'Đèn bàn Fliegenbein',
+    br: 'Ưu đãi đặc biệt đồ nội thất hiện đại.',
   },
   {
     image:
       'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/slide32.jpg?v=1629543119',
-    content: 'Wood Minimal Office Chair ',
-    br: 'Extra 40% off now.',
+    content: 'Ghế văn phòng gỗ tối giản',
+    br: 'Giảm thêm 40% ngay bây giờ.',
   },
   {
     image:
       'https://cdn.shopify.com/s/files/1/0376/9440/6700/files/slide33.jpg?v=1629543119',
-    content: 'Nordic Kitchen Termokande ',
-    br: 'One big markdown sale 70% off.',
+    content: 'Bình giữ nhiệt Nordic Kitchen',
+    br: 'Giảm giá lớn 70%.',
   },
 ];
 export interface IProduct {
