@@ -96,8 +96,7 @@ export const nextAuthOptions = {
       }
       const expirationTime = token.exp * 1000; // Lấy giá trị thời gian hết hạn từ token
       const currentTime = Date.now();
-
-      if (expirationTime && currentTime - expirationTime > 0) {
+      if (expirationTime && expirationTime - currentTime > 0) {
         // Kiểm tra nếu token vẫn còn hợp lệ
 
         return await handleRefreshToken(token);

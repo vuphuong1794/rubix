@@ -9,8 +9,12 @@ import ProductItem from '@/components/Products/ProductItem';
 import Skeleton from '@/components/Skeleton';
 
 import { CmsApi } from '@/api/cms-api';
-import { useAppDispatch } from '@/app/hooks';
-import { setSubItemChoose } from '@/features/products/productSlice';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import {
+  selectProducts,
+  setProducts,
+  setSubItemChoose,
+} from '@/features/products/productSlice';
 import FilterCategories from '@/screen/Shop/FilterCategories';
 import FilterPrice from '@/screen/Shop/FilterPrice';
 import FilterPriceRes from '@/screen/Shop/FilterPriceRes';
@@ -18,15 +22,14 @@ import PoperFilterCategories from '@/screen/Shop/PoperFilterCategories';
 import { WithLayout } from '@/shared/types';
 import { Category } from '@/shared/types/categories';
 import { ReqSearchProduct } from '@/shared/types/itemType';
-import { Product } from '@/shared/types/productType';
 
 import { BestSeller, ButtonPage } from './SubItem';
 
 const COUNT_PAGES_SHOW = 5;
 
 const Collections: WithLayout = () => {
+  const product = useAppSelector(selectProducts);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [product, setProduct] = useState<Product[]>([]);
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -80,7 +83,7 @@ const Collections: WithLayout = () => {
         cates_slug: lastSegment,
         search: search as string,
       });
-      setProduct(res.data.data);
+      dispatch(setProducts(res.data.data));
       setPageCount(res.data.meta.pageCount);
       setPrevPage(res.data.meta.hasPreviousPage);
       setNextPage(res.data.meta.hasNextPage);
@@ -113,7 +116,7 @@ const Collections: WithLayout = () => {
         start_price: minPrice,
         end_price: maxPrice,
       });
-      setProduct(res.data.data);
+      dispatch(setProducts(res.data.data));
       setPageCount(res.data.meta.pageCount);
       setPrevPage(res.data.meta.hasPreviousPage);
       setNextPage(res.data.meta.hasNextPage);
