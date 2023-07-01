@@ -60,7 +60,7 @@ const Contact: WithLayout = () => {
             <Input type='text' placeholder='Tên' />
             <Input type='text' placeholder='Email' className='rounded' />
             <textarea
-              placeholder='TIn nhắn'
+              placeholder='Tin nhắn'
               className='mb-4 h-32 w-full rounded border border-gray-300 pt-4 pl-2 outline-none'
             />
             <button className='h-14 w-full rounded border border-gray-300 transition-all hover:border-amber-400 hover:text-amber-400'>

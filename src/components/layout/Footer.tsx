@@ -26,8 +26,8 @@ const moreFromRubix: string[] = [
   'Về Rubix',
   'Cam kết của chúng tôi',
   'Điều khoản và điều kiện',
-  'Chính sách bảo mật',
   'Chính sách đổi trả',
+  'Chính sách bảo hành',
   'Giao hàng & Đổi trả',
   'Bản đồ trang web',
 ];

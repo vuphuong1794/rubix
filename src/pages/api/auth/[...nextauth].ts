@@ -6,12 +6,10 @@ import { CmsApi } from '@/api/cms-api';
 import { ERROR_TOKEN, ROUTES } from '@/constant';
 
 const handleRefreshToken = async (token: JWT) => {
-  console.log('có chạy token', token);
   try {
     const tokenData = await CmsApi.refreshToken({
       refresh_token: token.refreshToken,
     });
-
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
@@ -26,6 +24,7 @@ const handleRefreshToken = async (token: JWT) => {
       refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {
+    console.log('error', error);
     return {
       ...token,
       error: ERROR_TOKEN,
@@ -92,13 +91,15 @@ export const nextAuthOptions = {
         token.email = user.email;
         token.username = user.username;
         token.expiresIn = user.expiresIn;
+        token.refreshToken = user.refreshToken;
         return token;
       }
-      const expiresInToken = token?.expiresIn;
-      const expirationTime = expiresInToken.exp * 1000;
+      const expirationTime = token.exp * 1000; // Lấy giá trị thời gian hết hạn từ token
       const currentTime = Date.now();
 
-      if (expirationTime && expirationTime - currentTime > 30 * 60 * 1000) {
+      if (expirationTime && currentTime - expirationTime > 0) {
+        // Kiểm tra nếu token vẫn còn hợp lệ
+
         return await handleRefreshToken(token);
       }
       return token;
