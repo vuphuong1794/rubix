@@ -158,7 +158,7 @@ export const BestSeller = ({ item }: { item: Product }) => {
         <span className='cursor-pointer text-sm font-bold transition-none hover:text-amber-400'>
           {item.name}
         </span>
-        <span className='text-sm text-gray-700'>${item.price}</span>
+        <span className='text-sm text-gray-700'>₫{item.price}</span>
       </div>
     </div>
   );
