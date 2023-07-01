@@ -22,14 +22,14 @@ const infoCompany: string[] = [
   'Số dư thẻ quà tặng',
 ];
 
-const moreFromRubix: string[] = [
-  'Về Rubix',
-  'Cam kết của chúng tôi',
-  'Điều khoản và điều kiện',
-  'Chính sách đổi trả',
-  'Chính sách bảo hành',
-  'Giao hàng & Đổi trả',
-  'Bản đồ trang web',
+const moreFromRubix: { label: string; href: string }[] = [
+  { label: 'Về Rubix', href: 'javascript:void(0)' },
+  { label: 'Cam kết của chúng tôi', href: 'javascript:void(0)' },
+  { label: 'Điều khoản và điều kiện', href: 'javascript:void(0)' },
+  { label: 'Chính sách đổi trả', href: '/policy/return' },
+  { label: 'Chính sách bảo hành', href: '/policy/warranty' },
+  { label: 'Chính sách giao hàng', href: '/policy/shipping' },
+  { label: 'Bản đồ', href: '/us' },
 ];
 
 interface Iicon {
@@ -133,10 +133,10 @@ const Footer = () => {
           <ul className={!openMFR ? 'hidden sm:block' : 'block'}>
             {moreFromRubix.map((item) => (
               <li
-                key={item}
+                key={item.label}
                 className='cursor-pointer py-[5px] text-sm text-[#999] hover:text-amber-400 hover:transition-all'
               >
-                {item}
+                <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>
