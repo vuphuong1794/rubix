@@ -119,7 +119,7 @@ export default function Header() {
             <MenuItem
               key={`${href}${label}`}
               onClick={() => handleNavigate(href)}
-              className='flex hover:text-yellow-300'
+              className='flex p-3 hover:text-yellow-300'
             >
               <Link href={href}>
                 <span className='w-full'>{label}</span>
@@ -155,13 +155,13 @@ export default function Header() {
           <ul className='flex min-w-[170px] items-center justify-center'>
             <li className='pr-1 hover:text-yellow-300 xl:block'>
               <Link onClick={() => dispatch(login())} href='/login'>
-                Login
+                Đăng nhập
               </Link>
             </li>
             <li className=' xl:block'>/</li>
             <li className=' pl-1 pr-6 hover:text-yellow-300 xl:block'>
               <Link onClick={() => dispatch(register())} href='/signup'>
-                Sign up
+                Đăng ký
               </Link>
             </li>
           </ul>

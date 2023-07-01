@@ -87,7 +87,7 @@ const Login: NextPage & WithLayout = () => {
           <Input
             id='password'
             name='password'
-            placeholder='Password'
+            placeholder='Mật khẩu'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
@@ -102,7 +102,7 @@ const Login: NextPage & WithLayout = () => {
             onClick={toggleAuthLogin}
           >
             <Link href='/login' className='text-xs hover:text-amber-400'>
-              Forgot Password?
+              Quên mật khẩu ?
             </Link>
           </span>
 
@@ -111,14 +111,14 @@ const Login: NextPage & WithLayout = () => {
             type='submit'
             large
             className='rounded-lg bg-[#1a1a1a] text-sm text-white transition-all hover:bg-amber-400 hover:shadow-lg'
-            title={`${isLoading ? 'Loading...' : 'LOGIN'}`}
+            title={`${isLoading ? 'Đang tải...' : 'Đăng nhập'}`}
           />
         </form>
       ) : (
         <div className='flex flex-col items-center justify-center'>
-          <h4 className='p-2'>Reset your password</h4>
+          <h4 className='p-2'>Khôi phục mật khẩu</h4>
           <span className='pb-4'>
-            We will send you an email to reset your password.
+            Chúng tôi sẽ gửi email cho bạn để khôi phục mật khẩu.
           </span>
           <form
             onSubmit={formik.handleSubmit}
@@ -147,9 +147,9 @@ const Login: NextPage & WithLayout = () => {
             <Button
               onClick={toggleAuthLogin}
               type='submit'
-              small
+              large
               className='my-4 rounded-lg border border-stone-900 bg-transparent text-sm text-black transition-buttonLogin hover:border-amber-400 hover:text-amber-400 hover:shadow-lg'
-              title='Back to Login'
+              title='Quay lại đăng nhập'
             />
           </form>
         </div>

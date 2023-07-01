@@ -16,6 +16,7 @@ export interface Category {
   slug: string;
   status: string;
   children: null;
+  item_count: number;
 }
 
 export interface Meta {

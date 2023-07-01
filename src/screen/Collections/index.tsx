@@ -49,7 +49,7 @@ const Collections: WithLayout = () => {
                 {category.name}
               </h4>
               <span className='cursor-pointer transition-all hover:text-amber-400'>
-                17 products
+                {category.item_count} sản phẩm
               </span>
               <Link
                 href={`/collections/${category.slug}`}
