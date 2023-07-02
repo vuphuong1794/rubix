@@ -8,5 +8,6 @@ export { default as Login } from './Login';
 export { default as Return } from './Policy/Return';
 export { default as Shipping } from './Policy/Shipping';
 export { default as Warranty } from './Policy/Warranty';
+export { default as ProductDetail } from './ProductDetail';
 export { default as Shop } from './Shop';
 export { default as SignUp } from './SignUp';

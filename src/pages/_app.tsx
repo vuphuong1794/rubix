@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
-        <ToastContainer />
+        <ToastContainer autoClose={400} />
         {getLayout(<Component {...pageProps} />)}
       </Provider>
     </SessionProvider>

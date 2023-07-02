@@ -1,4 +1,5 @@
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -14,10 +15,12 @@ import { Product } from '@/shared/types/productType';
 const ProductItem = ({ item }: { item: Product }) => {
   const [isHover, setIsHover] = useState(false);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleAddToCart = async ({ itemId, quantity }: ReqCartItem) => {
     const items: ReqCartItem[] = [];
-    items.push({ itemId, quantity });
+    const quantityItem = quantity;
+    items.push({ itemId, quantity: quantityItem });
 
     try {
       const _ = await CmsApi.addToCart(items);
@@ -40,11 +43,14 @@ const ProductItem = ({ item }: { item: Product }) => {
     >
       <div>
         <NextImage
+          onClick={() => {
+            router.push(`/product/${item.id}`);
+          }}
           className='relative h-full w-full'
           width={500}
           height={500}
           src={isHover ? item.images[0] : item.images[1] || item.images[0]}
-          alt=''
+          alt='Products'
         />
         {isHover && (
           <div className='absolute right-4 top-4 flex flex-col gap-2'>

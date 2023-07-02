@@ -56,6 +56,9 @@ export const CmsApi = {
   getProductsByCategoryId: ({ id }: { id: string }) => {
     return axiosClient.get<ResProducts>(`/api/item/${id}`);
   },
+  getDetailItem: (id: string) => {
+    return axiosClient.get(`api/item/${id}`);
+  },
 
   getCart: () => {
     return axiosClient.get<ResCart>(`/api/cart`);

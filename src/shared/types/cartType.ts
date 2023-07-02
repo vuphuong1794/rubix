@@ -45,3 +45,8 @@ export interface ReqCartItem {
   itemId: string;
   quantity: number;
 }
+
+export interface ReqCartItemV2 {
+  item: CartItem;
+  quantity: number;
+}
