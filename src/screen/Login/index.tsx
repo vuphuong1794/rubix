@@ -59,8 +59,8 @@ const Login: NextPage & WithLayout = () => {
 
     validationSchema: Yup.object().shape({
       email: Yup.string()
-        .email('Invalid email address.')
-        .required('You must enter your email.'),
+        .email('Email không hợp lệ.')
+        .required('Bạn phải nhập email.'),
       password: Yup.string().required('You must enter your password.'),
     }),
   });

@@ -5,6 +5,7 @@ export { default as Collections } from './Collections';
 export { default as Contact } from './Contact';
 export { default as Home } from './Home';
 export { default as Login } from './Login';
+export { default as Order } from './Order';
 export { default as Return } from './Policy/Return';
 export { default as Shipping } from './Policy/Shipping';
 export { default as Warranty } from './Policy/Warranty';

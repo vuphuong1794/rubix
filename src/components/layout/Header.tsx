@@ -1,3 +1,4 @@
+import { Logout } from '@mui/icons-material';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
@@ -10,6 +11,7 @@ import {
   MenuList,
   Popover,
 } from '@mui/material';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
@@ -20,6 +22,7 @@ import SearchHeader from '@/components/layout/SearchHeader';
 import NextImage from '@/components/NextImage';
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { ROUTES } from '@/constant';
 import { login, register } from '@/features/auth/authSlice';
 import { fetchTotal } from '@/features/cart/cartSlice';
 
@@ -34,6 +37,7 @@ const links = [
 export default function Header() {
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const [openDr, setOpenDr] = React.useState(false);
 
@@ -144,7 +148,28 @@ export default function Header() {
               }}
             >
               <div className='flex flex-col items-center justify-center gap-2 p-4'>
-                <Button size='small' onClick={() => signOut()}>
+                <Button
+                  startIcon={
+                    <Image
+                      src='/svg/order.svg'
+                      width={20}
+                      height={20}
+                      alt='avatar'
+                      className='fill-[#1976d2]'
+                    />
+                  }
+                  size='small'
+                  onClick={() => router.push(ROUTES.ORDER)}
+                >
+                  Đơn đã mua
+                </Button>
+              </div>
+              <div className='flex flex-col items-center justify-center gap-2 p-4'>
+                <Button
+                  startIcon={<Logout />}
+                  size='small'
+                  onClick={() => signOut()}
+                >
                   Đăng xuất
                 </Button>
               </div>

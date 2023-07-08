@@ -11,15 +11,35 @@ import NextImage from '@/components/NextImage';
 
 import { CmsApi } from '@/api/cms-api';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { fetchTotal } from '@/features/cart/cartSlice';
+import {
+  fetchTotal,
+  setCartPayment,
+  setOpenPayment,
+} from '@/features/cart/cartSlice';
 import ButtonCart from '@/screen/Cart/ButtonCart';
+import { PaymentCart } from '@/screen/Cart/PaymentCart';
 import { WithLayout } from '@/shared/types';
-import { ReqCartItem, ReqCartItemV2 } from '@/shared/types/cartType';
+import { CartItem, ReqCartItem, ReqCartItemV2 } from '@/shared/types/cartType';
 
 const Cart: WithLayout = () => {
+  const [typePayment, setTypePayment] = React.useState<'one' | 'all'>('one');
+  const router = useRouter();
+
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.cart);
-  const router = useRouter();
+
+  const handleOpen = (item: CartItem) => {
+    setTypePayment('one');
+    const items: CartItem[] = [];
+    items.push(item);
+    dispatch(setCartPayment(items));
+    dispatch(setOpenPayment(true));
+  };
+  const handleOpenBuyAll = () => {
+    setTypePayment('all');
+    dispatch(setCartPayment(cartItems));
+    dispatch(setOpenPayment(true));
+  };
 
   useEffect(() => {
     dispatch(fetchTotal());
@@ -63,17 +83,27 @@ const Cart: WithLayout = () => {
       }
       const _ = await CmsApi.addToCart(items);
       dispatch(fetchTotal());
-      toast.success('Thêm vào giỏ hàng thành công');
     } catch (error) {
-      toast.error('Thêm vào giỏ hàng thất bại');
+      toast.error('Xóa sản phẩm thất bại');
     }
   };
 
   return (
-    <div className='mt-16 flex w-full flex-col items-center justify-center'>
-      <h3 className='mb-6 flex w-full max-w-[70%] justify-start'>
-        Giỏ hàng của bạn
-      </h3>
+    <div className='mt-16 mb-8 flex w-full flex-col items-center justify-center'>
+      <div className='mb-6 flex w-full items-center justify-between px-28 xl:px-72'>
+        <h3 className='flex w-full max-w-[70%] justify-start'>
+          Giỏ hàng của bạn
+        </h3>
+        {cartItems && cartItems.length > 1 && (
+          <div className=''>
+            <Button
+              onClick={handleOpenBuyAll}
+              title='Mua hết'
+              className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
+            />
+          </div>
+        )}
+      </div>
       <table className='flex w-full max-w-[70%] flex-col gap-6'>
         <thead>
           <tr className='flex w-full bg-[#f7f7f7] p-3 shadow-md'>
@@ -130,15 +160,23 @@ const Cart: WithLayout = () => {
                       <AddIcon />
                     </ButtonCart>
                   </span>
+                </div>
+              </td>
+              <td>
+                <h4>₫{item.item.price * item.quantity}</h4>
+                <div className='mt-32 flex gap-4'>
+                  <Button
+                    onClick={() => handleOpen(item)}
+                    title='Mua'
+                    className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
+                  />
+                  <PaymentCart typePayment={typePayment} />
                   <Button
                     title='Xóa'
                     onClick={() => handleDeleteItem(item.id)}
                     className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
                   />
                 </div>
-              </td>
-              <td>
-                <h4>₫{item.item.price * item.quantity}</h4>
               </td>
             </tr>
           ))}

@@ -10,6 +10,12 @@ export interface ReqLogin {
   requestFrom: string;
 }
 
+export interface ReqCreateOrder {
+  item_id: string;
+  quantity: number;
+}
+[];
+
 export interface LoginParams {
   reqLogin: ReqLogin;
   callback: any;
@@ -39,7 +45,7 @@ export interface ReqRegister {
 }
 
 export interface ReqRefresh {
-  refresh_token: any;
+  refresh_token: string;
 }
 
 export interface ResRegister {

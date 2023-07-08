@@ -23,6 +23,9 @@ import { Product } from '@/shared/types/productType';
 
 const ProductDetail: WithLayout = () => {
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
+
   const { id } = router.query;
   const [item, setItemDetail] = React.useState<Product>();
   const [quantityItem, setQuantityItem] = React.useState(1);
@@ -30,7 +33,6 @@ const ProductDetail: WithLayout = () => {
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down('md'));
 
-  const dispatch = useAppDispatch();
   const handleAddToCart = async ({ itemId, quantity }: ReqCartItem) => {
     const items: ReqCartItem[] = [];
     items.push({ itemId, quantity });
@@ -40,7 +42,12 @@ const ProductDetail: WithLayout = () => {
       dispatch(fetchTotal());
       toast.success('Thêm vào giỏ hàng thành công');
     } catch (error) {
-      toast.error('Thêm vào giỏ hàng thất bại');
+      if (error.response.status === 401) {
+        toast.error('Vui lòng đăng nhập');
+        router.push('/login');
+      } else {
+        toast.error('Thêm vào giỏ hàng thất bại');
+      }
     }
   };
 

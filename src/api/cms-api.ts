@@ -4,9 +4,11 @@ import axiosClient from '@/api/axiosClient';
 import { ReqCartItem, ResCart } from '@/shared/types/cartType';
 import { ResCategories } from '@/shared/types/categories';
 import { ReqSearchProduct } from '@/shared/types/itemType';
+import { OrderRes } from '@/shared/types/orderType';
 import { ResProducts } from '@/shared/types/productType';
 
 import {
+  ReqCreateOrder,
   ReqLogin,
   ReqRefresh,
   ReqRegister,
@@ -72,5 +74,14 @@ export const CmsApi = {
   deleteCartItem: (id: string[]) => {
     const params = { itemsId: id };
     return axiosClient.delete(`api/cart/delete-cart-item`, { data: params });
+  },
+  createOrder: (data: ReqCreateOrder[]) => {
+    return axiosClient.post(`api/order/create`, {
+      data,
+    });
+  },
+
+  getOrder: () => {
+    return axiosClient.get<OrderRes>(`api/order/list`);
   },
 };

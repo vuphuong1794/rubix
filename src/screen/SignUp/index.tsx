@@ -44,11 +44,11 @@ const Register: NextPage & WithLayout = () => {
     },
 
     validationSchema: Yup.object().shape({
-      username: Yup.string().required('You must enter your username.'),
+      username: Yup.string().required('Bạn phải nhập tên đăng nhập.'),
       email: Yup.string()
-        .email('Invalid email address.')
-        .required('You must enter your email.'),
-      password: Yup.string().required('You must enter your password.'),
+        .email('Email không hợp lệ.')
+        .required('Bạn phải nhập email.'),
+      password: Yup.string().required('Bạn phải nhập mật khẩu'),
     }),
   });
   return (
