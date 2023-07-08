@@ -4,12 +4,18 @@ import React from 'react';
 import { OrderItem } from '@/shared/types/orderType';
 
 type Props = {
+  status: string;
   item: OrderItem;
 };
 
-const OrderItemDetails = ({ item }: Props) => {
+const OrderItemDetails = ({ item, status }: Props) => {
   return (
-    <div className='my-2'>
+    <div
+      className='my-2'
+      onClick={() => {
+        alert(status);
+      }}
+    >
       <div className='flex items-center justify-between'>
         <div className='flex gap-2'>
           <Image
@@ -37,9 +43,16 @@ const OrderItemDetails = ({ item }: Props) => {
           Tổng tiền: {item.price * item.quantity}đ
         </div>
         <div>
-          <span className='ml-1 cursor-pointer border border-yellow-300 p-1'>
-            Đánh giá
-          </span>
+          {status === 'completed' && (
+            <span className='ml-1 cursor-pointer border border-yellow-300 p-1'>
+              Đánh giá
+            </span>
+          )}
+          {status === 'cancelled' && (
+            <span className='ml-1 cursor-pointer border bg-red-500 p-1'>
+              Đã hủy
+            </span>
+          )}
         </div>
       </div>
     </div>

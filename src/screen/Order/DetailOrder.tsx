@@ -39,41 +39,45 @@ export const OrderDetails = ({ orders }: OrderDetailProps) => {
             </span>
           </div>
         </div>
-        <div className='flex gap-1 text-[#88b59c]'>
-          <LocalShippingIcon />
-          {OrderStatus[orders.status]}
+        <div className='flex gap-1'>
+          {orders.status === 'pending' && (
+            <div className='flex gap-1 text-[#88b59c]'>
+              <LocalShippingIcon />
+              {OrderStatus[orders.status]}
+            </div>
+          )}
+          <QuestionMarkIcon className='mt-[3px] h-5 w-5 cursor-pointer rounded-xl border border-dark text-black' />
           <div
             aria-owns={open ? 'mouse-over-popover' : undefined}
             aria-haspopup='true'
             onMouseEnter={handlePopoverOpen}
             onMouseLeave={handlePopoverClose}
           >
-            <QuestionMarkIcon className='h-5 w-5 cursor-pointer rounded-xl border border-dark text-black' />
+            <Popover
+              id='mouse-over-popover'
+              sx={{
+                pointerEvents: 'none',
+              }}
+              open={open}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              onClose={handlePopoverClose}
+              disableRestoreFocus
+            >
+              <Typography sx={{ p: 1 }}>Cập nhật mới nhất</Typography>
+              <Typography sx={{ p: 1 }}>
+                {formatTime(orders.updated_at).time1.split('.')[0]}&nbsp;
+                {formatTime(orders.created_at).date}
+              </Typography>
+            </Popover>
           </div>
-          <Popover
-            id='mouse-over-popover'
-            sx={{
-              pointerEvents: 'none',
-            }}
-            open={open}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            onClose={handlePopoverClose}
-            disableRestoreFocus
-          >
-            <Typography sx={{ p: 1 }}>Cập nhật mới nhất</Typography>
-            <Typography sx={{ p: 1 }}>
-              {formatTime(orders.updated_at).time1.split('.')[0]}&nbsp;
-              {formatTime(orders.created_at).date}
-            </Typography>
-          </Popover>
         </div>
       </div>
       <div className='w-full'>
@@ -86,7 +90,7 @@ export const OrderDetails = ({ orders }: OrderDetailProps) => {
         />
       </div>
       {orders.orderItems.map((item) => (
-        <OrderItemDetails key={item.id} item={item} />
+        <OrderItemDetails status={orders.status} key={item.id} item={item} />
       ))}
     </div>
   );
