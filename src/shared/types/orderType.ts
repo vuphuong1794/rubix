@@ -14,7 +14,7 @@ export type OrderData = {
   orderItems: OrderItem[];
 };
 
-type OrderItem = {
+export type OrderItem = {
   id: number;
   created_at: string;
   quantity: number;

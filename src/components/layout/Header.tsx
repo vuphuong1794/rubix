@@ -159,7 +159,10 @@ export default function Header() {
                     />
                   }
                   size='small'
-                  onClick={() => router.push(ROUTES.ORDER)}
+                  onClick={() => {
+                    handlePopoverClose();
+                    router.push(ROUTES.ORDER);
+                  }}
                 >
                   Đơn đã mua
                 </Button>

@@ -31,7 +31,7 @@ const Order: WithLayout = () => {
   }, []);
 
   return (
-    <div>
+    <div className='mb-3 flex flex-col gap-2'>
       {orders.length > 0 &&
         orders.map((order) => (
           <div key={order.id}>

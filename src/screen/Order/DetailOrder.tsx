@@ -1,9 +1,10 @@
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import StoreIcon from '@mui/icons-material/Store';
-import { Popover, Typography } from '@mui/material';
+import { Divider, Popover, Typography } from '@mui/material';
 import React from 'react';
 
+import OrderItemDetails from '@/screen/Order/OrderItemDetails';
 import { OrderData, OrderStatus } from '@/shared/types/orderType';
 
 type OrderDetailProps = {
@@ -22,13 +23,23 @@ export const OrderDetails = ({ orders }: OrderDetailProps) => {
 
   const open = Boolean(anchorEl);
   return (
-    <div className='mx-2'>
-      <div className=' flex items-center justify-between gap-1'>
-        <div className='flex items-center'>
-          <StoreIcon />
-          <span className='font-bold'>Cửa hàng Rubix</span>
+    <div className='mx-2 bg-slate-50 p-2 lg:mx-60'>
+      <div className=' flex justify-between gap-1'>
+        <div className='flex flex-col'>
+          <div className='flex items-center'>
+            <StoreIcon />
+            <span className='font-bold'>Cửa hàng Rubix</span>
+          </div>
+          <div className='flex'>
+            <span className='font-extrabold '>
+              Tổng tiền đơn hàng:&nbsp;
+              <span className='text-red-500'>
+                {orders.total_price.toLocaleString()}đ
+              </span>
+            </span>
+          </div>
         </div>
-        <div className='flex items-center gap-1 text-[#88b59c]'>
+        <div className='flex gap-1 text-[#88b59c]'>
           <LocalShippingIcon />
           {OrderStatus[orders.status]}
           <div
@@ -63,19 +74,20 @@ export const OrderDetails = ({ orders }: OrderDetailProps) => {
               {formatTime(orders.created_at).date}
             </Typography>
           </Popover>
-          <span className='ml-1 cursor-pointer border border-yellow-300 p-1'>
-            Đánh giá
-          </span>
         </div>
       </div>
-      <div className='flex'>
-        <span className='font-extrabold '>
-          Tổng tiền đơn hàng:&nbsp;
-          <span className='text-red-500'>
-            {orders.total_price.toLocaleString()}đ
-          </span>
-        </span>
+      <div className='w-full'>
+        <Divider
+          sx={{
+            color: 'yellow',
+          }}
+          orientation='horizontal'
+          flexItem
+        />
       </div>
+      {orders.orderItems.map((item) => (
+        <OrderItemDetails key={item.id} item={item} />
+      ))}
     </div>
   );
 };
