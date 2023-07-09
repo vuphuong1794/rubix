@@ -5,7 +5,7 @@ export type OrderRes = {
 };
 
 export type OrderData = {
-  id: number;
+  id: string;
   created_at: string;
   updated_at: string;
   total_quantity: number;
@@ -15,11 +15,12 @@ export type OrderData = {
 };
 
 export type OrderItem = {
-  id: number;
+  id: string;
   created_at: string;
   quantity: number;
   price: number;
   item: Item;
+  is_reviewed: boolean;
 };
 
 export enum OrderStatus {

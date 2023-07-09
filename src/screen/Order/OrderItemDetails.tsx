@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
+import PoperFeedbackOrder from '@/screen/Order/PoperFeedbackOrder';
 import { OrderItem } from '@/shared/types/orderType';
 
 type Props = {
@@ -9,13 +10,9 @@ type Props = {
 };
 
 const OrderItemDetails = ({ item, status }: Props) => {
+  const [isReviewed, setIsReviewed] = React.useState<boolean>(item.is_reviewed);
   return (
-    <div
-      className='my-2'
-      onClick={() => {
-        alert(status);
-      }}
-    >
+    <div className='my-2'>
       <div className='flex items-center justify-between'>
         <div className='flex gap-2'>
           <Image
@@ -30,9 +27,11 @@ const OrderItemDetails = ({ item, status }: Props) => {
           </div>
         </div>
         <div className='flex gap-1'>
-          <div className='text-[#88b59c] line-through'>
-            {item.item.cost.toLocaleString()}đ
-          </div>
+          {item.item.cost < item.item.price && (
+            <div className='text-[#88b59c] line-through'>
+              {item.item.cost.toLocaleString()}đ
+            </div>
+          )}
           <div className='font-bold text-red-500'>
             {item.item.price.toLocaleString()}đ
           </div>
@@ -43,9 +42,12 @@ const OrderItemDetails = ({ item, status }: Props) => {
           Tổng tiền: {item.price * item.quantity}đ
         </div>
         <div>
-          {status === 'completed' && (
-            <span className='ml-1 cursor-pointer border border-yellow-300 p-1'>
-              Đánh giá
+          {status === 'completed' && !isReviewed && (
+            <PoperFeedbackOrder item={item} setIsReviewed={setIsReviewed} />
+          )}
+          {status === 'completed' && isReviewed && (
+            <span className='ml-1 cursor-pointer border bg-green-300 p-1'>
+              Đã đánh giá
             </span>
           )}
           {status === 'cancelled' && (

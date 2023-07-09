@@ -16,6 +16,7 @@ import {
   ResRefreshToken,
   ResRegister,
 } from '../shared/types/authType';
+import { CreateRating } from '../shared/types/ratingType';
 
 export const CmsApi = {
   login: async (req: ReqLogin) => {
@@ -83,5 +84,14 @@ export const CmsApi = {
 
   getOrder: () => {
     return axiosClient.get<OrderRes>(`api/order/list`);
+  },
+
+  createReview: ({ content, item_id, rating, order_item_id }: CreateRating) => {
+    return axiosClient.post<CreateRating>(`api/review/create`, {
+      content,
+      rating,
+      item_id,
+      order_item_id,
+    });
   },
 };
