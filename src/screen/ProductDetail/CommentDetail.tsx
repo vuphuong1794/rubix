@@ -28,7 +28,10 @@ const CommentDetail = () => {
       <div className='mb-4 flex w-full flex-col gap-8'>
         {reviews.length > 0 &&
           reviews.map((review) => (
-            <div className='ml-60 flex w-full gap-2' key={review.id}>
+            <div
+              className='flex w-full gap-2 md:ml-10 lg:ml-60'
+              key={review.id}
+            >
               <div>
                 <Avatar alt='Avatar'>
                   {review.user.username.charAt(0).toUpperCase()}
