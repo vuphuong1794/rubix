@@ -4,3 +4,7 @@ export interface CreateRating {
   content: string;
   order_item_id: string;
 }
+
+export interface CancelOrder {
+  order_id: string;
+}

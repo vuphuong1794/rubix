@@ -6,6 +6,7 @@ import { ResCategories } from '@/shared/types/categories';
 import { ReqSearchProduct } from '@/shared/types/itemType';
 import { OrderRes } from '@/shared/types/orderType';
 import { ResProducts } from '@/shared/types/productType';
+import { ReviewRes } from '@/shared/types/reviewType';
 
 import {
   ReqCreateOrder,
@@ -16,7 +17,7 @@ import {
   ResRefreshToken,
   ResRegister,
 } from '../shared/types/authType';
-import { CreateRating } from '../shared/types/ratingType';
+import { CancelOrder, CreateRating } from '../shared/types/ratingType';
 
 export const CmsApi = {
   login: async (req: ReqLogin) => {
@@ -84,6 +85,16 @@ export const CmsApi = {
 
   getOrder: () => {
     return axiosClient.get<OrderRes>(`api/order/list`);
+  },
+
+  cancelOrder: ({ order_id }: CancelOrder) => {
+    return axiosClient.post<CancelOrder>(`api/order/cancel`, {
+      order_id,
+    });
+  },
+
+  getReview: (id: string) => {
+    return axiosClient.get<ReviewRes>(`/api/review/${id}`);
   },
 
   createReview: ({ content, item_id, rating, order_item_id }: CreateRating) => {

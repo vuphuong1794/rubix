@@ -13,7 +13,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: ROUTES.CART,
+        destination: ROUTES.HOME,
       },
     };
   }

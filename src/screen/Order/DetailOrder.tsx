@@ -3,7 +3,11 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import StoreIcon from '@mui/icons-material/Store';
 import { Divider, Popover, Typography } from '@mui/material';
 import React from 'react';
+import { toast } from 'react-toastify';
 
+import { CmsApi } from '@/api/cms-api';
+import { useAppDispatch } from '@/app/hooks';
+import { addOrder, setLoadingOrders } from '@/features/products/productSlice';
 import OrderItemDetails from '@/screen/Order/OrderItemDetails';
 import { OrderData, OrderStatus } from '@/shared/types/orderType';
 
@@ -19,6 +23,21 @@ export const OrderDetails = ({ orders }: OrderDetailProps) => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
+  };
+
+  const dispatch = useAppDispatch();
+
+  const handleCancelOrder = async (id: string) => {
+    try {
+      await CmsApi.cancelOrder({ order_id: id });
+      toast.success('Hủy đơn hàng thành công');
+      dispatch(setLoadingOrders(true));
+      const res = await CmsApi.getOrder();
+      dispatch(addOrder(res.data.data));
+      dispatch(setLoadingOrders(false));
+    } catch (error) {
+      toast.error('Có lỗi xảy ra');
+    }
   };
 
   const open = Boolean(anchorEl);
@@ -41,10 +60,22 @@ export const OrderDetails = ({ orders }: OrderDetailProps) => {
         </div>
         <div className='flex gap-1'>
           {orders.status === 'pending' && (
-            <div className='flex gap-1 text-[#88b59c]'>
-              <LocalShippingIcon />
-              {OrderStatus[orders.status]}
+            <div className='flex flex-col gap-1 text-[#88b59c]'>
+              <div
+                onClick={() => {
+                  handleCancelOrder(orders.id);
+                }}
+              >
+                <span className='mr-3 h-8 w-11 cursor-pointer border bg-red-500 p-1 text-white'>
+                  Hủy
+                </span>
+                <LocalShippingIcon />
+                {OrderStatus[orders.status]}
+              </div>
             </div>
+          )}
+          {orders.status === 'cancelled' && (
+            <span className='ml-1 h-8 w-16 border bg-red-500 p-1'>Đã hủy</span>
           )}
           <QuestionMarkIcon className='mt-[3px] h-5 w-5 cursor-pointer rounded-xl border border-dark text-black' />
           <div

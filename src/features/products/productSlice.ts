@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
+import { OrderData } from '@/shared/types/orderType';
 import { Product } from '@/shared/types/productType';
 
 interface InitialState {
@@ -9,6 +10,8 @@ interface InitialState {
   subPriceChoose: string;
   valueImage: string;
   products: Product[];
+  orders: OrderData[];
+  loading: boolean;
 }
 
 const initialState: InitialState = {
@@ -17,6 +20,8 @@ const initialState: InitialState = {
   subPriceChoose: '',
   valueImage: '',
   products: [],
+  orders: [],
+  loading: false,
 };
 
 const productSlice = createSlice({
@@ -42,6 +47,13 @@ const productSlice = createSlice({
     getValueImage: (state, action) => {
       state.valueImage = action.payload;
     },
+
+    addOrder: (state, action) => {
+      state.orders = action.payload;
+    },
+    setLoadingOrders: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
@@ -51,6 +63,8 @@ export const {
   setSubColorChoose,
   setSubPriceChoose,
   setProducts,
+  addOrder,
+  setLoadingOrders,
 } = productSlice.actions;
 
 export const selectSubItemChoose = (state: RootState) =>
@@ -61,5 +75,7 @@ export const selectSubPriceChoose = (state: RootState) =>
   state.product.subPriceChoose;
 export const selectValueImage = (state: RootState) => state.product.valueImage;
 export const selectProducts = (state: RootState) => state.product.products;
+export const selectOrders = (state: RootState) => state.product.orders;
+export const selectLoadingOrders = (state: RootState) => state.product.loading;
 
 export default productSlice.reducer;

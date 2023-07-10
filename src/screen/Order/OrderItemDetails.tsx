@@ -46,14 +46,7 @@ const OrderItemDetails = ({ item, status }: Props) => {
             <PoperFeedbackOrder item={item} setIsReviewed={setIsReviewed} />
           )}
           {status === 'completed' && isReviewed && (
-            <span className='ml-1 cursor-pointer border bg-green-300 p-1'>
-              Đã đánh giá
-            </span>
-          )}
-          {status === 'cancelled' && (
-            <span className='ml-1 cursor-pointer border bg-red-500 p-1'>
-              Đã hủy
-            </span>
+            <span className='ml-1 border bg-green-300 p-1'>Đã đánh giá</span>
           )}
         </div>
       </div>
