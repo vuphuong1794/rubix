@@ -65,7 +65,7 @@ const Contact: WithLayout = () => {
       return;
     }
     try {
-      const text = `Người dùng: ${name} \n Có email: ${email} \n Gửi tin nhắn: ${message}`;
+      const text = `Người dùng: ${name} \n Có email: ${email} \n Gửi tin nhắn với nội dung: ${message}`;
       const _ = await CmsApi.sendMailContact(text);
       toast.success('Gửi phản hồi thành công');
       reset();
