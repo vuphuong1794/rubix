@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import React from 'react';
@@ -34,12 +35,16 @@ const Order: WithLayout = () => {
   React.useEffect(() => {
     async function fetchData() {
       dispatch(setLoadingOrders(true));
-      const res = await CmsApi.getOrder();
-      dispatch(addOrder(res.data.data));
-      dispatch(setLoadingOrders(false));
+      try {
+        const res = await CmsApi.getOrder();
+        dispatch(addOrder(res.data.data));
+        dispatch(setLoadingOrders(false));
+      } catch (error) {
+        router.push(ROUTES.LOGIN);
+      }
     }
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, router]);
 
   return (
     <div className='mb-3 flex flex-col gap-2'>
@@ -66,6 +71,16 @@ const Order: WithLayout = () => {
             <OrderDetails orders={order} />
           </div>
         ))}
+      {orders.length === 0 && !loading && (
+        <div className='flex h-96 items-center justify-center'>
+          <Image
+            src='/svg/empty-cart.svg'
+            width={300}
+            height={300}
+            alt='empty-cart'
+          />
+        </div>
+      )}
     </div>
   );
 };

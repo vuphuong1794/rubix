@@ -105,4 +105,7 @@ export const CmsApi = {
       order_item_id,
     });
   },
+  sendMailContact: (text: string) => {
+    return axiosClient.post(`api/mailer/send`, { text });
+  },
 };

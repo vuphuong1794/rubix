@@ -1,8 +1,14 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
-import { Input } from '@/components/common';
+import { RHFTextField } from '@/components/hook-form';
+import FormProvider from '@/components/hook-form/FormProvider';
 import Layout from '@/components/layout/Layout';
 
+import { CmsApi } from '@/api/cms-api';
 import { WithLayout } from '@/shared/types';
 
 interface PropsContact {
@@ -29,7 +35,45 @@ const data: PropsContact[] = [
   },
 ];
 
+type FormValuesProps = {
+  name: string;
+  email: string;
+};
+
 const Contact: WithLayout = () => {
+  const [message, setMessage] = React.useState<string>('');
+  const ContactSchema = Yup.object().shape({
+    name: Yup.string().required('Vui lòng nhập tên'),
+    email: Yup.string()
+      .email('Email không hợp lệ')
+      .required('Vui lòng nhập email'),
+  });
+
+  const defaultValues: FormValuesProps = {
+    name: '',
+    email: '',
+  };
+  const methods = useForm<FormValuesProps>({
+    resolver: yupResolver(ContactSchema),
+    defaultValues,
+  });
+  const { reset, handleSubmit } = methods;
+
+  const onSubmit = async ({ email, name }: FormValuesProps) => {
+    if (!message) {
+      toast.error('Vui lòng nhập nội dung tin nhắn');
+      return;
+    }
+    try {
+      const text = `Người dùng: ${name} \n Có email: ${email} \n Gửi tin nhắn: ${message}`;
+      const _ = await CmsApi.sendMailContact(text);
+      toast.success('Gửi phản hồi thành công');
+      reset();
+    } catch (error) {
+      toast.error('Gửi phản hồi không thành công');
+    }
+  };
+
   return (
     <div>
       <iframe
@@ -56,17 +100,31 @@ const Contact: WithLayout = () => {
               ))}
             </div>
           </div>
-          <form className='flex w-1/2 flex-col gap-4'>
-            <Input type='text' placeholder='Tên' />
-            <Input type='text' placeholder='Email' className='rounded' />
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <RHFTextField
+              name='name'
+              type='text'
+              placeholder='Tên'
+              className='hover:border-transparent focus:outline-none'
+            />
+            <RHFTextField
+              name='email'
+              type='text'
+              placeholder='Email'
+              className='my-3 rounded hover:border-transparent focus:outline-none'
+            />
             <textarea
               placeholder='Tin nhắn'
               className='mb-4 h-32 w-full rounded border border-gray-300 pt-4 pl-2 outline-none'
+              onChange={(e) => setMessage(e.target.value)}
             />
-            <button className='h-14 w-full rounded border border-gray-300 transition-all hover:border-amber-400 hover:text-amber-400'>
+            <button
+              type='submit'
+              className='h-14 w-full rounded border border-gray-300 transition-all hover:border-amber-400 hover:text-amber-400'
+            >
               <span>Gửi tin nhắn</span>
             </button>
-          </form>
+          </FormProvider>
         </div>
       </div>
     </div>
