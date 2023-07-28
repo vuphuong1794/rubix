@@ -1,8 +1,6 @@
-import AirplanemodeActiveOutlinedIcon from '@mui/icons-material/AirplanemodeActiveOutlined';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
-import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
-import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -33,19 +31,36 @@ interface IService {
 const services: IService[] = [
   {
     icon: (
-      <AirplanemodeActiveOutlinedIcon style={{ width: '2em', height: '2em' }} />
+      <Image
+        src='/svg/airplane-mode-active.svg'
+        alt='airplane-mode-active'
+        width={35}
+        height={35}
+      />
     ),
     title: 'Miễn phí vận chuyển toàn cầu',
     content: 'Cho tất cả đơn hàng trên $75.00',
   },
   {
-    icon: <PaymentOutlinedIcon style={{ width: '2em', height: '2em' }} />,
+    icon: (
+      <Image
+        width={35}
+        height={35}
+        src='/svg/payment-methods.svg'
+        alt='apayment-methods'
+      />
+    ),
     title: 'Thanh toán 100% an toàn',
     content: 'Chúng tôi đảm bảo thanh toán an toàn với PEV',
   },
   {
     icon: (
-      <KeyboardReturnOutlinedIcon style={{ width: '2em', height: '2em' }} />
+      <Image
+        width={35}
+        height={35}
+        src='/svg/return-icon.jpg'
+        alt='apayment-methods'
+      />
     ),
     title: '30 ngày đổi trả',
     content: 'Đổi trả trong vòng 20 ngày',
