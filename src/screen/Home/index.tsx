@@ -1,4 +1,3 @@
-import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -235,10 +234,18 @@ const Home: NextPage & WithLayout = () => {
                 <span>{service.icon}</span>
                 <h4 className='font-semibold'>{service.title}</h4>
                 <p>{service.content}</p>
-                <Link href='/' className='mt-2'>
+                <Link
+                  href='/'
+                  className='mt-2 flex items-center justify-center gap-2'
+                >
                   <span className='font-bold'>Đọc thêm</span>
                   <span>
-                    <KeyboardArrowRightOutlinedIcon />
+                    <Image
+                      width={12}
+                      height={8}
+                      src='/svg/arrow-right-icon.png'
+                      alt='arrow-right-icon'
+                    />
                   </span>
                 </Link>
               </div>
