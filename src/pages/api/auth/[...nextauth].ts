@@ -1,11 +1,10 @@
 import NextAuth from 'next-auth';
-import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { CmsApi } from '@/api/cms-api';
 import { ERROR_TOKEN, ROUTES } from '@/constant';
 
-const handleRefreshToken = async (token: JWT) => {
+const handleRefreshToken = async (token: any) => {
   try {
     const tokenData = await CmsApi.refreshToken({
       refresh_token: token.refreshToken,
