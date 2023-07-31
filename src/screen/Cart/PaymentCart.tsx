@@ -27,10 +27,13 @@ type Props = {
 };
 
 type FormValuesProps = {
+  userName: string;
   userNameCard: string;
   numberCard: string;
   dateCard: string;
   CVV: string;
+  phoneNumber: string;
+  address: string;
 };
 
 export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
@@ -42,6 +45,7 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
   const totalItemPayment = useAppSelector(selectTotalItemPayment);
 
   const PaymentSchema = Yup.object().shape({
+    userName: Yup.string().required('Nhập tên'),
     userNameCard: Yup.string().required('Vui lòng nhập tên chủ thẻ'),
     numberCard: Yup.string()
       .required('Vui lòng nhập số thẻ')
@@ -62,18 +66,26 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
         return true;
       }),
     CVV: Yup.string()
-
       .required('Vui lòng nhập CVV')
       .matches(/^[0-9]+$/, 'CVV không hợp lệ')
       .min(3, 'CVV không hợp lệ')
       .max(3, 'CVV không hợp lệ'),
+    phoneNumber: Yup.string()
+      .required('Vui lòng nhập số điện thoại')
+      .matches(/^[0-9]+$/, 'Số điện thoại không hợp lệ')
+      .min(10, 'Số điện thoại không hợp lệ')
+      .max(10, 'Số điện thoại không hợp lệ'),
+    address: Yup.string().required('Vui lòng nhập địa chỉ'),
   });
 
   const defaultValues: FormValuesProps = {
+    userName: '',
     userNameCard: '',
     numberCard: '',
     dateCard: '',
     CVV: '',
+    phoneNumber: '',
+    address: '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -88,6 +100,8 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
       dataItemReq.push({
         item_id: items[0].item.id,
         quantity: items[0].quantity,
+        phoneNumber: methods.getValues('phoneNumber'),
+        address: methods.getValues('address'),
       });
 
       try {
@@ -109,6 +123,8 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
           ...cartItems.map((item) => ({
             item_id: item.item.id,
             quantity: item.quantity,
+            phoneNumber: methods.getValues('phoneNumber'),
+            address: methods.getValues('address'),
           }))
         );
         const _ = await CmsApi.createOrder(dataItemReq);
@@ -133,13 +149,13 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
 
   const style = {
     position: 'absolute' as const,
-    top: '50%',
+    top: '9%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
+    width: 500,
+    height: 100,
+    //bgcolor: 'background.paper',
     boxShadow: 24,
-    p: 4,
   };
 
   return (
@@ -151,10 +167,49 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
     >
       <Box sx={style}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex items-center justify-center bg-blue-300 p-2'>
+          <div className=' flex items-center justify-center bg-lime-800 p-2'>
             <div className='flex h-auto flex-col gap-2 rounded-lg bg-white p-3'>
-              <p className='text-xl font-semibold'>Chi tiết thanh toán</p>
+              <span className='mt-3 text-center text-xl text-xl font-bold'>
+                Chi tiết thanh toán
+              </span>
+              <div className='input_text relative mt-5'>
+                {' '}
+                <RHFTextField
+                  name='userName'
+                  type='text'
+                  className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
+                  placeholder='Nhập tên'
+                />{' '}
+                <span className='absolute left-0 -top-5 text-sm font-semibold'>
+                  Tên người dùng
+                </span>{' '}
+                <i className='fa fa-user absolute left-2 top-4 text-gray-400'></i>{' '}
+              </div>
               <div className='input_text relative mt-6'>
+                <RHFTextField
+                  name='phoneNumber'
+                  type='text'
+                  className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
+                  placeholder='Số điện thoại'
+                />
+                <span className='absolute left-0 -top-5 text-sm font-semibold'>
+                  Số điện thoại
+                </span>
+                <i className='fa fa-phone absolute left-2 top-4 text-gray-400'></i>
+              </div>
+              <div className='input_text relative mt-6'>
+                <RHFTextField
+                  name='address'
+                  type='text'
+                  className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
+                  placeholder='Địa chỉ'
+                />
+                <span className='absolute left-0 -top-5 text-sm font-semibold'>
+                  Nhập địa chỉ
+                </span>
+                <i className='fa fa-map-marker absolute left-2 top-4 text-gray-400'></i>
+              </div>
+              <div className='input_text relative mt-8'>
                 {' '}
                 <RHFTextField
                   name='userNameCard'
@@ -162,32 +217,34 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
                   className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
                   placeholder='Tên'
                 />{' '}
-                <span className='absolute left-0 -top-5 text-sm'>
+                <span className='absolute left-0 -top-5 text-sm font-semibold'>
                   Tên chủ thẻ
                 </span>{' '}
                 <i className='fa fa-user absolute left-2 top-4 text-gray-400'></i>{' '}
               </div>
-              <div className='input_text relative mt-8'>
+              <div className='input_text relative mt-6'>
                 {' '}
                 <RHFTextField
                   name='numberCard'
                   type='text'
-                  className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
+                  className='h-12 w-full border-b p-2 outline-none transition-all focus:border-blue-900 '
                   placeholder='0000 0000 0000 0000'
                 />{' '}
-                <span className='absolute left-0 -top-5 text-sm'>Số thẻ</span>{' '}
+                <span className='absolute left-0 -top-5 text-sm font-semibold'>
+                  Số thẻ
+                </span>{' '}
                 <i className='fa fa-credit-card absolute left-2 top-[14px] text-sm text-gray-400'></i>{' '}
               </div>
-              <div className='mt-8 flex gap-5 '>
+              <div className='mt-10 flex gap-5 '>
                 <div className='input_text relative w-full'>
                   {' '}
                   <RHFTextField
                     name='dateCard'
                     type='text'
-                    className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
+                    className=' border-b outline-none transition-all focus:border-blue-900 '
                     placeholder='mm/yyyy'
                   />{' '}
-                  <span className='absolute left-0 -top-5 text-sm'>
+                  <span className='absolute left-0 -top-5 text-sm font-semibold'>
                     Hạn sử dụng
                   </span>{' '}
                   <i className='fa fa-calendar-o absolute left-2 top-4 text-gray-400'></i>{' '}
@@ -200,23 +257,27 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
                     className='h-12 w-full border-b px-2 pl-7 outline-none transition-all focus:border-blue-900 '
                     placeholder='000'
                   />{' '}
-                  <span className='absolute left-0 -top-4 text-sm'>CVV</span>{' '}
+                  <span className='absolute left-0 -top-4 text-sm font-semibold'>
+                    CVV
+                  </span>{' '}
                   <i className='fa fa-lock absolute left-2 top-4 text-gray-400'></i>{' '}
                 </div>
               </div>
               {typePayment === 'one' && items[0]?.item ? (
-                <p className='mt-10 text-center text-lg font-semibold text-gray-600'>
-                  Tổng tiền: đ{items[0].item.price * items[0].quantity}
-                </p>
+                <div className='mt-5 flex justify-between text-lg font-bold '>
+                  <p>Tổng tiền:</p>
+                  <p>đ{items[0].item.price * items[0].quantity}</p>
+                </div>
               ) : (
-                <p className='mt-10 text-center text-lg font-semibold text-gray-600'>
-                  Tổng tiền: đ{totalItemPayment}
+                <p className='mt-8 flex justify-between text-lg font-bold '>
+                  <p>Tổng tiền:</p>
+                  <p>đ{totalItemPayment}</p>
                 </p>
               )}
-              <div className='mt-2 flex justify-center'>
+              <div className='flex justify-center'>
                 {' '}
                 <Button
-                  className='pay mb-3 h-12 w-1/2 cursor-pointer rounded-lg bg-orange-600 text-white outline-none transition-all hover:bg-orange-700'
+                  className='pay h-12 w-full cursor-pointer rounded-lg bg-lime-600 text-white outline-none transition-all hover:bg-lime-800'
                   type='submit'
                 >
                   Thanh toán

@@ -53,7 +53,7 @@ const Collections: WithLayout = () => {
               </span>
               <Link
                 href={`/collections/${category.slug}`}
-                className='bg-black px-4 py-2 font-semibold text-white transition-all hover:bg-amber-400'
+                className='rounded-md bg-amber-400 px-4 py-2 font-semibold text-white transition-all hover:bg-amber-600'
               >
                 Khám phá bộ sưu tập
               </Link>

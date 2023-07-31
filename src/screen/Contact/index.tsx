@@ -87,7 +87,7 @@ const Contact: WithLayout = () => {
       <div className='flex w-full items-start justify-center'>
         <div className='my-20 flex max-w-[80%] items-start justify-between gap-10'>
           <div className='flex w-1/2 flex-col gap-6'>
-            <h3 className='font-semibold'>Liên hệ chúng tôi</h3>
+            <h3 className='font-bold'>Liên hệ chúng tôi</h3>
             <p className='text-gray-700'>
               Hãy liên hệ với chúng tôi để không có hậu quả phiền toái.
             </p>
@@ -120,7 +120,7 @@ const Contact: WithLayout = () => {
             />
             <button
               type='submit'
-              className='h-14 w-full rounded border border-gray-300 transition-all hover:border-amber-400 hover:text-amber-400'
+              className='h-14 w-full rounded border border-gray-300 bg-black font-bold text-white transition-all hover:bg-gray-900'
             >
               <span>Gửi tin nhắn</span>
             </button>

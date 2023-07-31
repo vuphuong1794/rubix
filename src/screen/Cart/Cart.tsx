@@ -92,19 +92,22 @@ const Cart: WithLayout = () => {
   return (
     <div>
       {cartItems.length === 0 && (
-        <div className='flex h-96 items-center justify-center'>
+        <div className='mt-10 flex flex-col items-center justify-center font-bold'>
+          <h1>Giỏ hàng của bạn đang trống</h1>
+
           <Image
             src='/svg/empty-cart.svg'
-            width={300}
-            height={300}
-            alt='empty-cart'
+            width={200}
+            height={200}
+            style={{ margin: 15 }}
+            alt='Giỏ hàng trống'
           />
         </div>
       )}
       {cartItems.length > 0 && (
         <div className='mt-16 mb-8 flex w-full flex-col items-center justify-center'>
           <div className='mb-6 flex w-full items-center justify-between px-28 xl:px-72'>
-            <h3 className='flex w-full max-w-[70%] justify-start'>
+            <h3 className='flex  items-center justify-center font-bold'>
               Giỏ hàng của bạn
             </h3>
             {cartItems && cartItems.length > 1 && (
@@ -112,17 +115,17 @@ const Cart: WithLayout = () => {
                 <Button
                   onClick={handleOpenBuyAll}
                   title='Mua hết'
-                  className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
+                  className='items-end rounded-md border bg-amber-400 p-2 text-white outline-none transition-all'
                 />
               </div>
             )}
           </div>
           <table className='flex w-full max-w-[70%] flex-col gap-6'>
             <thead>
-              <tr className='flex w-full bg-[#f7f7f7] p-3 shadow-md'>
-                <th className='w-[250px] text-center'>Ảnh</th>
-                <th className='w-full text-center'>Sản phẩm</th>
-                <th>Tổng</th>
+              <tr className='flex w-full bg-[#f7f7f7] p-3 pl-16 shadow-md'>
+                <th className='w-[2250] text-center'>Ảnh</th>
+                <th className=' w-full text-center'>Sản phẩm</th>
+                <th className='pr-6'>Tổng</th>
               </tr>
             </thead>
             <tbody className='mb-10 flex flex-col gap-6'>
@@ -137,7 +140,7 @@ const Cart: WithLayout = () => {
                       height={200}
                       src={item.item.images[0]}
                       alt='CartItem'
-                      className='h-full cursor-pointer bg-[#000]'
+                      className='h-full cursor-pointer '
                       onClick={() => {
                         router.push(`/product/${item.item.id}`);
                       }}
@@ -181,7 +184,7 @@ const Cart: WithLayout = () => {
                       <Button
                         onClick={() => handleOpen(item)}
                         title='Mua'
-                        className='rounded-md border border-amber-400 p-2 outline-none transition-all hover:bg-amber-400 hover:text-white '
+                        className='rounded-md border border-amber-400 bg-amber-400 p-2 text-white outline-none transition-all '
                       />
                       <PaymentCart typePayment={typePayment} />
                       <Button

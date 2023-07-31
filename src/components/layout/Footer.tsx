@@ -168,7 +168,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='flex w-full items-center justify-between border-t border-[#999] py-8 px-sm text-[#999] xl:px-xl '>
+      <div className='flex w-full items-center justify-between border-t border-[#999] py-4 px-sm text-[#999] xl:px-xl '>
         <div>
           <Link href='/'>
             <b className='text-white'>© 2023 Rubix.</b>
