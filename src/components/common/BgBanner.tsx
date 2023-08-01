@@ -9,7 +9,7 @@ interface PropsBgBanner {
 
 const BgBanner: FC<PropsBgBanner> = (props) => {
   return (
-    <div className='relative'>
+    <div className='relative border-b border-gray-400'>
       <NextImage
         width={2000}
         height={1000}
@@ -18,7 +18,9 @@ const BgBanner: FC<PropsBgBanner> = (props) => {
         alt=''
       />
       <div className='absolute top-1/2 left-[5%] -translate-y-1/2 2xl:left-[10%]'>
-        <h1 className='mb-6 text-5xl font-bold'>{props.nav}</h1>
+        <h1 className='text-md mb-2 font-bold md:mb-6 md:text-5xl'>
+          {props.nav}
+        </h1>
         <div className='flex items-center gap-2 text-sm text-gray-700'>
           <span>Trang chủ</span>
           <KeyboardArrowRightIcon style={{ fontSize: '18px' }} />

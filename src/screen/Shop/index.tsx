@@ -137,7 +137,7 @@ const Collections: WithLayout = () => {
     <div className='flex w-full flex-col items-center justify-center'>
       <BgBanner nav='Sản phẩm' />
       <div className='my-20 grid w-full max-w-[90%] grid-cols-5 gap-6 2xl:max-w-[80%]'>
-        <div className='hidden w-full lg:block'>
+        <div className='hidden w-full border-r-2 pr-1 lg:block'>
           <FilterCategories categories={categories} handleSort={handleSort} />
           <FilterPrice
             handleFilter={handleFilter}
@@ -156,7 +156,7 @@ const Collections: WithLayout = () => {
           </div>
         </div>
         <div className='col-span-5 lg:col-span-4'>
-          <div className='flex items-center justify-between'>
+          <div className='flex w-[97%] items-center justify-between'>
             <PoperFilterCategories
               categories={categories}
               handleSort={handleSort}

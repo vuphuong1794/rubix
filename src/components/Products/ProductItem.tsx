@@ -33,7 +33,7 @@ const ProductItem = ({ item }: { item: Product }) => {
 
   return (
     <div
-      className='relative cursor-pointer'
+      className='relative cursor-pointer shadow-lg'
       onMouseEnter={() => {
         setIsHover(true);
       }}
@@ -69,7 +69,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         )}
       </div>
 
-      <div className='mt-2'>
+      <div className='mt-2 border-t-2 p-1 py-3'>
         <h4 className='font-medium transition-all hover:text-amber-400'>
           {item.name}
         </h4>
