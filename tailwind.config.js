@@ -88,10 +88,13 @@ module.exports = {
       },
       boxShadow: {
         login: '13px 13px 40px #d9d9d9, -13px -13px 40px #ffffff',
+        login1: '3px 3px 10px #d9d9d9, -3px -3px 10px #ffffff',
       },
       transitionProperty: { buttonLogin: 'all .35s ease' },
 
       backgroundImage: {
+        'background-login':
+          "linear-gradient(0, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),url('https://toplist.vn/images/800px/sup-lo-84443.jpg')",
         'background-home':
           "url('https://cdn.shopify.com/s/files/1/0376/9440/6700/files/newsletter-bg.jpg?v=1629543119&fbclid=IwAR2e9wGtb3uV_AbVs768Jf2vHNPqPpnSIHqtEpGcng8hsFhguzqeUM3LCCk')",
       },
