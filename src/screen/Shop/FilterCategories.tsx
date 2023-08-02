@@ -35,7 +35,7 @@ const FilterCategories: React.FC<ProductCategoriesProps> = ({
 
   return (
     <div className='relative border-b pb-10'>
-      <h3 className='absolute -top-14 mb-10 font-bold'>Danh mục sản phẩm</h3>
+      <h4 className='absolute -top-14 mb-10'>Danh mục sản phẩm</h4>
       <ul className='flex w-full flex-col gap-4 '>
         <li
           onClick={handleAllCategoriesClick}
@@ -46,12 +46,12 @@ const FilterCategories: React.FC<ProductCategoriesProps> = ({
           <span
             className={`${
               isHover || id === 'all' ? 'border-black bg-black' : 'bg-white'
-            } flex h-5 w-5 items-center justify-center rounded-full border transition-all hover:border-black hover:bg-black`}
+            } flex h-4 w-4 items-center justify-center rounded-full border transition-all hover:border-black hover:bg-black`}
           >
             {isHover || id === 'all' ? (
               <span className='flex items-center justify-center text-white transition-all'>
                 <KeyboardArrowRightIcon
-                  style={{ width: '20px', height: '20px' }}
+                  style={{ width: '16px', height: '16px' }}
                 />
               </span>
             ) : null}
