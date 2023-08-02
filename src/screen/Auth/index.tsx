@@ -20,7 +20,7 @@ const Auth: NextPage<LoginProps> & WithLayout = ({ children }) => {
       <div className='bg-opacity-7 flex w-full flex-col items-center gap-2 p-14 text-center text-white '>
         <div className='flex items-center gap-2'>
           <h3 className='text-2xl font-black lg:text-4xl '>Welcome to</h3>
-          <h2 className='mb-2 inline text-3xl font-black text-[#00FF00] lg:text-5xl'>
+          <h2 className='mb-1 inline text-3xl font-black text-[#00FF00] lg:mb-2 lg:text-5xl'>
             Rubix
           </h2>
         </div>
