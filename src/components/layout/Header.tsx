@@ -1,7 +1,3 @@
-import { Logout } from '@mui/icons-material';
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import {
   Badge,
   Button,
@@ -16,6 +12,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { IoIosLogOut } from 'react-icons/io';
+import { MdOutlineLocalMall } from 'react-icons/md';
 import { RiCloseCircleFill } from 'react-icons/ri';
 
 import SearchHeader from '@/components/layout/SearchHeader';
@@ -24,11 +24,7 @@ import NextImage from '@/components/NextImage';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { ROUTES } from '@/constant';
 import { login, register } from '@/features/auth/authSlice';
-import {
-  fetchTotal,
-  selectChooseHref,
-  setChooseHref,
-} from '@/features/cart/cartSlice';
+import { fetchTotal } from '@/features/cart/cartSlice';
 
 const links = [
   { href: '/', label: 'Trang chủ' },
@@ -70,11 +66,9 @@ export default function Header() {
   const total = useAppSelector((state) => state.cart.total);
 
   const navigate = useRouter();
-  const chooseHref = useAppSelector(selectChooseHref);
 
   const handleNavigate = (href: string) => {
     setOpenDr(false);
-    dispatch(setChooseHref(href));
     navigate.push(href);
   };
 
@@ -82,7 +76,7 @@ export default function Header() {
     <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white  py-5 font-normal sm:px-sm lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
         <IconButton onClick={handleDrawerOpen}>
-          <MenuIcon className='cursor-pointer' />
+          <AiOutlineMenu className='cursor-pointer' />
         </IconButton>
         <SearchHeader />
       </div>
@@ -97,18 +91,7 @@ export default function Header() {
       <MenuList className=' hidden min-w-[600px] items-center justify-evenly gap-10 lg:flex'>
         {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
-            <Link
-              onClick={() => dispatch(setChooseHref(href))}
-              href={href}
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                color: chooseHref === href ? 'yellow' : 'gray',
-                transition: 'color 0.2s',
-              }}
-            >
+            <Link href={href} className=' flex hover:text-yellow-300'>
               <span className='w-full'>{label}</span>
             </Link>
           </li>
@@ -140,13 +123,7 @@ export default function Header() {
             <MenuItem
               key={`${href}${label}`}
               onClick={() => handleNavigate(href)}
-              className={`flex p-3 
-              ${
-                chooseHref === href
-                  ? 'border-b-2 border-yellow-300 text-yellow-300'
-                  : 'text-gray-700'
-              }
-              hover:text-yellow-300`}
+              className='flex p-3 hover:text-yellow-300'
             >
               <Link href={href}>
                 <span className='w-full'>{label}</span>
@@ -159,7 +136,7 @@ export default function Header() {
         {session && (
           <div className='hover:text-yellow-300'>
             <IconButton onClick={handlePopoverOpen}>
-              <PersonOutlinedIcon />
+              <BsFillPersonFill />
             </IconButton>
             <Popover
               open={open}
@@ -192,7 +169,7 @@ export default function Header() {
               </div>
               <div className='flex flex-col items-center justify-center gap-2 p-4'>
                 <Button
-                  startIcon={<Logout />}
+                  startIcon={<IoIosLogOut className='h-6 w-6' />}
                   size='small'
                   onClick={() => signOut()}
                 >
@@ -231,9 +208,7 @@ export default function Header() {
               className='relative cursor-pointer pl-2'
               badgeContent={total}
             >
-              <IconButton>
-                <LocalMallOutlinedIcon />
-              </IconButton>
+              <MdOutlineLocalMall className='h-6 w-6' />
             </Badge>
           </Link>
         )}
