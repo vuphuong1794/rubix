@@ -16,8 +16,19 @@ const Auth: NextPage<LoginProps> & WithLayout = ({ children }) => {
   const isChoose = useAppSelector(selectIsChoose);
 
   return (
-    <div className='flex items-center justify-center'>
-      <div className='mt-16 mb-20 min-w-[36%] rounded-[8px] bg-[#ffffff]  pb-10 shadow-login'>
+    <div className='flex  flex-col items-center justify-center bg-background-login bg-cover bg-no-repeat'>
+      <div className='bg-opacity-7 flex w-full flex-col items-center gap-2 p-14 text-center text-white '>
+        <div className='flex items-center gap-2'>
+          <h3 className='text-2xl font-black lg:text-4xl '>Welcome to</h3>
+          <h2 className='mb-1 inline text-3xl font-black text-[#00FF00] lg:mb-2 lg:text-5xl'>
+            Rubix
+          </h2>
+        </div>
+        <h2 className='w-[100%] text-sm font-black  md:text-lg lg:text-2xl'>
+          Trang web cung cấp thực phẩm tươi sống mới nổi !!!
+        </h2>
+      </div>
+      <div className='mt-6 mb-20 min-w-[50%] rounded-[8px] bg-white pb-10 focus-within:shadow-login1 lg:min-w-[36%]'>
         <div className='grid h-[70px] w-full grid-cols-2'>
           <Link
             href='/login'

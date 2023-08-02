@@ -72,8 +72,8 @@ const Footer = () => {
 
   return (
     <footer className='w-full bg-[#1a1a1a] text-white'>
-      <div className='flex w-full flex-col px-sm  pt-[70px] pb-10 sm:grid sm:grid-cols-2 md:grid-cols-4 xl:px-xl '>
-        <div className='flex flex-col'>
+      <div className='flex w-full flex-col px-sm pt-[70px] pb-10  sm:grid sm:grid-cols-2 md:grid-cols-4 lg:gap-0 xl:px-xl '>
+        <div className='mt-[6px]  flex flex-col'>
           <Link href='/'>
             <NextImage
               src='/images/logo_white.png'
@@ -83,7 +83,7 @@ const Footer = () => {
               className='w-full pt-[10px] pb-10'
             />
           </Link>
-          <div className='flex w-full gap-4'>
+          <div className='flex w-full flex-wrap gap-4'>
             {icon.map((item, idx) => (
               <a
                 href={item.href}
@@ -95,15 +95,16 @@ const Footer = () => {
             ))}
           </div>
         </div>
+
         <div className='h-full w-full '>
           <div
             className='flex w-full items-center justify-between '
             onClick={handlerOpenIC}
           >
-            <h4 className='mb-[10px] py-[10px] font-medium'>
+            <h4 className='mb-[10px] py-[10px] text-sm font-medium lg:text-lg'>
               Thông tin công ty
             </h4>
-            <span className='block sm:hidden'>
+            <span className='mb-2 block sm:hidden'>
               {!openIC ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
             </span>
           </div>
@@ -111,7 +112,7 @@ const Footer = () => {
             {infoCompany.map((item) => (
               <li
                 key={item}
-                className='cursor-pointer py-[5px] text-sm text-[#999] hover:text-amber-400 hover:transition-all'
+                className='cursor-pointer py-[5px] text-[12px] text-[#999] hover:text-amber-400 hover:transition-all lg:text-sm'
               >
                 <a href=''>{item}</a>
               </li>
@@ -123,10 +124,10 @@ const Footer = () => {
             className='flex w-full items-center justify-between sm:block'
             onClick={handlerOpenMFR}
           >
-            <h4 className='mb-[10px] py-[10px] font-medium'>
+            <h4 className='mb-[10px] py-[10px] text-sm font-medium lg:text-lg'>
               Nhiều hơn từ Rubix
             </h4>
-            <span className='block sm:hidden'>
+            <span className='mb-2 block sm:hidden'>
               {!openMFR ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
             </span>
           </div>
@@ -134,33 +135,37 @@ const Footer = () => {
             {moreFromRubix.map((item) => (
               <li
                 key={item.label}
-                className='cursor-pointer py-[5px] text-sm text-[#999] hover:text-amber-400 hover:transition-all'
+                className='w-full cursor-pointer py-[5px] text-[12px] text-[#999] hover:text-amber-400 hover:transition-all lg:text-sm'
               >
                 <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>
         </div>
-        <div>
+        <div className='w-full'>
           <div>
-            <h4 className='mb-[10px] py-[10px] font-medium'>Hãy nói chuyện</h4>
+            <h4 className='mb-[10px] py-[10px] text-sm font-medium lg:text-lg'>
+              Hãy nói chuyện
+            </h4>
             <div className='flex items-start gap-3 text-[#999]'>
               <div>
                 <HeadphonesIcon />
               </div>
-              <div className='cursor-text'>
+              <div className='cursor-text text-[12px] lg:text-sm'>
                 +391 (0)35 2568 4593 <br />
                 <u>hello@domain.com</u>
               </div>
             </div>
           </div>
           <div>
-            <h4 className='mb-[10px] py-[10px] font-medium'>Tìm chúng tôi</h4>
+            <h4 className='mb-[10px] py-[10px] text-sm font-medium lg:text-lg'>
+              Tìm chúng tôi
+            </h4>
             <div className='flex items-start gap-3 text-[#999]'>
               <div>
                 <LocationOnIcon />
               </div>
-              <div className='cursor-text'>
+              <div className='cursor-text text-[12px] lg:text-sm'>
                 +391 (0)35 2568 4593 <br />
                 <u>hello@domain.com</u>
               </div>
@@ -168,20 +173,20 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='flex w-full items-center justify-between border-t border-[#999] py-4 px-sm text-[#999] xl:px-xl '>
-        <div>
+      <div className='flex w-full items-center justify-between border-t border-[#999] py-8 px-sm text-[#999] xl:px-xl '>
+        <div className='flex-1'>
           <Link href='/'>
             <b className='text-white'>© 2023 Rubix.</b>
           </Link>{' '}
-          Mọi quyền được bảo lưu
+          <span className='text-md'>Mọi quyền được bảo lưu</span>
         </div>
-        <div className='hidden md:block'>
+        <div className='mr-10 hidden flex-1 justify-end md:flex lg:mr-0'>
           <NextImage
             src='/images/payment_logo.png'
             width={429}
             height={36}
             alt='Ribix'
-            className='h-full w-full'
+            className='h-[70%] w-[70%] lg:h-full lg:w-full'
           />
         </div>
       </div>
