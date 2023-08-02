@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Modal } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -138,7 +139,6 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
     }
     reset();
   };
-  console.log('🚀 ~ totalItemPayment:', totalItemPayment);
 
   const openPayment = useAppSelector(selectOpenPayment);
   const handleClose = () => dispatch(setOpenPayment(false));
@@ -151,7 +151,7 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
     width: 500,
     height: 100,
   };
-
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <Modal
       open={openPayment}
@@ -163,7 +163,7 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <div className=' flex items-center justify-center bg-teal-400 p-2 '>
             <div className='flex h-auto flex-col gap-2 rounded-lg bg-white p-4'>
-              <div className='mt-3 text-center text-xl text-xl font-bold'>
+              <div className='mt-3 text-center text-xl font-bold'>
                 Chi tiết thanh toán
               </div>
               <div className='input_text relative mt-5'>
@@ -271,8 +271,15 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
               <div className='flex justify-center'>
                 {' '}
                 <Button
-                  className='pay h-12 w-full cursor-pointer rounded-lg bg-lime-600 text-white outline-none transition-all hover:bg-lime-800'
+                  className='pay bordertransition-all h-12 w-full cursor-pointer outline-none'
+                  style={{
+                    backgroundColor: isHovered ? '#008B00' : 'limegreen',
+                    color: 'white',
+                    borderRadius: '8px',
+                  }}
                   type='submit'
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
                 >
                   Thanh toán
                 </Button>{' '}
