@@ -28,7 +28,7 @@ const Input: FC<IInput> = (props) => {
     <div className='relative flex h-[56px] w-full items-center justify-between rounded border border-gray-300'>
       <input
         {...parentAttributes}
-        className='border-color-transparent h-full w-full rounded border px-3 outline-none focus:border-2 focus:border-blue-700'
+        className=' border-color-transparent h-full w-full rounded px-3 outline-none'
         type={getType()}
       />
       {eyeEnable ? (

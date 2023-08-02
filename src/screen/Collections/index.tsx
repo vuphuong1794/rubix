@@ -36,7 +36,7 @@ const Collections: WithLayout = () => {
           {categories.map((category) => (
             <div
               key={category.id}
-              className='flex flex-col items-center justify-center border  pb-4 shadow-xl hover:border-2'
+              className='flex flex-col items-center justify-center gap-4'
             >
               <NextImage
                 width={500}
@@ -45,15 +45,15 @@ const Collections: WithLayout = () => {
                 src={category.image}
                 alt={category.name}
               />
-              <h4 className='w-full cursor-pointer border-t-2 pt-3 text-center transition-all hover:text-amber-400'>
+              <h4 className='cursor-pointer transition-all hover:text-amber-400'>
                 {category.name}
               </h4>
-              <span className='cursor-pointer py-4 transition-all hover:text-amber-400'>
+              <span className='cursor-pointer transition-all hover:text-amber-400'>
                 {category.item_count} sản phẩm
               </span>
               <Link
                 href={`/collections/${category.slug}`}
-                className='bg-black px-4 py-2 font-semibold text-white transition-all hover:bg-amber-400'
+                className='rounded-md bg-amber-400 px-4 py-2 font-semibold text-white transition-all hover:bg-amber-600'
               >
                 Khám phá bộ sưu tập
               </Link>
