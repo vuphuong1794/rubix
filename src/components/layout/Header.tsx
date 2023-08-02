@@ -98,10 +98,16 @@ export default function Header() {
         {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
             <Link
+              onClick={() => dispatch(setChooseHref(href))}
               href={href}
-              className={`flex
-               ${chooseHref === href ? 'text-yellow-300' : 'text-gray-700'}
-            hover:text-yellow-300`}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                color: chooseHref === href ? 'yellow' : 'gray',
+                transition: 'color 0.2s',
+              }}
             >
               <span className='w-full'>{label}</span>
             </Link>
