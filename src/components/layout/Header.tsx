@@ -1,3 +1,7 @@
+import { Logout } from '@mui/icons-material';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import {
   Badge,
   Button,
@@ -12,10 +16,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
-import { BsFillPersonFill } from 'react-icons/bs';
-import { IoIosLogOut } from 'react-icons/io';
-import { MdOutlineLocalMall } from 'react-icons/md';
 import { RiCloseCircleFill } from 'react-icons/ri';
 
 import SearchHeader from '@/components/layout/SearchHeader';
@@ -82,7 +82,7 @@ export default function Header() {
     <header className='sticky top-0 z-40 flex h-24 w-full min-w-[90%] items-center justify-around bg-white  py-5 font-normal sm:px-sm lg:justify-between xl:px-xl'>
       <div className='flex gap-4 lg:hidden'>
         <IconButton onClick={handleDrawerOpen}>
-          <AiOutlineMenu className='cursor-pointer' />
+          <MenuIcon className='cursor-pointer' />
         </IconButton>
         <SearchHeader />
       </div>
@@ -159,7 +159,7 @@ export default function Header() {
         {session && (
           <div className='hover:text-yellow-300'>
             <IconButton onClick={handlePopoverOpen}>
-              <BsFillPersonFill />
+              <PersonOutlinedIcon />
             </IconButton>
             <Popover
               open={open}
@@ -192,7 +192,7 @@ export default function Header() {
               </div>
               <div className='flex flex-col items-center justify-center gap-2 p-4'>
                 <Button
-                  startIcon={<IoIosLogOut className='h-6 w-6' />}
+                  startIcon={<Logout />}
                   size='small'
                   onClick={() => signOut()}
                 >
@@ -231,7 +231,9 @@ export default function Header() {
               className='relative cursor-pointer pl-2'
               badgeContent={total}
             >
-              <MdOutlineLocalMall className='h-6 w-6' />
+              <IconButton>
+                <LocalMallOutlinedIcon />
+              </IconButton>
             </Badge>
           </Link>
         )}

@@ -99,6 +99,15 @@ const Home: NextPage & WithLayout = () => {
             }}
             speed={800}
           >
+            {/* <span
+              className='absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
+              onClick={() => {
+                console.log(swiper);
+                swiper.slidePrev();
+              }}
+            >
+              <ArrowBackIosNewIcon style={{ fontSize: '16px' }} />
+            </span> */}
             <div>
               {dataSwiper.map((item) => (
                 <SwiperSlide key={item.image}>
@@ -106,6 +115,12 @@ const Home: NextPage & WithLayout = () => {
                 </SwiperSlide>
               ))}
             </div>
+            {/* <span
+              className='absolute top-1/2 right-2 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-gray-200 bg-white transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white'
+              onClick={() => swiper.slideNext()}
+            >
+              <ArrowForwardIosIcon style={{ fontSize: '16px' }} />
+            </span> */}
           </Swiper>
         </div>
 

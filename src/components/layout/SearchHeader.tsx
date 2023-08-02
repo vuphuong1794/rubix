@@ -1,8 +1,8 @@
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import SendIcon from '@mui/icons-material/Send';
 import { Button, IconButton, Input, Popover } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AiOutlineSend } from 'react-icons/ai';
-import { BsSearch } from 'react-icons/bs';
 
 const SearchHeader = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -32,7 +32,7 @@ const SearchHeader = () => {
   return (
     <div>
       <IconButton onClick={handleClick} id={id}>
-        <BsSearch />
+        <SearchOutlinedIcon />
       </IconButton>
       <Popover
         id={id}
@@ -57,7 +57,7 @@ const SearchHeader = () => {
           }}
           endAdornment={
             <Button aria-label='search' onClick={handleClose}>
-              <AiOutlineSend />
+              <SendIcon />
             </Button>
           }
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
