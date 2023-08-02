@@ -111,7 +111,11 @@ const Contact: WithLayout = () => {
               name='email'
               type='text'
               placeholder='Email'
-              className='my-3 rounded hover:border-transparent focus:outline-none'
+              className='rounded hover:border-transparent focus:outline-none'
+              style={{
+                marginTop: '1rem',
+                marginBottom: '1rem',
+              }}
             />
             <textarea
               placeholder='Tin nhắn'
