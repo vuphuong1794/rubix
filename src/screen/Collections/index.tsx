@@ -36,7 +36,7 @@ const Collections: WithLayout = () => {
           {categories.map((category) => (
             <div
               key={category.id}
-              className='flex flex-col items-center justify-center gap-4'
+              className='flex flex-col items-center justify-center border  pb-4 shadow-xl hover:border-2'
             >
               <NextImage
                 width={500}
@@ -45,10 +45,10 @@ const Collections: WithLayout = () => {
                 src={category.image}
                 alt={category.name}
               />
-              <h4 className='cursor-pointer transition-all hover:text-amber-400'>
+              <h4 className='w-full cursor-pointer border-t-2 pt-3 text-center transition-all hover:text-amber-400'>
                 {category.name}
               </h4>
-              <span className='cursor-pointer transition-all hover:text-amber-400'>
+              <span className='cursor-pointer py-4 transition-all hover:text-amber-400'>
                 {category.item_count} sản phẩm
               </span>
               <Link

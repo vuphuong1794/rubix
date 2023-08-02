@@ -52,7 +52,7 @@ const FilterPrice: React.FC<ProductCategoriesProps> = ({
         )}
       </div>
       <ul className='flex w-full flex-col gap-4'>
-        <li className='flex w-full cursor-pointer items-center gap-4'>
+        <li className='flex w-full cursor-pointer font-semibold items-center gap-4'>
           <TextField
             label='₫ TỪ'
             type='number'
@@ -69,7 +69,7 @@ const FilterPrice: React.FC<ProductCategoriesProps> = ({
         <li className='w-full'>
           <Button
             //variant='outlined'
-            className='w-full bg-amber-400 font-bold text-white'
+            className='w-full bg-amber-400 hover:bg-amber-500 font-bold text-white'
             onClick={() =>
               handleFilter({
                 page: 1,
