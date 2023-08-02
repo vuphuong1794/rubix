@@ -54,6 +54,13 @@ const FilterPriceRes: React.FC<ProductCategoriesProps> = ({
         <li className='h-14 w-10'>
           <Button
             sx={{ height: '100%' }}
+            style={{
+              width: '100%',
+              backgroundColor: '#F59E0B',
+              fontWeight: 'bold',
+              color: 'white',
+              transition: 'background-color 0.2s',
+            }}
             variant='outlined'
             onClick={() =>
               handleFilter({

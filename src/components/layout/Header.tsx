@@ -91,7 +91,15 @@ export default function Header() {
       <MenuList className=' hidden min-w-[600px] items-center justify-evenly gap-10 lg:flex'>
         {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
-            <Link href={href} className=' flex hover:text-yellow-300'>
+            <Link
+              href={href}
+              className='flex hover:text-yellow-300'
+              style={
+                router.asPath === href
+                  ? { color: 'green', display: 'flex' }
+                  : { color: 'black' }
+              }
+            >
               <span className='w-full'>{label}</span>
             </Link>
           </li>
@@ -126,7 +134,7 @@ export default function Header() {
               onClick={() => handleNavigate(href)}
               style={
                 router.asPath === href
-                  ? { color: 'red', display: 'flex' }
+                  ? { color: 'green', display: 'flex' }
                   : { color: 'black' }
               }
               className={` hover:text-yellow-300`}

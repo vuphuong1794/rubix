@@ -115,7 +115,11 @@ const Contact: WithLayout = () => {
             />
             <textarea
               placeholder='Tin nhắn'
-              className='mb-4 h-32 w-full rounded border border-gray-300 pt-4 pl-2 outline-none'
+              className='mb-4 h-32 w-full rounded border border-gray-300 outline-none'
+              style={{
+                paddingTop: '1rem',
+                paddingLeft: '1rem',
+              }}
               onChange={(e) => setMessage(e.target.value)}
             />
             <button
