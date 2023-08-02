@@ -45,6 +45,8 @@ export default function Header() {
     setAnchorEl(event.currentTarget);
   };
 
+  console.log('drawer', router.asPath);
+
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
