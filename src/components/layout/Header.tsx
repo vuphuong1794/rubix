@@ -105,7 +105,8 @@ export default function Header() {
       >
         <IconButton
           onClick={handleDrawerClose}
-          className='absolute right-1 m-2 cursor-pointer'
+          style={{ position: 'absolute', top: '8px', right: '8px' }}
+          // className='absolute right-1 m-2 cursor-pointer'
         >
           <RiCloseCircleFill />
         </IconButton>
@@ -118,12 +119,17 @@ export default function Header() {
             className='mx-auto mt-12'
           />
         </Link>
-        <MenuList className=' m-6 mt-10 min-w-[300px] flex-col items-center justify-center gap-10'>
+        <MenuList className='m-6 mt-10 min-w-[300px] flex-col items-center justify-center gap-10'>
           {links.map(({ href, label }) => (
             <MenuItem
               key={`${href}${label}`}
               onClick={() => handleNavigate(href)}
-              className='flex p-3 hover:text-yellow-300'
+              style={
+                router.asPath === href
+                  ? { color: 'red', display: 'flex' }
+                  : { color: 'black' }
+              }
+              className={` hover:text-yellow-300`}
             >
               <Link href={href}>
                 <span className='w-full'>{label}</span>
