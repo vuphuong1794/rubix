@@ -100,8 +100,6 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
       dataItemReq.push({
         item_id: items[0].item.id,
         quantity: items[0].quantity,
-        phoneNumber: methods.getValues('phoneNumber'),
-        address: methods.getValues('address'),
       });
 
       try {
@@ -123,8 +121,6 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
           ...cartItems.map((item) => ({
             item_id: item.item.id,
             quantity: item.quantity,
-            phoneNumber: methods.getValues('phoneNumber'),
-            address: methods.getValues('address'),
           }))
         );
         const _ = await CmsApi.createOrder(dataItemReq);
