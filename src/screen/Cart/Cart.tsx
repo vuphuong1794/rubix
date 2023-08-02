@@ -93,8 +93,7 @@ const Cart: WithLayout = () => {
     <div>
       {cartItems.length === 0 && (
         <div className='mt-10 flex flex-col items-center justify-center font-bold'>
-          <h1>Giỏ hàng của bạn đang trống</h1>
-
+          <h2>Giỏ hàng của bạn đang trống</h2>
           <Image
             src='/svg/empty-cart.svg'
             width={200}

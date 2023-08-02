@@ -69,7 +69,7 @@ const FilterPrice: React.FC<ProductCategoriesProps> = ({
         <li className='w-full'>
           <Button
             //variant='outlined'
-            className='w-full bg-amber-400 font-bold text-white'
+            className='w-full bg-amber-400 font-bold text-white hover:bg-amber-500'
             onClick={() =>
               handleFilter({
                 page: 1,

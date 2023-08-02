@@ -100,8 +100,6 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
       dataItemReq.push({
         item_id: items[0].item.id,
         quantity: items[0].quantity,
-        phoneNumber: methods.getValues('phoneNumber'),
-        address: methods.getValues('address'),
       });
 
       try {
@@ -123,8 +121,6 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
           ...cartItems.map((item) => ({
             item_id: item.item.id,
             quantity: item.quantity,
-            phoneNumber: methods.getValues('phoneNumber'),
-            address: methods.getValues('address'),
           }))
         );
         const _ = await CmsApi.createOrder(dataItemReq);
@@ -154,8 +150,6 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
     transform: 'translate(-50%, -50%)',
     width: 500,
     height: 100,
-    //bgcolor: 'background.paper',
-    boxShadow: 24,
   };
 
   return (
@@ -167,11 +161,11 @@ export const PaymentCart: React.FC<Props> = ({ typePayment }) => {
     >
       <Box sx={style}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-          <div className=' flex items-center justify-center bg-lime-800 p-2'>
-            <div className='flex h-auto flex-col gap-2 rounded-lg bg-white p-3'>
-              <span className='mt-3 text-center text-xl text-xl font-bold'>
+          <div className=' flex items-center justify-center bg-teal-400 p-2 '>
+            <div className='flex h-auto flex-col gap-2 rounded-lg bg-white p-4'>
+              <div className='mt-3 text-center text-xl text-xl font-bold'>
                 Chi tiết thanh toán
-              </span>
+              </div>
               <div className='input_text relative mt-5'>
                 {' '}
                 <RHFTextField

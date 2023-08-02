@@ -63,10 +63,10 @@ const ProductDetail: WithLayout = () => {
     <div className='w-full'>
       {item ? (
         <div className='flex w-full flex-col items-center justify-center sm:mb-10 sm:px-10 lg:mb-2 lg:px-64'>
-          <div className='flex w-full justify-center gap-2'>
+          <div className='my-8 flex w-full justify-center gap-2'>
             <div className='flex-2 flex'>
               <NextImage
-                width={md ? 300 : 400}
+                width={md ? 700 : 800}
                 height={md ? 300 : 400}
                 src={item.images[0] || item.images[1]}
                 alt='Products'

@@ -75,8 +75,8 @@ const Order: WithLayout = () => {
         <div className='flex h-96 items-center justify-center'>
           <Image
             src='/svg/empty-cart.svg'
-            width={300}
-            height={300}
+            width={200}
+            height={200}
             alt='empty-cart'
           />
         </div>
