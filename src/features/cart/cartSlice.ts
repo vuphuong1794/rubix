@@ -10,6 +10,7 @@ export interface CartState {
   itemPayment: CartItem[];
   totalItemPayment: number;
   total: number;
+  chooseHref: string;
 }
 
 export const fetchTotal = createAsyncThunk('cart/fetchTotal', async () => {
@@ -28,6 +29,7 @@ const initialStateCart: CartState = {
   openPayment: false,
   itemPayment: [],
   totalItemPayment: 0,
+  chooseHref: '',
 };
 
 export const CartSlice = createSlice({
@@ -40,6 +42,9 @@ export const CartSlice = createSlice({
     },
     setCartPayment: (state, action) => {
       state.itemPayment = action.payload;
+    },
+    setChooseHref: (state, action) => {
+      state.chooseHref = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -55,7 +60,8 @@ export const CartSlice = createSlice({
   },
 });
 
-export const { setOpenPayment, setCartPayment } = CartSlice.actions;
+export const { setOpenPayment, setCartPayment, setChooseHref } =
+  CartSlice.actions;
 
 export const selectCartTotal = (state: RootState) => state.cart.total;
 export const selectCart = (state: RootState) => state.cart.cart;
@@ -63,5 +69,6 @@ export const selectOpenPayment = (state: RootState) => state.cart.openPayment;
 export const selectItemPayment = (state: RootState) => state.cart.itemPayment;
 export const selectTotalItemPayment = (state: RootState) =>
   state.cart.totalItemPayment;
+export const selectChooseHref = (state: RootState) => state.cart.chooseHref;
 
 export default CartSlice.reducer;

@@ -24,7 +24,11 @@ import NextImage from '@/components/NextImage';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { ROUTES } from '@/constant';
 import { login, register } from '@/features/auth/authSlice';
-import { fetchTotal } from '@/features/cart/cartSlice';
+import {
+  fetchTotal,
+  selectChooseHref,
+  setChooseHref,
+} from '@/features/cart/cartSlice';
 
 const links = [
   { href: '/', label: 'Trang chủ' },
@@ -66,9 +70,11 @@ export default function Header() {
   const total = useAppSelector((state) => state.cart.total);
 
   const navigate = useRouter();
+  const chooseHref = useAppSelector(selectChooseHref);
 
   const handleNavigate = (href: string) => {
     setOpenDr(false);
+    dispatch(setChooseHref(href));
     navigate.push(href);
   };
 
@@ -91,7 +97,12 @@ export default function Header() {
       <MenuList className=' hidden min-w-[600px] items-center justify-evenly gap-10 lg:flex'>
         {links.map(({ href, label }) => (
           <li key={`${href}${label}`}>
-            <Link href={href} className=' flex hover:text-yellow-300'>
+            <Link
+              href={href}
+              className={`flex
+               ${chooseHref === href ? 'text-yellow-300' : 'text-gray-700'}
+            hover:text-yellow-300`}
+            >
               <span className='w-full'>{label}</span>
             </Link>
           </li>
@@ -123,7 +134,13 @@ export default function Header() {
             <MenuItem
               key={`${href}${label}`}
               onClick={() => handleNavigate(href)}
-              className='flex p-3 hover:text-yellow-300'
+              className={`flex p-3 
+              ${
+                chooseHref === href
+                  ? 'border-b-2 border-yellow-300 text-yellow-300'
+                  : 'text-gray-700'
+              }
+              hover:text-yellow-300`}
             >
               <Link href={href}>
                 <span className='w-full'>{label}</span>
