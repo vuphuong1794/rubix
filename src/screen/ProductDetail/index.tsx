@@ -31,7 +31,7 @@ const ProductDetail: WithLayout = () => {
   const [quantityItem, setQuantityItem] = React.useState(1);
 
   const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down('md'));
+  const lg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const handleAddToCart = async ({ itemId, quantity }: ReqCartItem) => {
     const items: ReqCartItem[] = [];
@@ -64,10 +64,10 @@ const ProductDetail: WithLayout = () => {
       {item ? (
         <div className='flex w-full flex-col items-center justify-center sm:mb-10 sm:px-10 lg:mb-2 lg:px-64'>
           <div className='my-8 flex w-full justify-center gap-2'>
-            <div className='flex-2 flex'>
+            <div className='flex-2 mr-[100px] ml-[100px] flex'>
               <NextImage
-                width={md ? 700 : 800}
-                height={md ? 300 : 400}
+                width={lg ? 200 : 700}
+                height={lg ? 300 : 400}
                 src={item.images[0] || item.images[1]}
                 alt='Products'
               />
