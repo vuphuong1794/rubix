@@ -41,7 +41,7 @@ const FilterPrice: React.FC<ProductCategoriesProps> = ({
   return (
     <div className='mt-12 w-full border-b pb-10'>
       <div className='flex h-full w-full justify-between'>
-        <h4 className='mb-6'>Giá</h4>
+        <h3 className='mb-6 font-bold'>Giá</h3>
         {getSubPriceChoose === '' ? null : (
           <span
             className='cursor-pointer text-amber-400'
@@ -68,8 +68,8 @@ const FilterPrice: React.FC<ProductCategoriesProps> = ({
         </li>
         <li className='w-full'>
           <Button
-            variant='outlined'
-            className='w-full'
+            //variant='outlined'
+            className='w-full bg-amber-400 font-bold text-white hover:bg-amber-500'
             onClick={() =>
               handleFilter({
                 page: 1,

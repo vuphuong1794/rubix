@@ -7,7 +7,7 @@ import NextImage from '@/components/NextImage';
 
 const Blog = ({ item }: { item: IBlog }) => {
   return (
-    <div className='flex w-full flex-col gap-4 p-2 shadow-md' key={item.author}>
+    <div className='flex w-full flex-col gap-4' key={item.author}>
       <NextImage
         className='w-full cursor-pointer'
         width={600}
@@ -19,13 +19,11 @@ const Blog = ({ item }: { item: IBlog }) => {
         LIFESTYLE
       </span>
       <div>
-        <div className='flex items-center justify-between'>
-          <h6 className='mr-2 text-sm font-bold lg:text-lg'>{item.author}</h6>
-          <span className=' text-[11px] text-gray-700 lg:text-lg'>
-            {item.date}
-          </span>
+        <div className='flex'>
+          <h6 className='mr-2 font-bold'>{item.author}</h6>
+          <span className='text-gray-700'>{item.date}</span>
         </div>
-        <h4 className='text-md pb-6 pt-2 sm:text-xl'>{item.title}</h4>
+        <h4 className='pb-6 pt-2 text-xl'>{item.title}</h4>
         <p className='hidden text-gray-700 md:block'>{item.description}</p>
       </div>
       <button className='mt-6 flex h-full w-full items-end'>
