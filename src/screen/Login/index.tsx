@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import { NextPage } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
@@ -96,15 +95,6 @@ const Login: NextPage & WithLayout = () => {
           {formik.touched.password && formik.errors.password ? (
             <div className='text-sm text-red-600'>{formik.errors.password}</div>
           ) : null}
-
-          <span
-            className='flex w-full items-center justify-between '
-            onClick={toggleAuthLogin}
-          >
-            <Link href='/login' className='text-xs hover:text-amber-400'>
-              Quên mật khẩu ?
-            </Link>
-          </span>
 
           {error && <span className='text-sm text-red-600'>{error}</span>}
           <Button
