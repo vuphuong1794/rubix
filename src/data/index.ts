@@ -197,15 +197,6 @@ const ourBlog: IBlog[] = [
   },
   {
     blog_image:
-      '	https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/6_540x.jpg?v=1585986836',
-    author: 'Mrs. Sasimi. ',
-    date: 'Aug 23, 2020',
-    title: 'Diga: three kitchen utensils designed for Ommo',
-    description:
-      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    blog_image:
       'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/5_540x.jpg?v=1585986814',
     author: 'Mr. Dawm. ',
     date: 'July 19, 2020',
@@ -236,15 +227,6 @@ const ourBlog: IBlog[] = [
       'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/2_540x.jpg?v=1585986704',
     author: 'Mrs. Lee. ',
     date: 'Jan 28, 2020',
-    title: 'Diga: three kitchen utensils designed for Ommo',
-    description:
-      'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    blog_image:
-      'https://cdn.shopify.com/s/files/1/0376/9440/6700/articles/1_540x.jpg?v=1585986627',
-    author: 'Mr. ToLi. ',
-    date: 'Jan 18, 2020',
     title: 'Diga: three kitchen utensils designed for Ommo',
     description:
       'Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
