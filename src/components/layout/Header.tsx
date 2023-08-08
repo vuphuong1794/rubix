@@ -30,7 +30,7 @@ const links = [
   { href: '/', label: 'Trang chủ' },
   { href: '/collections/all', label: 'Cửa hàng' },
   { href: '/collections', label: 'Bộ sưu tập' },
-  { href: '/blogs', label: 'Bài viết' },
+  // { href: '/blogs', label: 'Bài viết' },
   { href: '/us', label: 'Liên hệ' },
 ];
 
